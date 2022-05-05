@@ -1,0 +1,28 @@
+{
+  "BOARD": {
+    "TITLE": "Створити новий урок",
+    "BUTTON_SUBMIT": "Опублікувати",
+    "BUTTON_CANCEL": "Відміна",
+    "SECTION_NAME_TITLE": "Назва уроку",
+    "SECTION_NAME_PLACEHOLDER": "Додайте назву уроку",
+    "SECTION_DESCRIPTION_TITLE": "Опис уроку",
+    "SECTION_DESCRIPTION_PLACEHOLDER": "Додайте завдання*",
+    "SECTION_BOARD_TITLE": "Додавання рухів",
+    "SECTION_INITIAL_TITLE": "Початкова позиція",
+    "SECTION_INITIAL_PLACEHOLDER": "Початковий стан у нотації FEN",
+    "SECTION_MOVES_TITLE": "Контрольні ходи",
+    "SECTION_MOVES_TOGGLE_HIDE": "Сховати форму",
+    "SECTION_MOVES_TOGGLE_ADD": "Додати нові ходи",
+    "SECTION_MOVES_PLACEHOLDER_FROM": "Початкова позиція",
+    "SECTION_MOVES_PLACEHOLDER_TO": "Кінцева позиція",
+    "SECTION_MOVES_BUTTON_ADD": "+ Додати"
+  },
+  "LESSONS": {
+    "TITLE": "Перелік доступних уроків",
+    "BUTTON_EDIT": "Рудагувати",
+    "BUTTON_REMOVE": "Видалити"
+  },
+  "LESSON": {
+    "SUBTITLE_HISTORY": "Істрія ходів"
+  }
+}

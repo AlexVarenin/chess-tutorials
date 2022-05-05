@@ -1,0 +1,14 @@
+<ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+<div class="editor-wrapper" [ngClass]="{
+  'custom-focused': isOnFocus,
+  'custom-invalid': (formControl?.invalid && formControl.touched) || (formControl?.invalid && formControl.dirty)
+}">
+  <ngx-editor
+    [editor]="editor"
+    [formControl]="formControl"
+    (focusOut)="onFocusOut()"
+    (focusIn)="onFocusIn()"
+    [placeholder]="placeholderText"
+  ></ngx-editor>
+</div>
+

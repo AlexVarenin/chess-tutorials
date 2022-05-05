@@ -1,0 +1,36 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+
+  &:active {
+    outline: none;
+  }
+}
+
+input, textarea {
+  background: transparent;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+textarea {
+  overflow: auto
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  &:disabled {
+    opacity: .8;
+    cursor: not-allowed;
+  }
+}

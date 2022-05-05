@@ -1,0 +1,133 @@
+<form class="wrapper" [formGroup]="form" novalidate>
+  <div class="title-header">
+    <h1 class="mat-display-1">{{ 'BOARD.TITLE' | translate }}</h1>
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="publish()">{{ 'BOARD.BUTTON_SUBMIT' | translate }}</button>
+      <button mat-raised-button (click)="discard()">{{ 'BOARD.BUTTON_CANCEL' | translate }}</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <mat-card>
+      <mat-card-title class="section-title">{{ 'BOARD.SECTION_NAME_TITLE' | translate }}</mat-card-title>
+      <mat-form-field>
+        <input matInput formControlName="title" [placeholder]="'BOARD.SECTION_NAME_PLACEHOLDER' | translate">
+      </mat-form-field>
+    </mat-card>
+  </div>
+  <div class="section">
+    <mat-card>
+      <mat-card-title class="section-title">{{ 'BOARD.SECTION_DESCRIPTION_TITLE' | translate }}</mat-card-title>
+
+      <chess-chess-text-editor formControlName="description" [placeholder]="'BOARD.SECTION_DESCRIPTION_PLACEHOLDER' | translate"></chess-chess-text-editor>
+
+    </mat-card>
+  </div>
+  <div class="section double-section">
+    <mat-card class="main">
+      <mat-card-title class="section-title">{{ 'BOARD.SECTION_BOARD_TITLE' | translate }}</mat-card-title>
+
+      <chess-board
+        (onDrop)="onPieceDrop($event)"
+        (onChange)="onPieceChange($event)"
+      ></chess-board>
+
+    </mat-card>
+    <div class="aside">
+      <mat-card class="section">
+        <div class="title-header">
+          <mat-card-title class="section-title">{{ 'BOARD.SECTION_INITIAL_TITLE' | translate }}</mat-card-title>
+          <div>
+            <button mat-icon-button color="primary" (click)="changeOrientation(); $event.preventDefault()">
+              <mat-icon>swap_vert</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="setStartPosition(); $event.preventDefault()"
+                    [disabled]="!!moves.length || (isMoveFormDisplayed$ | async)">
+              <mat-icon>restart_alt</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="clearBoard(); $event.preventDefault()"
+                    [disabled]="!!moves.length || (isMoveFormDisplayed$ | async)">
+              <mat-icon>cleaning_services</mat-icon>
+            </button>
+          </div>
+        </div>
+
+
+        <mat-form-field>
+          <input
+            matInput
+            formControlName="initialState"
+            [placeholder]="'BOARD.SECTION_INITIAL_PLACEHOLDER' | translate"
+          >
+        </mat-form-field>
+      </mat-card>
+
+      <div class="section">
+        <mat-accordion>
+          <mat-expansion-panel
+            disabled
+            [expanded]="isMoveFormDisplayed$ | async"
+            hideToggle
+          >
+            <mat-expansion-panel-header class="panel-header">
+              <mat-panel-title class="panel-title">{{ 'BOARD.SECTION_MOVES_TITLE' | translate }}</mat-panel-title>
+              <mat-panel-description class="panel-description">
+                <ng-container *ngIf="isMoveFormDisplayed$ | async; else closedText">
+                  <button *ngIf="!moves.length" mat-raised-button color="primary" class="wide-button" (click)="toggleForm(false)">
+                    {{ 'BOARD.SECTION_MOVES_TOGGLE_HIDE' | translate }}
+                  </button>
+                </ng-container>
+                <ng-template #closedText>
+                  <button mat-raised-button color="primary" class="wide-button" (click)="toggleForm(true)">
+                    {{ 'BOARD.SECTION_MOVES_TOGGLE_ADD' | translate }}
+                  </button>
+                </ng-template>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="movesForm" class="double-section">
+              <div>
+                <mat-form-field class="triple-input">
+                  <input matInput formControlName="from" [placeholder]="'BOARD.SECTION_MOVES_PLACEHOLDER_FROM' | translate">
+                </mat-form-field>
+                <mat-form-field class="triple-input">
+                  <input matInput formControlName="to" [placeholder]="'BOARD.SECTION_MOVES_PLACEHOLDER_TO' | translate">
+                </mat-form-field>
+              </div>
+              <button mat-icon-button color="primary" (click)="resetMoveInputs()" [disabled]="!movesForm.valid">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </form>
+
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="addMove()"
+              [disabled]="!movesForm.valid"
+            >{{ 'BOARD.SECTION_MOVES_BUTTON_ADD' | translate }}</button>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <mat-card  class="double-section small-section" *ngFor="let move of moves; last as isLast">
+        <div class="sub-section">
+          <img width="25" [src]="move.piece | pieceIcon">
+          <span>{{ move.from }} </span>
+          <mat-icon>trending_flat</mat-icon>
+          <span> {{ move.to }}</span>
+        </div>
+        <button
+          *ngIf="isLast && !movesForm.valid"
+          mat-icon-button color="primary"
+          (click)="removeLastMove()"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card>
+
+    </div>
+  </div>
+  <div class="action-buttons action-buttons--bigger">
+    <button mat-raised-button color="primary" (click)="publish()">{{ 'BOARD.BUTTON_SUBMIT' | translate }}</button>
+    <button mat-raised-button (click)="discard()">{{ 'BOARD.BUTTON_CANCEL' | translate }}</button>
+  </div>
+</form>

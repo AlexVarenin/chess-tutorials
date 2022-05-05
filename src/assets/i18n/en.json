@@ -1,0 +1,28 @@
+{
+  "BOARD": {
+    "TITLE": "Create new lesson",
+    "BUTTON_SUBMIT": "Publish",
+    "BUTTON_CANCEL": "Discard",
+    "SECTION_NAME_TITLE": "Lesson name",
+    "SECTION_NAME_PLACEHOLDER": "Add lesson name",
+    "SECTION_DESCRIPTION_TITLE": "Lesson description",
+    "SECTION_DESCRIPTION_PLACEHOLDER": "Add description*",
+    "SECTION_BOARD_TITLE": "Moves adding",
+    "SECTION_INITIAL_TITLE": "Initial position",
+    "SECTION_INITIAL_PLACEHOLDER": "Set initial position FEN",
+    "SECTION_MOVES_TITLE": "Task moves",
+    "SECTION_MOVES_TOGGLE_HIDE": "Hide form",
+    "SECTION_MOVES_TOGGLE_ADD": "Add new moves",
+    "SECTION_MOVES_PLACEHOLDER_FROM": "Start position",
+    "SECTION_MOVES_PLACEHOLDER_TO": "End position",
+    "SECTION_MOVES_BUTTON_ADD": "+ Add"
+  },
+  "LESSONS": {
+    "TITLE": "List of available lessons",
+    "BUTTON_EDIT": "Edit",
+    "BUTTON_REMOVE": "Remove"
+  },
+  "LESSON": {
+    "SUBTITLE_HISTORY": "Moves history"
+  }
+}

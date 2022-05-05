@@ -1,0 +1,71 @@
+.main {
+  width: 532px;
+}
+
+.aside {
+  flex-shrink: 1;
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.double-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.triple-input {
+  width: 150px;
+  & + & {
+    margin-left: 20px;
+  }
+}
+
+.sub-section {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.small-section {
+  padding-top: 0;
+  padding-bottom: 0;
+  min-height: 40px;
+  & + & {
+    margin-top: 5px;
+  }
+}
+
+.action-buttons--bigger {
+  button {
+    width: 150px;
+    height: 50px;
+  }
+}
+
+.panel-header {
+  padding: 0 0 0 16px;
+}
+
+.panel-title {
+  color: #000 !important;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.panel-description {
+  justify-content: flex-end;
+}
+
+.title-moves {
+  font-size: 28px;
+}
+
+.falsy-move {
+  background: rgba(255, 0, 0, .1);
+}
+
