@@ -4,9 +4,24 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Lesson } from "../models";
 
 export const lessonsActionTypes = {
+  requestLessons: '[Lessons] Request lessons',
   addLesson: '[Lessons] Add lesson',
   removeLesson: '[Lessons] Remove lesson',
 };
+
+export const requestLessons = createAction(
+  lessonsActionTypes.requestLessons
+);
+
+export const requestLessonsSuccess = createAction(
+  getSuccessType(lessonsActionTypes.requestLessons),
+  props<{ lessons: Lesson[] }>()
+);
+
+export const requestLessonsFailure = createAction(
+  getFailureType(lessonsActionTypes.requestLessons),
+  props<{ error: HttpErrorResponse }>()
+);
 
 
 export const addLesson = createAction(

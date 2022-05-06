@@ -1,0 +1,17 @@
+.modal {
+  &__title {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  &__main-content {
+  }
+
+  &__button {
+    margin-top: 20px;
+    min-width: 120px;
+    & + & {
+      margin-left: 20px;
+    }
+  }
+}

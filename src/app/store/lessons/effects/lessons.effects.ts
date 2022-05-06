@@ -10,6 +10,19 @@ import { Lesson } from "../models";
 @Injectable()
 export class LessonsEffects {
 
+  public requestLessons$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(ActionList.requestLessons),
+      exhaustMap( () =>
+        this.lessonsApiService.getLessons()
+          .pipe(
+            map((lessons: Lesson[]) => ActionList.requestLessonsSuccess({ lessons })),
+            catchError((error: HttpErrorResponse) => of(ActionList.requestLessonsFailure({ error })))
+          )
+      )
+    )
+  );
+
   public addLesson$ = createEffect(() => this.actions$
     .pipe(
       ofType(ActionList.addLesson),

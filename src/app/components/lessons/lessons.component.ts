@@ -19,6 +19,7 @@ export class LessonsComponent implements OnInit {
     private lessonsStoreService: LessonsStoreService) { }
 
   public ngOnInit(): void {
+    this.lessonsStoreService.requestLessons();
   }
 
   public addNew(): void {

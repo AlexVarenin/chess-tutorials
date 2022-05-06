@@ -29,6 +29,9 @@ import { ChessTextEditorComponent } from './components/chess-text-editor/chess-t
 import { LessonsComponent } from './components/lessons/lessons.component';
 import { RootStoreModule } from './store/root-store.module';
 import { LessonComponent } from './components/lesson/lesson.component';
+import { ChessModalsWrapperComponent } from './components/chess-modals-wrapper/chess-modals-wrapper.component';
+import { ChessConfirmationDialogComponent } from './components/chess-confirmation-dialog/chess-confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -44,7 +47,9 @@ export function createTranslateLoader(http: HttpClient) {
     ChessTextEditorComponent,
     PieceIconPipe,
     LessonsComponent,
-    LessonComponent
+    LessonComponent,
+    ChessModalsWrapperComponent,
+    ChessConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +67,7 @@ export function createTranslateLoader(http: HttpClient) {
     ReactiveFormsModule,
     MatButtonToggleModule,
     RootStoreModule,
+    MatDialogModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

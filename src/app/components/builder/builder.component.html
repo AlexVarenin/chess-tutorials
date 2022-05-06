@@ -38,7 +38,8 @@
         <div class="title-header">
           <mat-card-title class="section-title">{{ 'BOARD.SECTION_INITIAL_TITLE' | translate }}</mat-card-title>
           <div>
-            <button mat-icon-button color="primary" (click)="changeOrientation(); $event.preventDefault()">
+            <button mat-icon-button color="primary" (click)="changeOrientation(); $event.preventDefault()"
+                    [disabled]="!!moves.length || (isMoveFormDisplayed$ | async)">
               <mat-icon>swap_vert</mat-icon>
             </button>
             <button mat-icon-button color="primary" (click)="setStartPosition(); $event.preventDefault()"

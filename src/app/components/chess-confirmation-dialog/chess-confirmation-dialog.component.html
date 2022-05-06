@@ -1,0 +1,17 @@
+<chess-modals-wrapper [dialogRef]="dialogRef">
+
+  <ng-container ngProjectAs="modal-title">
+    <h2 *ngIf='data.title' class="modal__title">{{ data.title }}</h2>
+  </ng-container>
+
+  <ng-container ngProjectAs="modal-content">
+    <p class="modal__main-content">{{ data.description }}</p>
+  </ng-container>
+
+  <ng-container ngProjectAs="modal-actions">
+    <button tabindex="0" class="modal__button" type="button" mat-raised-button color="primary" (click)="dialogRef.close(true)">Confirm</button>
+    <button *ngIf="!data.hideCancel" class="modal__button" type="button" mat-raised-button (click)="dialogRef.close()">Cancel</button>
+  </ng-container>
+
+</chess-modals-wrapper>
+

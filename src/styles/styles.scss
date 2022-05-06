@@ -151,4 +151,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   align-items: baseline;
 }
 
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+.mat-card-header-text {
+  margin-left: 0 !important;
+}
 

@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import {filter, tap} from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BoardComponent } from '../board/board.component';
 import { Move } from '../../store/lessons/models';
 import { LessonsStoreService } from '../../store/lessons/services/lessons-store.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ChessConfirmationDialogComponent } from '../chess-confirmation-dialog/chess-confirmation-dialog.component';
 
 type HistoryMove = Move & { isFalsy?: boolean };
 
@@ -28,8 +30,10 @@ export class LessonComponent implements OnInit {
   @ViewChild(BoardComponent) public board: BoardComponent;
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private lessonsStoreService: LessonsStoreService
+    private lessonsStoreService: LessonsStoreService,
+    private dialog: MatDialog,
   ) { }
 
   public ngOnInit(): void {
@@ -46,6 +50,22 @@ export class LessonComponent implements OnInit {
           this.historyMoves.push(botMove);
           this.state = this.board.fen = botMove.fen;
         }, 500);
+      } else {
+          const dialogRef = this.dialog.open(ChessConfirmationDialogComponent, {
+            width: '300px',
+            autoFocus: false,
+            disableClose: true,
+            data: {
+              title:  'Congratulations!',
+              description: 'You have successfully finished this lesson! Go to lessons list?',
+              hideCancel: true
+            }
+          });
+          dialogRef.afterClosed().subscribe((isConfirmed: boolean) => {
+            if (isConfirmed) {
+              this.router.navigate(['/lessons']);
+            }
+          });
       }
     } else {
       this.historyMoves[this.historyMoves.length - 1].isFalsy = true;
