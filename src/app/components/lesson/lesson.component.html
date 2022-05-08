@@ -11,6 +11,7 @@
   <div class="section double-section">
     <mat-card class="main">
       <chess-board
+        [draggable]="!lesson.disableDrag"
         [initialOrientation]="lesson.orientation"
         [spare]="false"
         [initialFen]="lesson.initialState"
@@ -20,6 +21,39 @@
     </mat-card>
 
     <div class="aside">
+
+      <div class="section">
+        <mat-accordion>
+          <mat-expansion-panel
+            disabled
+            [expanded]="true"
+            hideToggle
+          >
+            <mat-expansion-panel-header class="panel-header">
+              <mat-panel-title class="panel-title">{{ 'BOARD.SECTION_MOVES_TITLE' | translate }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="double-section">
+              <div>
+                <mat-form-field class="triple-input">
+                  <input matInput [formControl]="notation" [placeholder]="'BOARD.SECTION_MOVES_PLACEHOLDER_EDIT_NOTATION' | translate">
+                </mat-form-field>
+                <button mat-icon-button color="primary" (click)="resetInput()" [disabled]="!notation.valid">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <button
+                mat-mini-fab
+                color="accent"
+                (click)="addMove()"
+                [disabled]="!notation.valid"
+              >+</button>
+            </div>
+
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
       <h3 class="mat-display-1 title-moves">{{ 'LESSON.SUBTITLE_HISTORY' | translate }}</h3>
       <mat-card
         class="double-section small-section"
@@ -27,10 +61,13 @@
         [ngClass]="{ 'falsy-move': move.isFalsy }"
       >
         <div class="sub-section">
-          <img width="25" [src]="move.piece | pieceIcon">
-          <span>{{ move.from }} </span>
-          <mat-icon>trending_flat</mat-icon>
-          <span> {{ move.to }}</span>
+          <ng-container *ngIf="move.piece; else question">
+            <img width="25" [src]="move.piece | pieceIcon">
+          </ng-container>
+          <ng-template #question>
+            <mat-icon>question_mark</mat-icon>
+          </ng-template>
+          <span class="notation">{{move.piece | pieceName: lesson.notationType : move.notation}}{{move.notation}}</span>
         </div>
       </mat-card>
     </div>

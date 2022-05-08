@@ -35,8 +35,8 @@
     </mat-card>
     <div class="aside">
       <mat-card class="section">
-        <div class="title-header">
-          <mat-card-title class="section-title">{{ 'BOARD.SECTION_INITIAL_TITLE' | translate }}</mat-card-title>
+        <div class="title-header panel-title-header">
+          <mat-card-title class="section-title">{{ 'BOARD.SECTION_SETTINGS_TITLE' | translate }}</mat-card-title>
           <div>
             <button mat-icon-button color="primary" (click)="changeOrientation(); $event.preventDefault()"
                     [disabled]="!!moves.length || (isMoveFormDisplayed$ | async)">
@@ -53,14 +53,43 @@
           </div>
         </div>
 
-
-        <mat-form-field>
-          <input
-            matInput
-            formControlName="initialState"
-            [placeholder]="'BOARD.SECTION_INITIAL_PLACEHOLDER' | translate"
+        <div class="settings-item">
+          <label id="orientation" class="settings-item-label">
+            {{ 'BOARD.SECTION_SETTINGS_PIECES_COLOR' | translate }}
+          </label>
+          <mat-radio-group
+            (click)="changeOrientation()"
+            class="settings-item-buttons"
+            aria-labelledby="orientation"
+            formControlName="orientation"
           >
-        </mat-form-field>
+            <mat-radio-button value="white" class="settings-item-button">
+              {{ 'BOARD.SECTION_SETTINGS_PIECES_COLOR_WHITE' | translate }}<img width="25" [src]="'wP' | pieceIcon">
+            </mat-radio-button>
+            <mat-radio-button value="black" class="settings-item-button">
+              {{ 'BOARD.SECTION_SETTINGS_PIECES_COLOR_BLACK' | translate }}<img width="25" [src]="'bP' | pieceIcon">
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="settings-item">
+          <label id="notation-type" class="settings-item-label">
+            {{ 'BOARD.SECTION_SETTINGS_NOTATION_TYPE' | translate }}
+          </label>
+          <mat-radio-group aria-labelledby="notation-type" formControlName="notationType">
+            <mat-radio-button value="cyr" class="settings-item-button"
+            >{{ 'BOARD.SECTION_SETTINGS_NOTATION_TYPE_CYR' | translate }}</mat-radio-button>
+            <mat-radio-button value="lat" class="settings-item-button"
+            >{{ 'BOARD.SECTION_SETTINGS_NOTATION_TYPE_LAT' | translate }}</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div class="settings-item">
+          <mat-slide-toggle formControlName="disableDrag">
+            <span class="settings-item-label">{{ 'BOARD.SECTION_SETTINGS_NOTATION_ONLY' | translate }}</span>
+          </mat-slide-toggle>
+        </div>
+
       </mat-card>
 
       <div class="section">
@@ -88,33 +117,36 @@
             <form [formGroup]="movesForm" class="double-section">
               <div>
                 <mat-form-field class="triple-input">
-                  <input matInput formControlName="from" [placeholder]="'BOARD.SECTION_MOVES_PLACEHOLDER_FROM' | translate">
+                  <span matPrefix>{{movesForm.get('piece')?.value | pieceName: form.get('notationType')?.value : movesForm.get('notation')?.value}}</span>
+                  <input matInput formControlName="notation" [placeholder]="'BOARD.SECTION_MOVES_PLACEHOLDER_EDIT_NOTATION' | translate">
                 </mat-form-field>
-                <mat-form-field class="triple-input">
-                  <input matInput formControlName="to" [placeholder]="'BOARD.SECTION_MOVES_PLACEHOLDER_TO' | translate">
-                </mat-form-field>
+                <button mat-icon-button color="primary" (click)="resetMoveInputs()" [disabled]="!movesForm.valid">
+                  <mat-icon>delete</mat-icon>
+                </button>
               </div>
-              <button mat-icon-button color="primary" (click)="resetMoveInputs()" [disabled]="!movesForm.valid">
-                <mat-icon>delete</mat-icon>
-              </button>
+              <button
+                mat-mini-fab
+                color="accent"
+                (click)="addMove()"
+                [disabled]="!movesForm.valid"
+              >+</button>
             </form>
 
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="addMove()"
-              [disabled]="!movesForm.valid"
-            >{{ 'BOARD.SECTION_MOVES_BUTTON_ADD' | translate }}</button>
+
           </mat-expansion-panel>
         </mat-accordion>
       </div>
 
       <mat-card  class="double-section small-section" *ngFor="let move of moves; last as isLast">
         <div class="sub-section">
-          <img width="25" [src]="move.piece | pieceIcon">
-          <span>{{ move.from }} </span>
-          <mat-icon>trending_flat</mat-icon>
-          <span> {{ move.to }}</span>
+          <ng-container *ngIf="move.piece; else question">
+            <img width="25" [src]="move.piece | pieceIcon">
+          </ng-container>
+          <ng-template #question>
+            <mat-icon>question_mark</mat-icon>
+          </ng-template>
+
+          <span class="notation">{{move.piece | pieceName: form.get('notationType')?.value : move.notation}}{{move.notation}}</span>
         </div>
         <button
           *ngIf="isLast && !movesForm.valid"

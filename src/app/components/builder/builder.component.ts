@@ -7,6 +7,7 @@ import { MatAccordion } from '@angular/material/expansion';
 import { BoardComponent } from '../board/board.component';
 import { Lesson, Move } from '../../store/lessons/models';
 import { LessonsStoreService } from '../../store/lessons/services/lessons-store.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'chess-builder',
@@ -20,13 +21,18 @@ export class BuilderComponent implements OnInit, AfterViewInit {
   public moves: Move[] = [];
   public INITIAL_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
   public initialState: FormControl;
+  public notation: FormControl;
+  public orientation: FormControl;
   public isMoveFormDisplayed = new BehaviorSubject<boolean>(false);
   public isMoveFormDisplayed$ = this.isMoveFormDisplayed.asObservable().pipe(
     tap((isOpened: boolean) => {
       if (isOpened || !!this.moves.length) {
         this.initialState.disable();
+        this.orientation.disable();
+
       } else {
         this.initialState.enable();
+        this.orientation.enable();
       }
 
     }), shareReplay());
@@ -38,7 +44,8 @@ export class BuilderComponent implements OnInit, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private lessonsStoreService: LessonsStoreService
+    private lessonsStoreService: LessonsStoreService,
+    private translate: TranslateService
   ) { }
 
   public ngOnInit(): void {
@@ -51,24 +58,12 @@ export class BuilderComponent implements OnInit, AfterViewInit {
     this.initialState.valueChanges.subscribe((fen: string) => {
       this.board.fen = fen;
     });
-
-    this.movesForm.valueChanges.subscribe(() => {
-      if (this.movesForm.valid) {
-        const { from, to } = this.movesForm.value;
-        this.board.movePiece(`${from}-${to}`);
-        const piece = this.board.getPieceByPosition(to);
-        if (piece) {
-          this.movesForm.get('piece')!.setValue(piece, { emitEvent: false });
-        }
-      }
-    });
   }
 
-  public onPieceDrop({ from, to, piece }: Move): void {
+  public onPieceDrop({ piece, notation }: Move): void {
     if (this.initialState.disabled) {
-      this.movesForm.get('from')!.setValue(from, { emitEvent: false });
-      this.movesForm.get('to')!.setValue(to, { emitEvent: false });
-      this.movesForm.get('piece')!.setValue(piece, { emitEvent: false });
+      this.movesForm.get('piece')!.setValue(piece);
+      this.movesForm.get('notation')!.setValue(notation);
     }
   }
 
@@ -155,16 +150,21 @@ export class BuilderComponent implements OnInit, AfterViewInit {
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      initialState: [this.INITIAL_FEN, Validators.required]
+      initialState: [this.INITIAL_FEN, Validators.required],
+      notationType: [this.translate.currentLang === 'ua' ? 'cyr' : 'lat'],
+      orientation: ['white', Validators.required],
+      disableDrag: [false]
     });
 
     this.initialState = this.form.get('initialState') as FormControl;
+    this.orientation = this.form.get('orientation') as FormControl;
 
     this.movesForm = this.formBuilder.group({
-      from: ['', Validators.required],
-      to: ['', Validators.required],
-      piece: ['']
+      piece: ['', Validators.required],
+      notation: ['', Validators.required]
     });
+
+    this.notation = this.form.get('notation') as FormControl;
   }
 
   private subscribeData(): void {
@@ -176,7 +176,7 @@ export class BuilderComponent implements OnInit, AfterViewInit {
   }
 
   private updateData(lesson: Lesson) {
-    const { title, description, initialState, moves, orientation } = lesson;
+    const { title, description, initialState, moves, orientation, notationType, disableDrag } = lesson;
     this.board.orientation = orientation;
     this.board.fen = initialState;
     this.moves = moves;
@@ -184,6 +184,9 @@ export class BuilderComponent implements OnInit, AfterViewInit {
       this.form.get('title')!.setValue(title, { emitEvent: false });
       this.form.get('description')!.setValue(description, { emitEvent: false });
       this.form.get('initialState')!.setValue(initialState, { emitEvent: false });
+      this.form.get('orientation')!.setValue(orientation, { emitEvent: false });
+      this.form.get('notationType')!.setValue(notationType, { emitEvent: false });
+      this.form.get('disableDrag')!.setValue(disableDrag, { emitEvent: false });
     });
 
     if (moves.length) {
@@ -191,4 +194,5 @@ export class BuilderComponent implements OnInit, AfterViewInit {
     }
 
   }
+
 }

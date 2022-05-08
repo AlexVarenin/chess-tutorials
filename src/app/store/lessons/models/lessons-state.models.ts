@@ -11,11 +11,12 @@ export interface Lesson {
   initialState: string;
   moves: Move[];
   orientation: 'black' | 'white';
+  notationType: 'cyr' | 'lat';
+  disableDrag: boolean;
 }
 
 export interface Move {
-  from: string;
-  to: string;
   piece: string;
+  notation: string;
   fen: string;
 }

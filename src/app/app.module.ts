@@ -32,6 +32,9 @@ import { LessonComponent } from './components/lesson/lesson.component';
 import { ChessModalsWrapperComponent } from './components/chess-modals-wrapper/chess-modals-wrapper.component';
 import { ChessConfirmationDialogComponent } from './components/chess-confirmation-dialog/chess-confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PieceNamePipe } from './pipes/piece-name/piece-name.pipe';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,6 +49,7 @@ export function createTranslateLoader(http: HttpClient) {
     BuilderComponent,
     ChessTextEditorComponent,
     PieceIconPipe,
+    PieceNamePipe,
     LessonsComponent,
     LessonComponent,
     ChessModalsWrapperComponent,
@@ -68,6 +72,8 @@ export function createTranslateLoader(http: HttpClient) {
     MatButtonToggleModule,
     RootStoreModule,
     MatDialogModule,
+    MatRadioModule,
+    MatSlideToggleModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

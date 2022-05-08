@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,7 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    this.translate.addLangs(['ua', 'en']);
-
-    const browserLang = this.translate.getBrowserLang();
-    this.translate.use(browserLang?.match(/|ua|en/) ? browserLang : 'ua');
+    this.translate.addLangs(environment.langs);
+    this.translate.use(this.translate.langs[0]);
   }
 }
