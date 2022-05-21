@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+::ng-deep .avatar-content {
+  border: 1px solid white;
+}

@@ -35,6 +35,18 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PieceNamePipe } from './pipes/piece-name/piece-name.pipe';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { StudentsComponent } from './components/students/students.component';
+import { AvatarModule } from 'ngx-avatar';
+import { ChessAvatarComponent } from './components/chess-avatar/chess-avatar.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { ChessLabelComponent } from './components/chess-label/chess-label.component';
+import { GroupsComponent } from './components/groups/groups.component';
+import { GroupComponent } from './components/group/group.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { UserNamePipe } from './pipes/user-name/piece-name.pipe';
+import { httpInterceptorProviders } from './interceptors/http-interceptor';
+import {LoginComponent} from "./components/login/login.component";
+
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -53,7 +65,14 @@ export function createTranslateLoader(http: HttpClient) {
     LessonsComponent,
     LessonComponent,
     ChessModalsWrapperComponent,
-    ChessConfirmationDialogComponent
+    ChessConfirmationDialogComponent,
+    StudentsComponent,
+    GroupsComponent,
+    ChessAvatarComponent,
+    ChessLabelComponent,
+    GroupComponent,
+    UserNamePipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +93,9 @@ export function createTranslateLoader(http: HttpClient) {
     MatDialogModule,
     MatRadioModule,
     MatSlideToggleModule,
+    AvatarModule,
+    MatChipsModule,
+    MatAutocompleteModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -83,7 +105,7 @@ export function createTranslateLoader(http: HttpClient) {
       useDefaultLang: false
     }),
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

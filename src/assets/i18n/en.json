@@ -28,6 +28,32 @@
     "BUTTON_REMOVE": "Remove"
   },
   "LESSON": {
-    "SUBTITLE_HISTORY": "Moves history"
+    "SUBTITLE_HISTORY": "Moves history",
+    "BUTTON_EDIT": "Edit lesson",
+    "SECTION_MOVE_TITLE": "Moves adding",
+    "ADD_NOTATION": "Add notation",
+    "MODAL_SUCCESS_TITLE": "Congratulations!",
+    "MODAL_SUCCESS_DESCRIPTION": "You have successfully finished this lesson! Go to lessons list?"
+  },
+  "STUDENTS": {
+    "TITLE": "Students list"
+  },
+  "GROUPS": {
+    "TITLE": "Groups list",
+    "BUTTON_OPEN": "Open",
+    "BUTTON_CREATE": "Create New Group",
+    "BUTTON_SAVE_GROUP": "Save group",
+    "PLACEHOLDER_GROUP_TITLE": "Add title"
+  },
+  "GROUP": {
+    "SECTION_STUDENTS_TITLE": "Students list",
+    "BUTTON_OPEN": "Open",
+    "BUTTON_EDIT": "Edit group",
+    "SECTION_STUDENTS_PLACEHOLDER": "Type first name, last name or email",
+    "SECTION_LESSONS_PLACEHOLDER": "Type lesson title"
+  },
+  "MODAL_CONFIRMATION": {
+    "BUTTON_CONFIRM": "Confirm",
+    "BUTTON_CANCEL": "Cancel"
   }
 }

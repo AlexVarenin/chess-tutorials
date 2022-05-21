@@ -1,12 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 import { getFailureType, getSuccessType } from '../../utils/store-actions.helper';
 import { HttpErrorResponse } from "@angular/common/http";
-import { Lesson } from "../models";
+import {Lesson, LessonInfo} from "../models";
 
 export const lessonsActionTypes = {
   requestLessons: '[Lessons] Request lessons',
   addLesson: '[Lessons] Add lesson',
   removeLesson: '[Lessons] Remove lesson',
+  requestLessonInfo: '[Lessons] Request lesson info'
 };
 
 export const requestLessons = createAction(
@@ -20,6 +21,21 @@ export const requestLessonsSuccess = createAction(
 
 export const requestLessonsFailure = createAction(
   getFailureType(lessonsActionTypes.requestLessons),
+  props<{ error: HttpErrorResponse }>()
+);
+
+export const requestLessonInfo = createAction(
+  lessonsActionTypes.requestLessonInfo,
+  props<{ id: string }>()
+);
+
+export const requestLessonInfoSuccess = createAction(
+  getSuccessType(lessonsActionTypes.requestLessonInfo),
+  props<{ lessonInfo: LessonInfo }>()
+);
+
+export const requestLessonInfoFailure = createAction(
+  getFailureType(lessonsActionTypes.requestLessonInfo),
   props<{ error: HttpErrorResponse }>()
 );
 

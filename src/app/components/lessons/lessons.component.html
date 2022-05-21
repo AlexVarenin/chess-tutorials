@@ -26,8 +26,12 @@
         </div>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="edit(lesson); $event.stopPropagation()">{{ 'LESSONS.BUTTON_EDIT' | translate }}</button>
-        <button mat-raised-button (click)="remove(lesson); $event.stopPropagation()">{{ 'LESSONS.BUTTON_REMOVE' | translate }}</button>
+        <button mat-raised-button color="primary" (click)="edit(lesson); $event.stopPropagation()">
+          {{ 'LESSONS.BUTTON_EDIT' | translate }}
+        </button>
+        <button mat-raised-button (click)="remove(lesson); $event.stopPropagation()">
+          {{ 'LESSONS.BUTTON_REMOVE' | translate }}
+        </button>
       </mat-card-actions>
     </mat-card>
 

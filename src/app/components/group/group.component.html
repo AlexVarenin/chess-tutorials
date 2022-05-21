@@ -1,0 +1,98 @@
+<div class="wrapper" *ngIf="group$ | async as group">
+  <div class="title-header">
+    <h1 class="mat-display-1">
+      <span *ngIf="textMode" class="title-input-text">
+        <span>{{ title.value }}</span>
+        <button *ngIf="textMode" matSuffix mat-icon-button (click)="toggleTitleInput()">
+          <mat-icon>mode_edit</mat-icon>
+        </button>
+      </span>
+      <mat-form-field *ngIf="!textMode" class="title-input">
+        <input
+          matInput
+          [formControl]="title"
+        >
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="toggleTitleInput()">
+          <mat-icon>done</mat-icon>
+        </button>
+      </mat-form-field>
+    </h1>
+  </div>
+
+  <div class="section">
+    <mat-card>
+      <mat-card-title class="section-title">{{ 'GROUP.SECTION_STUDENTS_TITLE' | translate }}</mat-card-title>
+      <mat-form-field class="autocomplete-input">
+        <input type="text"
+          [placeholder]="'GROUP.SECTION_STUDENTS_PLACEHOLDER' | translate"
+          matInput
+          [formControl]="studentToAdd"
+          [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let student of availableStudents$ | async" [value]="student">
+            {{ student | userName }}
+          </mat-option>
+        </mat-autocomplete>
+        <button *ngIf="studentToAdd.value" matSuffix mat-icon-button (click)="studentToAdd.reset()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <button
+        class="add-button"
+        mat-mini-fab
+        color="accent"
+        (click)="addStudent()"
+        [disabled]="isStudentsAddDisabled$ | async"
+      >+</button>
+      <div class="students-list">
+        <chess-chess-avatar
+          class="avatar"
+          *ngFor="let student of group.students"
+          [user]="student"
+          [size]="100"
+          [displayName]="true"
+        ></chess-chess-avatar>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="list-wrapper">
+
+    <mat-form-field class="autocomplete-input">
+      <input type="text"
+        [placeholder]="'GROUP.SECTION_LESSONS_PLACEHOLDER' | translate"
+        matInput
+        [formControl]="lessonToAdd"
+        [matAutocomplete]="lessonsAuto">
+      <mat-autocomplete #lessonsAuto="matAutocomplete" [displayWith]="displayLessonFn">
+        <mat-option *ngFor="let lesson of availableLessons$ | async" [value]="lesson">
+          {{ lesson.title }}
+        </mat-option>
+      </mat-autocomplete>
+      <button *ngIf="lessonToAdd.value" matSuffix mat-icon-button (click)="lessonToAdd.reset()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <button
+      class="add-button"
+      mat-mini-fab
+      color="accent"
+      (click)="addLesson()"
+      [disabled]="isLessonsAddDisabled$ | async"
+    >+</button>
+
+    <mat-card *ngFor="let lesson of group.lessons" class="list-card">
+      <mat-card-header>
+        <div class="lessons-wrapper">
+          <img width="40" [src]="(lesson.orientation === 'white' ? 'wN' : 'bN') | pieceIcon">
+          <mat-card-title class="lesson-title">{{ lesson.title }}</mat-card-title>
+        </div>
+
+      </mat-card-header>
+
+      <button mat-raised-button color="primary" (click)="goToLesson(lesson)">
+        {{ 'GROUP.BUTTON_OPEN' | translate }}
+      </button>
+    </mat-card>
+  </div>
+</div>

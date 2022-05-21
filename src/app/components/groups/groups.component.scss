@@ -1,0 +1,30 @@
+.group-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  mat-card-title {
+    margin: 0 !important;
+  }
+}
+
+.avatars-list {
+  max-width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 30px;
+
+  .avatar {
+    width: 35px;
+  }
+}
+
+.group-card {
+  padding-left: 30px !important;
+}
+
+.group-input {
+  width: 400px;
+}
+

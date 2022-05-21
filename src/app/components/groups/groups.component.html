@@ -1,0 +1,48 @@
+<div class="wrapper">
+  <div class="title-header">
+    <h1 class="mat-display-1">{{ 'GROUPS.TITLE' | translate }}</h1>
+    <div class="action-buttons">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="createGroup()"
+        [disabled]="formIdDisplayed"
+      >{{ 'GROUPS.BUTTON_CREATE' | translate }}</button>
+    </div>
+  </div>
+
+  <div class="list-wrapper">
+
+    <mat-card *ngIf="formIdDisplayed" class="list-card group-card">
+      <mat-form-field class="group-input">
+        <input matInput [formControl]="newGroupTitle" [placeholder]="'GROUPS.PLACEHOLDER_GROUP_TITLE' | translate">
+      </mat-form-field>
+
+
+      <button mat-raised-button color="primary" (click)="saveGroup()" [disabled]="!newGroupTitle.valid">
+        {{ 'GROUPS.BUTTON_SAVE_GROUP' | translate }}
+      </button>
+    </mat-card>
+
+    <mat-card *ngFor="let group of groups$ | async" class="list-card group-card">
+      <div class="group-wrapper">
+        <mat-card-header>
+            <mat-card-title>
+              {{ group.name | titlecase }}
+            </mat-card-title>
+        </mat-card-header>
+
+        <div class="avatars-list">
+          <chess-chess-avatar *ngFor="let student of group.students" class="avatar" [user]="student" [size]="40">
+          </chess-chess-avatar>
+        </div>
+      </div>
+
+
+      <button mat-raised-button color="primary" (click)="goToGroupInfo(group)">
+        {{ 'GROUPS.BUTTON_OPEN' | translate }}
+      </button>
+    </mat-card>
+
+  </div>
+</div>

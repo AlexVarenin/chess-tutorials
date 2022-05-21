@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <div class="title-header">
+    <h1 class="mat-display-1">{{ 'STUDENTS.TITLE' | translate }}</h1>
+    <div class="action-buttons">
+    </div>
+  </div>
+
+  <div class="list-wrapper">
+
+    <mat-card *ngFor="let student of students$ | async" class="list-card">
+      <mat-card-header>
+        <div class="user-wrapper">
+          <chess-chess-avatar class="avatar" [user]="student"></chess-chess-avatar>
+          <mat-card-title class="user-name" *ngIf="student.firstName || student.lastName">
+            <span>{{ student.firstName | titlecase }} </span>
+            <span>{{ student.lastName | titlecase }}</span>
+          </mat-card-title>
+          <mat-card-subtitle class="user-email">{{ student.email }}</mat-card-subtitle>
+        </div>
+
+      </mat-card-header>
+
+      <chess-chess-label [text]="student.group?.name"></chess-chess-label>
+    </mat-card>
+
+  </div>
+</div>

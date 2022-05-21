@@ -1,0 +1,68 @@
+.students-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .avatar {
+    margin: 5px;
+
+    &:last-child {
+      margin: 5px auto 5px 15px;
+    }
+  }
+}
+
+.lessons-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .lesson-title {
+    margin-left: 30px;
+    margin-bottom: 0 !important;
+  }
+
+}
+
+.mat-display-1 {
+
+  width: 70%;
+
+  .title-input {
+    height: 60px;
+    width: 100%;
+  }
+
+  ::ng-deep .mat-form-field-infix {
+    border: none;
+    height: 60px;
+  }
+
+  ::ng-deep .mat-form-field-label {
+    display: none !important;
+  }
+}
+
+.title-header {
+  height: 60px;
+  align-items: center;
+}
+
+.title-input-text {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  button {
+    margin-left: 30px;
+  }
+}
+
+.add-button {
+  margin-left: 20px;
+}
+
+.autocomplete-input {
+  width: 350px;
+}
+

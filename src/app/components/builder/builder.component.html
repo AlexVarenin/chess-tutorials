@@ -64,10 +64,10 @@
             formControlName="orientation"
           >
             <mat-radio-button value="white" class="settings-item-button">
-              {{ 'BOARD.SECTION_SETTINGS_PIECES_COLOR_WHITE' | translate }}<img width="25" [src]="'wP' | pieceIcon">
+              {{ 'BOARD.SECTION_SETTINGS_PIECES_COLOR_WHITE' | translate }}<img width="25" [src]="'wN' | pieceIcon">
             </mat-radio-button>
             <mat-radio-button value="black" class="settings-item-button">
-              {{ 'BOARD.SECTION_SETTINGS_PIECES_COLOR_BLACK' | translate }}<img width="25" [src]="'bP' | pieceIcon">
+              {{ 'BOARD.SECTION_SETTINGS_PIECES_COLOR_BLACK' | translate }}<img width="25" [src]="'bN' | pieceIcon">
             </mat-radio-button>
           </mat-radio-group>
         </div>
@@ -103,7 +103,7 @@
               <mat-panel-title class="panel-title">{{ 'BOARD.SECTION_MOVES_TITLE' | translate }}</mat-panel-title>
               <mat-panel-description class="panel-description">
                 <ng-container *ngIf="isMoveFormDisplayed$ | async; else closedText">
-                  <button *ngIf="!moves.length" mat-raised-button color="primary" class="wide-button" (click)="toggleForm(false)">
+                  <button *ngIf="!moves.length" mat-raised-button color="primary" class="wide-button" (click)="toggleForm(false); resetInputs()">
                     {{ 'BOARD.SECTION_MOVES_TOGGLE_HIDE' | translate }}
                   </button>
                 </ng-container>
@@ -119,10 +119,10 @@
                 <mat-form-field class="triple-input">
                   <span matPrefix>{{movesForm.get('piece')?.value | pieceName: form.get('notationType')?.value : movesForm.get('notation')?.value}}</span>
                   <input matInput formControlName="notation" [placeholder]="'BOARD.SECTION_MOVES_PLACEHOLDER_EDIT_NOTATION' | translate">
+                  <button *ngIf="movesForm.valid" matSuffix mat-icon-button aria-label="Clear" (click)="movesForm.reset()">
+                    <mat-icon>close</mat-icon>
+                  </button>
                 </mat-form-field>
-                <button mat-icon-button color="primary" (click)="resetMoveInputs()" [disabled]="!movesForm.valid">
-                  <mat-icon>delete</mat-icon>
-                </button>
               </div>
               <button
                 mat-mini-fab

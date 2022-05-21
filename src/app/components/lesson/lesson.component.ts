@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import {filter, tap} from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BoardComponent } from '../board/board.component';
 import { Move } from '../../store/lessons/models';
 import { LessonsStoreService } from '../../store/lessons/services/lessons-store.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ChessConfirmationDialogComponent } from '../chess-confirmation-dialog/chess-confirmation-dialog.component';
-import {FormControl, Validators} from "@angular/forms";
-import {normaliseNotation} from "../../services/notation-normaliser.helper";
+import { FormControl, Validators } from '@angular/forms';
+import { normaliseNotation } from '../../services/notation-normaliser.helper';
 
 type HistoryMove = Move & { isFalsy?: boolean };
 
@@ -25,7 +25,7 @@ export class LessonComponent implements OnInit {
   public moveIndex = 0;
   public lessonId = this.activatedRoute.snapshot.paramMap.get('id');
   public notation = new FormControl('', Validators.required);
-  public lesson$ = this.lessonsStoreService.getLessonInfo$(this.lessonId as string).pipe(filter(Boolean),
+  public lesson$ = this.lessonsStoreService.lessonInfo$.pipe(
     tap(lesson => {
       this.state = lesson.initialState;
       this.controlMoves = lesson.moves;
@@ -42,7 +42,7 @@ export class LessonComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-
+    this.lessonsStoreService.requestLessonInfo(this.lessonId as string);
   }
 
   public onPieceDrop(move: Move): void {
@@ -68,6 +68,10 @@ export class LessonComponent implements OnInit {
     })
   }
 
+  public edit(): void {
+    this.router.navigate(['edit'], { relativeTo: this.activatedRoute });
+  }
+
   private checkMove(move: Move, isDirectInput?: boolean) {
     const controlMove = this.controlMoves[this.moveIndex];
     if (controlMove.fen === move.fen && (!isDirectInput || move.notation === controlMove.notation)
@@ -91,8 +95,8 @@ export class LessonComponent implements OnInit {
       autoFocus: false,
       disableClose: true,
       data: {
-        title:  'Congratulations!',
-        description: 'You have successfully finished this lesson! Go to lessons list?',
+        title:  'LESSON.MODAL_SUCCESS_TITLE',
+        description: 'LESSON.MODAL_SUCCESS_DESCRIPTION',
         hideCancel: true
       }
     });
@@ -110,5 +114,6 @@ export class LessonComponent implements OnInit {
       this.state = this.board.fen = move.fen;
     }, 500);
   }
+
 
 }

@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import {filter, shareReplay, tap} from 'rxjs/operators';
+import { shareReplay, tap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatAccordion } from '@angular/material/expansion';
 import { BoardComponent } from '../board/board.component';
-import { Lesson, Move } from '../../store/lessons/models';
+import { LessonInfo, Move} from '../../store/lessons/models';
 import { LessonsStoreService } from '../../store/lessons/services/lessons-store.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -104,6 +104,7 @@ export class BuilderComponent implements OnInit, AfterViewInit {
 
   public changeOrientation(): void {
     this.board.changeOrientation();
+    this.form.get('orientation')?.setValue(this.board.orientation);
   }
 
   public setStartPosition(): void {
@@ -169,29 +170,32 @@ export class BuilderComponent implements OnInit, AfterViewInit {
 
   private subscribeData(): void {
     if (this.lessonId) {
-      this.lessonsStoreService.getLessonInfo$(this.lessonId)
-        .pipe(filter(Boolean), tap((lesson: Lesson) => this.updateData(lesson)))
+      this.lessonsStoreService.requestLessonInfo(this.lessonId);
+      this.lessonsStoreService.lessonInfo$
+        .pipe(tap((lesson: LessonInfo) => this.updateData(lesson)))
         .subscribe();
     }
   }
 
-  private updateData(lesson: Lesson) {
+  private updateData(lesson: LessonInfo) {
     const { title, description, initialState, moves, orientation, notationType, disableDrag } = lesson;
-    this.board.orientation = orientation;
-    this.board.fen = initialState;
-    this.moves = moves;
+
     setTimeout(() => {
+      if (moves.length) {
+        this.isMoveFormDisplayed.next(true);
+      }
       this.form.get('title')!.setValue(title, { emitEvent: false });
       this.form.get('description')!.setValue(description, { emitEvent: false });
       this.form.get('initialState')!.setValue(initialState, { emitEvent: false });
       this.form.get('orientation')!.setValue(orientation, { emitEvent: false });
       this.form.get('notationType')!.setValue(notationType, { emitEvent: false });
       this.form.get('disableDrag')!.setValue(disableDrag, { emitEvent: false });
+      this.board.orientation = orientation;
+      this.board.fen = moves.length ? moves[moves.length - 1].fen : initialState;
+      this.moves = [...moves];
     });
 
-    if (moves.length) {
-      this.isMoveFormDisplayed.next(true);
-    }
+
 
   }
 

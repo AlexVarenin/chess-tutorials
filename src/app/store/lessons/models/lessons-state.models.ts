@@ -2,6 +2,7 @@ export const LessonsStateName = 'lessons';
 
 export interface LessonsState {
   lessonsList: Lesson[] | undefined;
+  lessonInfo: LessonInfo | undefined;
 }
 
 export interface Lesson {
@@ -9,8 +10,11 @@ export interface Lesson {
   title: string;
   description: string;
   initialState: string;
-  moves: Move[];
   orientation: 'black' | 'white';
+}
+
+export interface LessonInfo extends Lesson {
+  moves: Move[];
   notationType: 'cyr' | 'lat';
   disableDrag: boolean;
 }

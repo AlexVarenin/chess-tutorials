@@ -1,6 +1,9 @@
 <div class="wrapper" *ngIf="lesson$ | async as lesson">
   <div class="title-header">
     <h1 class="mat-display-1">{{ lesson.title }}</h1>
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="edit()">{{ 'LESSON.BUTTON_EDIT' | translate }}</button>
+    </div>
   </div>
 
   <div class="section">
@@ -30,12 +33,12 @@
             hideToggle
           >
             <mat-expansion-panel-header class="panel-header">
-              <mat-panel-title class="panel-title">{{ 'BOARD.SECTION_MOVES_TITLE' | translate }}</mat-panel-title>
+              <mat-panel-title class="panel-title">{{ 'LESSON.SECTION_MOVE_TITLE' | translate }}</mat-panel-title>
             </mat-expansion-panel-header>
             <div class="double-section">
               <div>
                 <mat-form-field class="triple-input">
-                  <input matInput [formControl]="notation" [placeholder]="'BOARD.SECTION_MOVES_PLACEHOLDER_EDIT_NOTATION' | translate">
+                  <input matInput [formControl]="notation" [placeholder]="'LESSON.ADD_NOTATION' | translate">
                 </mat-form-field>
                 <button mat-icon-button color="primary" (click)="resetInput()" [disabled]="!notation.valid">
                   <mat-icon>delete</mat-icon>
@@ -54,7 +57,7 @@
         </mat-accordion>
       </div>
 
-      <h3 class="mat-display-1 title-moves">{{ 'LESSON.SUBTITLE_HISTORY' | translate }}</h3>
+      <h3 *ngIf="historyMoves.length" class="mat-display-1 title-moves">{{ 'LESSON.SUBTITLE_HISTORY' | translate }}</h3>
       <mat-card
         class="double-section small-section"
         *ngFor="let move of historyMoves"

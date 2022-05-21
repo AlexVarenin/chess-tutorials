@@ -5,7 +5,7 @@ import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as ActionList from '../actions';
 import { LessonsApiService } from '../services/lessons-api.service';
-import { Lesson } from "../models";
+import { Lesson, LessonInfo } from '../models';
 
 @Injectable()
 export class LessonsEffects {
@@ -18,6 +18,19 @@ export class LessonsEffects {
           .pipe(
             map((lessons: Lesson[]) => ActionList.requestLessonsSuccess({ lessons })),
             catchError((error: HttpErrorResponse) => of(ActionList.requestLessonsFailure({ error })))
+          )
+      )
+    )
+  );
+
+  public requestLessonInfo$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(ActionList.requestLessonInfo),
+      exhaustMap( ({ id }) =>
+        this.lessonsApiService.getLessonInfo(id)
+          .pipe(
+            map((lessonInfo: LessonInfo) => ActionList.requestLessonInfoSuccess({ lessonInfo })),
+            catchError((error: HttpErrorResponse) => of(ActionList.requestLessonInfoFailure({ error })))
           )
       )
     )
@@ -52,5 +65,5 @@ export class LessonsEffects {
   constructor(
     private actions$: Actions,
     private lessonsApiService: LessonsApiService
-  ) {};
+  ) {}
 }

@@ -28,6 +28,32 @@
     "BUTTON_REMOVE": "Видалити"
   },
   "LESSON": {
-    "SUBTITLE_HISTORY": "Істрія ходів"
+    "SUBTITLE_HISTORY": "Істрія ходів",
+    "BUTTON_EDIT": "Редагувати урок",
+    "SECTION_MOVE_TITLE": "Додавання ходів",
+    "ADD_NOTATION": "Додайте нотацію",
+    "MODAL_SUCCESS_TITLE": "Поздоровляємо!",
+    "MODAL_SUCCESS_DESCRIPTION": "Ви успішно завершили урок! Перейти до переліку уроків?"
+  },
+  "STUDENTS": {
+    "TITLE": "Перелік студентів"
+  },
+  "GROUPS": {
+    "TITLE": "Перелік груп",
+    "BUTTON_OPEN": "Відкрити",
+    "BUTTON_CREATE": "Створити нову групу",
+    "BUTTON_SAVE_GROUP": "Зберегти групу",
+    "PLACEHOLDER_GROUP_TITLE": "Додати заголовок"
+  },
+  "GROUP": {
+    "SECTION_STUDENTS_TITLE": "Перелік студентів",
+    "BUTTON_OPEN": "Відкрити",
+    "BUTTON_EDIT": "Редагувати групу",
+    "SECTION_STUDENTS_PLACEHOLDER": "Почніть вводити ім'я. фамілію чи електронну адресу",
+    "SECTION_LESSONS_PLACEHOLDER": "Почніть вводити назву уроку"
+  },
+  "MODAL_CONFIRMATION": {
+    "BUTTON_CONFIRM": "Підтвердити",
+    "BUTTON_CANCEL": "Відмінити"
   }
 }
