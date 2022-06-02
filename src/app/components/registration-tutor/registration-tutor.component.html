@@ -89,13 +89,17 @@
 
       </mat-form-field>
 
+      <mat-error *ngIf="error">
+        {{ 'REGISTRATION.USER_EXISTS' | translate }}
+      </mat-error>
+
     </form>
   </mat-card-content>
   <mat-card-actions>
     <button class="login__button" type="button" mat-raised-button color="primary" [disabled]="form.invalid || isLoading" (click)="onSubmit()">
       <span *ngIf="!isLoading; else loading">{{ 'REGISTRATION.SUBMIT' | translate }}</span>
     </button>
-    <button class="login__button" type="button" mat-raised-button [disabled]="!form.dirty" (click)="form.reset()">{{ 'REGISTRATION.RESET' | translate }}</button>
+    <button class="login__button" type="button" mat-raised-button [disabled]="!form.dirty" (click)="form.reset(); error = null">{{ 'REGISTRATION.RESET' | translate }}</button>
   </mat-card-actions>
 </mat-card>
 <ng-template #loading>{{ 'REGISTRATION.LOADING' | translate }}</ng-template>

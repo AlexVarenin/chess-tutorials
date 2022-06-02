@@ -14,7 +14,7 @@ import { UsersStoreService } from '../../store/users/services/users-store.servic
 })
 export class LessonsComponent implements OnInit, OnDestroy {
 
-  public lessons$ = this.lessonsStoreService.lessons$.pipe(filter(Boolean));
+  public lessons$ = this.lessonsStoreService.lessons$;
 
   private destroy$ = new Subject<boolean>();
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, ActionsSubject } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import {distinctUntilChanged, filter, map, skip} from "rxjs/operators";
+import { distinctUntilChanged, filter, map, skip } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

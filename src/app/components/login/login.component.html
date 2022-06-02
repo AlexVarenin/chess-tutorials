@@ -46,7 +46,7 @@
     <button class="login__button" type="button" mat-raised-button color="primary" [disabled]="form.invalid || isLoading" (click)="onSubmit()">
       <span *ngIf="!isLoading; else loading">{{ 'LOGIN.SUBMIT' | translate }}</span>
     </button>
-    <button class="login__button" type="button" mat-raised-button [disabled]="!form.dirty" (click)="form.reset()">{{ 'LOGIN.RESET' | translate }}</button>
+    <button class="login__button" type="button" mat-raised-button [disabled]="!form.dirty" (click)="form.reset(); error = null">{{ 'LOGIN.RESET' | translate }}</button>
   </mat-card-actions>
 </mat-card>
 <ng-template #loading>{{ 'LOGIN.LOADING' | translate }}</ng-template>

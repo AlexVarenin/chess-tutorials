@@ -31,7 +31,9 @@
   "LESSONS": {
     "TITLE": "Перелік доступних уроків",
     "BUTTON_EDIT": "Редагувати",
-    "BUTTON_REMOVE": "Видалити"
+    "BUTTON_REMOVE": "Видалити",
+    "NO_RESULTS": "У вас поки що немає уроків",
+    "ADD_NEW": "Додати новий урок"
   },
   "LESSON": {
     "SUBTITLE_HISTORY": "Істрія ходів",
@@ -44,14 +46,17 @@
   "STUDENTS": {
     "TITLE": "Перелік студентів",
     "INVITE_NEW_STUDENT": "Запросити нового студента",
-    "COPY_TO_REGISTER": "Скопіюйте код для реєстрації нового студента"
+    "COPY_TO_REGISTER": "Скопіюйте код для реєстрації нового студента",
+    "NO_RESULTS": "Немає заєрестрованих студентів"
   },
   "GROUPS": {
     "TITLE": "Перелік груп",
     "BUTTON_OPEN": "Відкрити",
     "BUTTON_CREATE": "Створити нову групу",
+    "BUTTON_RESET": "Відмінити",
     "BUTTON_SAVE_GROUP": "Зберегти групу",
-    "PLACEHOLDER_GROUP_TITLE": "Додати заголовок"
+    "PLACEHOLDER_GROUP_TITLE": "Додати заголовок",
+    "NO_RESULTS": "У вас поки що немає груп"
   },
   "GROUP": {
     "SECTION_STUDENTS_TITLE": "Перелік студентів",
@@ -82,6 +87,7 @@
     "PASSWORD_SHORT": "Пароль повинен бути не менше 8 символів",
     "REPEAT_PASSWORD": "підтвердження паролю",
     "PASSWORD_NOT_MATCH": "Паролі не співпадають",
+    "USER_EXISTS": "Користувач вже існує",
     "SUBMIT": "Надіслати",
     "RESET": "Очистити",
     "LOADING": "загрузка..."

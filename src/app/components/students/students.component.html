@@ -22,28 +22,37 @@
   </div>
 
   <div class="list-wrapper">
+    <ng-container *ngIf="students$ | async as students; else loading">
+      <mat-card *ngFor="let student of students" class="list-card">
+        <mat-card-header>
+          <div class="user-wrapper">
+            <chess-chess-avatar class="avatar" [user]="student"></chess-chess-avatar>
+            <mat-card-title class="user-name" *ngIf="student.firstName || student.lastName">
+              <span>{{ student.firstName | titlecase }} </span>
+              <span>{{ student.lastName | titlecase }}</span>
+            </mat-card-title>
+            <mat-card-subtitle class="user-email">{{ student.email }}</mat-card-subtitle>
+          </div>
 
-    <mat-card *ngFor="let student of students$ | async" class="list-card">
-      <mat-card-header>
-        <div class="user-wrapper">
-          <chess-chess-avatar class="avatar" [user]="student"></chess-chess-avatar>
-          <mat-card-title class="user-name" *ngIf="student.firstName || student.lastName">
-            <span>{{ student.firstName | titlecase }} </span>
-            <span>{{ student.lastName | titlecase }}</span>
-          </mat-card-title>
-          <mat-card-subtitle class="user-email">{{ student.email }}</mat-card-subtitle>
+        </mat-card-header>
+        <div>
+          <chess-chess-label
+            class="group-label"
+            *ngFor="let group of student.groups"
+            [text]="group.name"
+            (click)="goToGroup(group.id)"
+          ></chess-chess-label>
         </div>
+      </mat-card>
 
-      </mat-card-header>
-      <div>
-        <chess-chess-label
-          class="group-label"
-          *ngFor="let group of student.groups"
-          [text]="group.name"
-          (click)="goToGroup(group.id)"
-        ></chess-chess-label>
-      </div>
-    </mat-card>
+      <p class="no-results" *ngIf="!students.length">{{ 'STUDENTS.NO_RESULTS' | translate }}</p>
+
+    </ng-container>
+
 
   </div>
 </div>
+
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

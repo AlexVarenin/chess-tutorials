@@ -53,6 +53,7 @@ import { HiddenForDirective } from './directives/hidden-for/hidden-for.directive
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChessLangSwitcherComponent } from './components/chess-lang-switcher/chess-lang-switcher.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -109,6 +110,7 @@ export function createTranslateLoader(http: HttpClient) {
     MatAutocompleteModule,
     MatMenuModule,
     MatTooltipModule,
+    MatProgressBarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

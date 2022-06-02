@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { first, tap } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { UsersStoreService } from '../../store/users/services/users-store.service';
-import {Group} from "../../store/groups/models";
 
 @Component({
   selector: 'chess-students',

@@ -32,3 +32,9 @@
   width: 400px;
 }
 
+.form-button {
+  & + & {
+    margin-left: 20px;
+  }
+}
+

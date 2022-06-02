@@ -1,6 +1,7 @@
-<div class="wrapper" *ngIf="group$ | async as group">
-  <div class="title-header">
-    <h1 class="mat-display-1">
+<div class="wrapper">
+  <ng-container *ngIf="group$ | async as group; else loading">
+    <div class="title-header">
+      <h1 class="mat-display-1">
       <span *ngIf="textMode" class="title-input-text">
         <span>{{ title.value }}</span>
         <ng-container *hiddenFor="['admin','student']">
@@ -9,34 +10,78 @@
         </button>
         </ng-container>
       </span>
-      <mat-form-field *ngIf="!textMode" class="title-input">
-        <input
-          matInput
-          [formControl]="title"
-        >
-        <button matSuffix mat-icon-button aria-label="Clear" (click)="toggleTitleInput(true)">
-          <mat-icon>done</mat-icon>
-        </button>
-      </mat-form-field>
-    </h1>
-  </div>
+        <mat-form-field *ngIf="!textMode" class="title-input">
+          <input
+            matInput
+            [formControl]="title"
+          >
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="toggleTitleInput(true)">
+            <mat-icon>done</mat-icon>
+          </button>
+        </mat-form-field>
+      </h1>
+    </div>
 
-  <div class="section">
-    <mat-card>
-      <mat-card-title class="section-title">{{ 'GROUP.SECTION_STUDENTS_TITLE' | translate }}</mat-card-title>
+    <div class="section">
+      <mat-card>
+        <mat-card-title class="section-title">{{ 'GROUP.SECTION_STUDENTS_TITLE' | translate }}</mat-card-title>
+        <ng-container *hiddenFor="['admin','student']">
+          <mat-form-field class="autocomplete-input">
+            <input type="text"
+                   [placeholder]="'GROUP.SECTION_STUDENTS_PLACEHOLDER' | translate"
+                   matInput
+                   [formControl]="studentToAdd"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              <mat-option *ngFor="let student of availableStudents$ | async | selectedFilter: group.students" [value]="student">
+                {{ student | userName }}
+              </mat-option>
+            </mat-autocomplete>
+            <button *ngIf="studentToAdd.value" matSuffix mat-icon-button (click)="studentToAdd.reset()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+          <button
+            class="add-button"
+            mat-mini-fab
+            color="warn"
+            (click)="addStudent()"
+            [disabled]="isStudentsAddDisabled$ | async"
+          >+</button>
+        </ng-container>
+
+        <div class="students-list">
+          <div *ngFor="let student of group.students" class="avatar">
+            <button *hiddenFor="['admin','student']"
+                    class="remove-user"
+                    (click)="removeStudent(student)"
+            ><mat-icon>cancel</mat-icon></button>
+            <chess-chess-avatar
+              [user]="student"
+              [size]="100"
+              [displayName]="true"
+            ></chess-chess-avatar>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="list-wrapper">
+
+      <h3 class="mat-display-1 title-smaller">{{ 'GROUP.SECTION_LESSONS_TITLE' | translate }}</h3>
       <ng-container *hiddenFor="['admin','student']">
         <mat-form-field class="autocomplete-input">
           <input type="text"
-                 [placeholder]="'GROUP.SECTION_STUDENTS_PLACEHOLDER' | translate"
+                 [placeholder]="'GROUP.SECTION_LESSONS_PLACEHOLDER' | translate"
                  matInput
-                 [formControl]="studentToAdd"
-                 [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let student of availableStudents$ | async | selectedFilter: group.students" [value]="student">
-              {{ student | userName }}
+                 [formControl]="lessonToAdd"
+                 [matAutocomplete]="lessonsAuto">
+          <mat-autocomplete #lessonsAuto="matAutocomplete" [displayWith]="displayLessonFn">
+            <mat-option *ngFor="let lesson of availableLessons$ | async | selectedFilter: group.lessons" [value]="lesson">
+              {{ lesson.title }}
             </mat-option>
           </mat-autocomplete>
-          <button *ngIf="studentToAdd.value" matSuffix mat-icon-button (click)="studentToAdd.reset()">
+          <button *ngIf="lessonToAdd.value" matSuffix mat-icon-button (click)="lessonToAdd.reset()">
             <mat-icon>close</mat-icon>
           </button>
         </mat-form-field>
@@ -44,79 +89,40 @@
           class="add-button"
           mat-mini-fab
           color="warn"
-          (click)="addStudent()"
-          [disabled]="isStudentsAddDisabled$ | async"
+          (click)="addLesson()"
+          [disabled]="isLessonsAddDisabled$ | async"
         >+</button>
       </ng-container>
 
-      <div class="students-list">
-        <div *ngFor="let student of group.students" class="avatar">
-          <button *hiddenFor="['admin','student']"
-            class="remove-user"
-            (click)="removeStudent(student)"
-          ><mat-icon>cancel</mat-icon></button>
-          <chess-chess-avatar
-            [user]="student"
-            [size]="100"
-            [displayName]="true"
-          ></chess-chess-avatar>
-        </div>
+
+      <div *ngFor="let lesson of group.lessons" class="list-card-wrapper">
+        <mat-card class="list-card">
+          <mat-card-header>
+            <div class="lessons-wrapper">
+              <img width="40" [src]="(lesson.orientation === 'white' ? 'wN' : 'bN') | pieceIcon">
+              <mat-card-title class="lesson-title">{{ lesson.title }}</mat-card-title>
+            </div>
+
+          </mat-card-header>
+
+          <button mat-raised-button color="primary" (click)="goToLesson(lesson)">
+            {{ 'GROUP.BUTTON_OPEN' | translate }}
+          </button>
+        </mat-card>
+        <button
+          *hiddenFor="['admin','student']"
+          mat-icon-button color="primary"
+          (click)="removeLesson(lesson)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
-    </mat-card>
-  </div>
 
-  <div class="list-wrapper">
-
-    <h3 class="mat-display-1 title-smaller">{{ 'GROUP.SECTION_LESSONS_TITLE' | translate }}</h3>
-    <ng-container *hiddenFor="['admin','student']">
-      <mat-form-field class="autocomplete-input">
-        <input type="text"
-          [placeholder]="'GROUP.SECTION_LESSONS_PLACEHOLDER' | translate"
-          matInput
-          [formControl]="lessonToAdd"
-          [matAutocomplete]="lessonsAuto">
-        <mat-autocomplete #lessonsAuto="matAutocomplete" [displayWith]="displayLessonFn">
-          <mat-option *ngFor="let lesson of availableLessons$ | async | selectedFilter: group.lessons" [value]="lesson">
-            {{ lesson.title }}
-          </mat-option>
-        </mat-autocomplete>
-        <button *ngIf="lessonToAdd.value" matSuffix mat-icon-button (click)="lessonToAdd.reset()">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
-      <button
-        class="add-button"
-        mat-mini-fab
-        color="warn"
-        (click)="addLesson()"
-        [disabled]="isLessonsAddDisabled$ | async"
-      >+</button>
-    </ng-container>
-
-
-    <div *ngFor="let lesson of group.lessons" class="list-card-wrapper">
-      <mat-card class="list-card">
-        <mat-card-header>
-          <div class="lessons-wrapper">
-            <img width="40" [src]="(lesson.orientation === 'white' ? 'wN' : 'bN') | pieceIcon">
-            <mat-card-title class="lesson-title">{{ lesson.title }}</mat-card-title>
-          </div>
-
-        </mat-card-header>
-
-        <button mat-raised-button color="primary" (click)="goToLesson(lesson)">
-          {{ 'GROUP.BUTTON_OPEN' | translate }}
-        </button>
-      </mat-card>
-      <button
-        *hiddenFor="['admin','student']"
-        mat-icon-button color="primary"
-        (click)="removeLesson(lesson)"
-      >
-        <mat-icon>delete</mat-icon>
-      </button>
     </div>
+  </ng-container>
 
-
-  </div>
 </div>
+
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

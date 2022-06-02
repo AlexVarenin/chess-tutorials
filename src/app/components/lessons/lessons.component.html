@@ -6,40 +6,60 @@
   </div>
 
   <div class="list-wrapper">
+    <ng-container *ngIf="lessons$ | async as lessons; else loading">
+      <mat-card *ngFor="let lesson of lessons" class="lesson-card" (click)="goToLesson(lesson)">
+        <mat-card-header>
+          <mat-card-title>{{ lesson.title | titlecase }}</mat-card-title>
+        </mat-card-header>
+        <chess-board
+          [initialOrientation]="lesson.orientation"
+          [initialFen]="lesson.initialState"
+          [isMinimised]="true"
+          [draggable]="false"
+          [spare]="false"
+          [showNotation]="false"
+        ></chess-board>
+        <mat-card-content>
+          <div class="description-wrapper">
+            <p [innerHTML]="lesson.description"></p>
+            <div class="blur-layout"></div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions *hiddenFor="['admin','student']">
+          <button mat-raised-button color="primary" (click)="edit(lesson); $event.stopPropagation()">
+            {{ 'LESSONS.BUTTON_EDIT' | translate }}
+          </button>
+          <button mat-raised-button (click)="remove(lesson); $event.stopPropagation()">
+            {{ 'LESSONS.BUTTON_REMOVE' | translate }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
 
-    <mat-card *ngFor="let lesson of lessons$ | async" class="lesson-card" (click)="goToLesson(lesson)">
-      <mat-card-header>
-        <mat-card-title>{{ lesson.title | titlecase }}</mat-card-title>
-      </mat-card-header>
-      <chess-board
-        [initialOrientation]="lesson.orientation"
-        [initialFen]="lesson.initialState"
-        [isMinimised]="true"
-        [draggable]="false"
-        [spare]="false"
-        [showNotation]="false"
-      ></chess-board>
-      <mat-card-content>
-        <div class="description-wrapper">
-          <p [innerHTML]="lesson.description"></p>
-          <div class="blur-layout"></div>
+      <ng-container *ngIf="lessons.length">
+        <mat-card *hiddenFor="['admin','student']" class="lesson-card lesson-card--new" (click)="addNew()">
+          <mat-card-content>
+            <mat-icon [inline]="true">add_circle</mat-icon>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+
+      <div *ngIf="!lessons.length" class="no-results-wrapper">
+        <p class="no-results">{{ 'LESSONS.NO_RESULTS' | translate }}</p>
+        <div *hiddenFor="['admin','student']" class="action-buttons action-buttons--bigger">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addNew()"
+          >{{ 'LESSONS.ADD_NEW' | translate }}</button>
         </div>
-      </mat-card-content>
-      <mat-card-actions *hiddenFor="['admin','student']">
-        <button mat-raised-button color="primary" (click)="edit(lesson); $event.stopPropagation()">
-          {{ 'LESSONS.BUTTON_EDIT' | translate }}
-        </button>
-        <button mat-raised-button (click)="remove(lesson); $event.stopPropagation()">
-          {{ 'LESSONS.BUTTON_REMOVE' | translate }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
+      </div>
 
-    <mat-card *hiddenFor="['admin','student']" class="lesson-card lesson-card--new" (click)="addNew()">
-      <mat-card-content>
-        <mat-icon [inline]="true">add_circle</mat-icon>
-      </mat-card-content>
-    </mat-card>
+    </ng-container>
+
   </div>
 </div>
+
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>
 

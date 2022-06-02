@@ -31,7 +31,9 @@
   "LESSONS": {
     "TITLE": "List of available lessons",
     "BUTTON_EDIT": "Edit",
-    "BUTTON_REMOVE": "Remove"
+    "BUTTON_REMOVE": "Remove",
+    "NO_RESULTS": "У вас поки що немає уроків",
+    "ADD_NEW": "Додати новий урок"
   },
   "LESSON": {
     "SUBTITLE_HISTORY": "Moves history",
@@ -44,14 +46,17 @@
   "STUDENTS": {
     "TITLE": "Students list",
     "INVITE_NEW_STUDENT": "Invite new student",
-    "COPY_TO_REGISTER": "Copy code below to register new student"
+    "COPY_TO_REGISTER": "Copy code below to register new student",
+    "NO_RESULTS": "There are no students registered"
   },
   "GROUPS": {
     "TITLE": "Groups list",
     "BUTTON_OPEN": "Open",
     "BUTTON_CREATE": "Create New Group",
+    "BUTTON_RESET": "Cancel",
     "BUTTON_SAVE_GROUP": "Save group",
-    "PLACEHOLDER_GROUP_TITLE": "Add title"
+    "PLACEHOLDER_GROUP_TITLE": "Add title",
+    "NO_RESULTS": "You have no groups yet"
   },
   "GROUP": {
     "SECTION_STUDENTS_TITLE": "Students list",
@@ -82,6 +87,7 @@
     "PASSWORD_SHORT": "Password should be not less than 8 characters",
     "REPEAT_PASSWORD": "confirm password",
     "PASSWORD_NOT_MATCH": "Passwords not match",
+    "USER_EXISTS": "User already exists",
     "SUBMIT": "Submit",
     "RESET": "Reset",
     "LOADING": "loading..."

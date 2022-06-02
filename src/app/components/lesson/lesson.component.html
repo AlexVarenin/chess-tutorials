@@ -1,80 +1,87 @@
-<div class="wrapper" *ngIf="lesson$ | async as lesson">
-  <div class="title-header">
-    <h1 class="mat-display-1">{{ lesson.title }}</h1>
-    <div class="action-buttons" *hiddenFor="['admin','student']">
-      <button mat-raised-button color="primary" (click)="edit()">{{ 'LESSON.BUTTON_EDIT' | translate }}</button>
-    </div>
-  </div>
-
-  <div class="section">
-    <mat-card>
-      <p [innerHTML]="lesson.description"></p>
-    </mat-card>
-  </div>
-  <div class="section double-section">
-    <mat-card class="main">
-      <chess-board
-        [draggable]="!lesson.disableDrag"
-        [initialOrientation]="lesson.orientation"
-        [spare]="false"
-        [initialFen]="lesson.initialState"
-        (onDrop)="onPieceDrop($event)"
-      ></chess-board>
-
-    </mat-card>
-
-    <div class="aside">
-
-      <div class="section">
-        <mat-accordion>
-          <mat-expansion-panel
-            disabled
-            [expanded]="true"
-            hideToggle
-          >
-            <mat-expansion-panel-header class="panel-header">
-              <mat-panel-title class="panel-title">{{ 'LESSON.SECTION_MOVE_TITLE' | translate }}</mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="double-section">
-              <div>
-                <mat-form-field class="triple-input">
-                  <input matInput [formControl]="notation" [placeholder]="'LESSON.ADD_NOTATION' | translate">
-                </mat-form-field>
-                <button mat-icon-button color="primary" (click)="resetInput()" [disabled]="!notation.valid">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-              <button
-                mat-mini-fab
-                color="warn"
-                (click)="addMove()"
-                [disabled]="!notation.valid"
-              >+</button>
-            </div>
-
-
-          </mat-expansion-panel>
-        </mat-accordion>
+<div class="wrapper">
+  <ng-container *ngIf="lesson$ | async as lesson; else loading">
+    <div class="title-header">
+      <h1 class="mat-display-1">{{ lesson.title }}</h1>
+      <div class="action-buttons" *hiddenFor="['admin','student']">
+        <button mat-raised-button color="primary" (click)="edit()">{{ 'LESSON.BUTTON_EDIT' | translate }}</button>
       </div>
+    </div>
 
-      <h3 *ngIf="historyMoves.length" class="mat-display-1 title-smaller">{{ 'LESSON.SUBTITLE_HISTORY' | translate }}</h3>
-      <mat-card
-        class="double-section small-section"
-        *ngFor="let move of historyMoves"
-        [ngClass]="{ 'falsy-move': move.isFalsy }"
-      >
-        <div class="sub-section">
-          <ng-container *ngIf="move.piece; else question">
-            <img width="25" [src]="move.piece | pieceIcon">
-          </ng-container>
-          <ng-template #question>
-            <mat-icon>question_mark</mat-icon>
-          </ng-template>
-          <span class="notation">{{move.piece | pieceName: lesson.notationType : move.notation}}{{move.notation}}</span>
-        </div>
+    <div class="section">
+      <mat-card>
+        <p [innerHTML]="lesson.description"></p>
       </mat-card>
     </div>
+    <div class="section double-section">
+      <mat-card class="main">
+        <chess-board
+          [draggable]="!lesson.disableDrag"
+          [initialOrientation]="lesson.orientation"
+          [spare]="false"
+          [initialFen]="lesson.initialState"
+          (onDrop)="onPieceDrop($event)"
+        ></chess-board>
 
-  </div>
+      </mat-card>
+
+      <div class="aside">
+
+        <div class="section">
+          <mat-accordion>
+            <mat-expansion-panel
+              disabled
+              [expanded]="true"
+              hideToggle
+            >
+              <mat-expansion-panel-header class="panel-header">
+                <mat-panel-title class="panel-title">{{ 'LESSON.SECTION_MOVE_TITLE' | translate }}</mat-panel-title>
+              </mat-expansion-panel-header>
+              <div class="double-section">
+                <div>
+                  <mat-form-field class="triple-input">
+                    <input matInput [formControl]="notation" [placeholder]="'LESSON.ADD_NOTATION' | translate">
+                  </mat-form-field>
+                  <button mat-icon-button color="primary" (click)="resetInput()" [disabled]="!notation.valid">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+                <button
+                  mat-mini-fab
+                  color="warn"
+                  (click)="addMove()"
+                  [disabled]="!notation.valid"
+                >+</button>
+              </div>
+
+
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+        <h3 *ngIf="historyMoves.length" class="mat-display-1 title-smaller">{{ 'LESSON.SUBTITLE_HISTORY' | translate }}</h3>
+        <mat-card
+          class="double-section small-section"
+          *ngFor="let move of historyMoves"
+          [ngClass]="{ 'falsy-move': move.isFalsy }"
+        >
+          <div class="sub-section">
+            <ng-container *ngIf="move.piece; else question">
+              <img width="25" [src]="move.piece | pieceIcon">
+            </ng-container>
+            <ng-template #question>
+              <mat-icon>question_mark</mat-icon>
+            </ng-template>
+            <span class="notation">{{move.piece | pieceName: lesson.notationType : move.notation}}{{move.notation}}</span>
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
+  </ng-container>
+
 
 </div>
+
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

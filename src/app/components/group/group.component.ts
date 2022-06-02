@@ -29,6 +29,7 @@ export class GroupComponent implements OnInit {
   public availableLessons$: Observable<Lesson[]>;
   public isStudentsAddDisabled$: Observable<boolean>;
   public isLessonsAddDisabled$: Observable<boolean>;
+  public userMe$ = this.usersStoreService.userMe$;
   public displayFn = (user: Student) => this.userNamePipe.transform(user);
   public displayLessonFn = (lesson: Lesson) => lesson?.title;
 

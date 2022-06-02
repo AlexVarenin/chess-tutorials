@@ -14,7 +14,7 @@ import {
 } from '../actions';
 import { filter } from 'rxjs/operators';
 import { selectLessonInfo, selectLessons } from '../selectors';
-import { ActionsListenerService } from '../../actions-listener.service';
+import { ActionsListenerService } from '../../utils/actions-listener.service';
 
 @Injectable({
   providedIn: 'root'
