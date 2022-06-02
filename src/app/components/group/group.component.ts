@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GroupsStoreService } from '../../store/groups/services/groups-store.service';
 import { Lesson } from '../../store/lessons/models';
 import { FormControl, Validators } from '@angular/forms';
-import {distinctUntilChanged, map, shareReplay, startWith, switchMap, tap} from 'rxjs/operators';
+import { distinctUntilChanged, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
 import { Student } from '../../store/users/models';
 import { UserNamePipe } from '../../pipes/user-name/piece-name.pipe';
 import { UsersStoreService } from '../../store/users/services/users-store.service';
@@ -88,20 +88,31 @@ export class GroupComponent implements OnInit {
     this.router.navigate(['lessons', lesson.id]);
   }
 
-  public toggleTitleInput() {
+  public toggleTitleInput(saveChanges: boolean) {
     if (this.title.valid) {
       this.textMode = !this.textMode;
     }
+    if (saveChanges) {
+      this.groupsStoreService.updateGroup(this.groupId as string, { name: this.title.value });
+    }
   }
 
-  addStudent(): void {
+  public addStudent(): void {
     this.groupsStoreService.addStudentToGroup(this.groupId as string, this.studentToAdd.value);
     this.studentToAdd.reset();
   }
 
-  addLesson(): void {
+  public addLesson(): void {
     this.groupsStoreService.addLessonToGroup(this.groupId as string, this.lessonToAdd.value);
     this.lessonToAdd.reset();
+  }
+
+  public removeLesson(lesson: Lesson): void {
+    this.groupsStoreService.removeLessonFromGroup(this.groupId as string, lesson);
+  }
+
+  public removeStudent(student: Student): void {
+    this.groupsStoreService.removeStudentFromGroup(this.groupId as string, student);
   }
 
   private filterStudents(name: string, students: Student[]): Student[] {

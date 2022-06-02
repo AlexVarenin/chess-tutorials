@@ -1,11 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Lesson } from '../models';
-import { addLessonSuccess, removeLessonSuccess, requestLessonsSuccess } from '../actions';
+import { removeLessonSuccess, requestLessonsSuccess, requestStudentLessonsSuccess } from '../actions';
 
 const reducer = createReducer<Lesson[] | undefined>(
   undefined,
   on(requestLessonsSuccess, (state, { lessons }) => lessons),
-  on(addLessonSuccess, (state, { lesson }) => state ? [ ...state, lesson ] : [lesson]),
+  on(requestStudentLessonsSuccess, (state, { lessons }) => lessons),
   on(removeLessonSuccess, (state, { id }) => state?.filter(lesson => lesson.id !== id) )
 );
 

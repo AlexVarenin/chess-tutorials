@@ -24,3 +24,14 @@ export interface Move {
   notation: string;
   fen: string;
 }
+
+export interface MoveStatusResponse {
+  status: MoveStatus;
+  nextMove: Move;
+}
+
+export enum MoveStatus {
+  SUCCEED = 'SUCCEED',
+  FAILED = 'FAILED',
+  FINISHED = 'FINISHED'
+}

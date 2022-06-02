@@ -4,7 +4,17 @@ import { Observable } from 'rxjs';
 import { Group, GroupInfo, GroupsState } from '../models';
 import { filter } from 'rxjs/operators';
 import { selectGroupInfo, selectGroups } from '../selectors';
-import { addGroup, addLessonToGroup, addStudentToGroup, requestGroupInfo, requestGroups } from '../actions';
+import {
+  addGroup,
+  addLessonToGroup,
+  addStudentToGroup,
+  removeLessonFromGroup,
+  removeStudentFromGroup,
+  requestGroupInfo,
+  requestGroups,
+  requestStudentGroups,
+  updateGroup
+} from '../actions';
 import { Student } from '../../users/models';
 import { Lesson } from '../../lessons/models';
 
@@ -28,12 +38,20 @@ export class GroupsStoreService {
     this.store.dispatch(requestGroups());
   }
 
+  public requestStudentGroups(): void {
+    this.store.dispatch(requestStudentGroups());
+  }
+
   public requestGroupInfo(id: string): void {
     this.store.dispatch(requestGroupInfo({ id }));
   }
 
-  public addGroup(name: string): void {
-    this.store.dispatch(addGroup({ name }));
+  public addGroup(group: Partial<Group>): void {
+    this.store.dispatch(addGroup({ group }));
+  }
+
+  public updateGroup(id: string, group: Partial<Group>): void {
+    this.store.dispatch(updateGroup({ id, group }));
   }
 
   public addStudentToGroup(groupId: string, student: Student): void {
@@ -44,4 +62,11 @@ export class GroupsStoreService {
     this.store.dispatch(addLessonToGroup({ groupId, lesson }));
   }
 
+  public removeLessonFromGroup(groupId: string, lesson: Lesson): void {
+    this.store.dispatch(removeLessonFromGroup({ groupId, lesson}));
+  }
+
+  public removeStudentFromGroup(groupId: string, student: Student): void {
+    this.store.dispatch(removeStudentFromGroup({ groupId, student}));
+  }
 }

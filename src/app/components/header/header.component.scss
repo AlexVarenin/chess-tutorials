@@ -8,11 +8,50 @@
   box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
 }
 
+.inner-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 1024px;
+  margin: 0 auto;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
 }
 
-.lang-toggle {
-  transform: scale(.8);
+.active {
+  text-decoration: underline;
+}
+
+.menu-items {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: normal;
+
+  span {
+    cursor: pointer;
+  }
+
+  span + span {
+    margin-left: 50px;
+  }
+}
+
+.avatar {
+  margin-left: 50px;
+  width: 50px;
+  height: 50px;
+}
+
+.logo,
+.lang-section {
+  width: 120px;
+}
+
+.logo {
+  img {
+    margin-top: 38px;
+  }
 }

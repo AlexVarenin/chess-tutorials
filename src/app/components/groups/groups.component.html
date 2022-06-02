@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="title-header">
     <h1 class="mat-display-1">{{ 'GROUPS.TITLE' | translate }}</h1>
-    <div class="action-buttons">
+    <div class="action-buttons" *hiddenFor="['admin','student']">
       <button
         mat-raised-button
         color="primary"
@@ -33,7 +33,13 @@
         </mat-card-header>
 
         <div class="avatars-list">
-          <chess-chess-avatar *ngFor="let student of group.students" class="avatar" [user]="student" [size]="40">
+          <chess-chess-avatar
+            *ngFor="let student of group.students"
+            class="avatar"
+            [user]="student"
+            [size]="40"
+            [displayTooltip]="true"
+          >
           </chess-chess-avatar>
         </div>
       </div>

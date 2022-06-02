@@ -5,6 +5,22 @@
     </div>
   </div>
 
+  <div class="section" *ngIf="userMe$ | async">
+    <mat-card>
+      <mat-card-title class="section-title">{{ 'STUDENTS.INVITE_NEW_STUDENT' | translate }}</mat-card-title>
+      <mat-form-field class="invite-users-field" appearance="fill">
+        <mat-label>{{ 'STUDENTS.COPY_TO_REGISTER' | translate }}</mat-label>
+        <input type="text"
+          matInput
+          [formControl]="inviteStudent"
+          >
+        <button mat-icon-button matSuffix (click)="copyContent(); $event.preventDefault()">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card>
+  </div>
+
   <div class="list-wrapper">
 
     <mat-card *ngFor="let student of students$ | async" class="list-card">
@@ -19,8 +35,14 @@
         </div>
 
       </mat-card-header>
-
-      <chess-chess-label [text]="student.group?.name"></chess-chess-label>
+      <div>
+        <chess-chess-label
+          class="group-label"
+          *ngFor="let group of student.groups"
+          [text]="group.name"
+          (click)="goToGroup(group.id)"
+        ></chess-chess-label>
+      </div>
     </mat-card>
 
   </div>

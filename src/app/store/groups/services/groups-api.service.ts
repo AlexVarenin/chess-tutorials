@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Group, GroupInfo } from '../models';
-import { Student } from '../../users/models';
-import { Lesson } from '../../lessons/models';
 
 @Injectable({
   providedIn: 'root'
@@ -12,176 +10,40 @@ export class GroupsApiService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getGroups(): Observable<Group[]> {
-    return of([
-      {
-        id: 'hy1z6nn441',
-        name: 'Клас 3 Клас 3 Клас 3 Клас 3',
-        students: [
-          {
-            id: 'hy1z6nn441',
-            firstName: 'Taras',
-            lastName: 'Panasenko',
-            email: 'taras@gmail.com'
-          },
-          {
-            id: 'hy1z6nn441',
-            firstName: 'Taras',
-            lastName: 'Panasenko',
-            email: 'taras@gmail.com'
-          }
-      /*    {
-            id: 'hy1z6nn441',
-            firstName: 'Taras',
-            lastName: 'Panasenko',
-            email: 'taras@gmail.com'
-          },
-          {
-            id: 'hy1z6nn441',
-            firstName: 'Taras',
-            lastName: 'Panasenko',
-            email: 'taras@gmail.com'
-          },
-          {
-            id: 'hy1z6nn441',
-            firstName: 'Taras',
-            lastName: 'Panasenko',
-            email: 'taras@gmail.com'
-          },
-          {
-            id: 'hy1z6nn441',
-            firstName: 'Taras',
-            lastName: 'Panasenko',
-            email: 'taras@gmail.com'
-          },
-          {
-            id: 'hy1z6nn441',
-            firstName: 'Taras',
-            lastName: 'Panasenko',
-            email: 'taras@gmail.com'
-          },
-          {
-            id: 'hy1z6nn441',
-            firstName: 'Taras',
-            lastName: 'Panasenko',
-            email: 'taras@gmail.com'
-          },
-          {
-            id: 'hy1z6nn441',
-            firstName: 'Taras',
-            lastName: 'Panasenko',
-            email: 'taras@gmail.com'
-          },
-          {
-            id: 'hy1z6nn441',
-            firstName: 'Taras',
-            lastName: 'Panasenko',
-            email: 'taras@gmail.com'
-          }*/
-        ]
-      }
-    ]);
+  public getGroups(): Observable<Group[]> {
+    return this.httpClient.get<Group[]>('groups/my');
   }
 
-  getGroupInfo(id: string): Observable<GroupInfo> {
-    return of({
-      id: 'hy1z6nn441',
-      name: 'Клас 3 Клас 3 Клас 3 Клас 3',
-      lessons: [
-        {
-          description: '<h1><strong>Хід білих</strong></h1><ol><li><p>Білі ходять першими</p></li><li><p>Пішак а2а3</p></li></ol>',
-          id: 'hy1z6nn441',
-          initialState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
-          orientation: 'white',
-          title: 'Тестовий урок № 1',
-        },
-        {
-          description: '<h1><strong>Хід білих</strong></h1><ol><li><p>Білі ходять першими</p></li><li><p>Пішак а2а3</p></li></ol>',
-          id: 'hy1z6nn441',
-          initialState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
-          orientation: 'black',
-          title: 'Тестовий урок № 1',
-        }
-      ],
-      students: [
-        {
-          id: 'hy1z6nn441',
-          firstName: 'Taras',
-          lastName: 'Panasenko',
-          email: 'taras@gmail.com'
-        },
-        {
-          id: 'hy1z6nn441',
-          firstName: 'Taras',
-          lastName: 'Panasenko',
-          email: 'taras@gmail.com'
-        },
-        {
-          id: 'hy1z6nn441',
-          firstName: 'Taras',
-          lastName: 'Panasenko',
-          email: 'taras@gmail.com'
-        },
-        {
-          id: 'hy1z6nn441',
-          firstName: 'Taras',
-          lastName: 'Panasenko',
-          email: 'taras@gmail.com'
-        },
-        {
-          id: 'hy1z6nn441',
-          firstName: 'Taras',
-          lastName: 'Panasenko',
-          email: 'taras@gmail.com'
-        },
-        {
-          id: 'hy1z6nn441',
-          firstName: 'Taras',
-          lastName: 'Panasenko',
-          email: 'taras@gmail.com'
-        },
-        {
-          id: 'hy1z6nn441',
-          firstName: 'Taras',
-          lastName: 'Panasenko',
-          email: 'taras@gmail.com'
-        },
-        {
-          id: 'hy1z6nn441',
-          firstName: 'Taras',
-          lastName: 'Panasenko',
-          email: 'taras@gmail.com'
-        },
-        {
-          id: 'hy1z6nn441',
-          firstName: 'Taras',
-          lastName: 'Panasenko',
-          email: 'taras@gmail.com'
-        },
-        {
-          id: 'hy1z6nn441',
-          firstName: 'Taras',
-          lastName: 'Panasenko',
-          email: 'taras@gmail.com'
-        }
-      ]
-    });
+  public getStudentGroups(): Observable<Group[]> {
+    return this.httpClient.get<Group[]>('groups/student');
   }
 
-  public addGroup(name: string): Observable<Group> {
-    return of({
-      id: 'hy1z6nn441',
-      name,
-      students: []
-    });
+  public getGroupInfo(id: string): Observable<GroupInfo> {
+    return this.httpClient.get<GroupInfo>(`groups/${id}`);
   }
 
-  public addStudentToGroup(groupId: string, student: Student): Observable<Student> {
-    return of({ ...student });
+  public addGroup(group: Partial<Group>): Observable<{ id: string }> {
+    return this.httpClient.post<{ id: string }>('groups', group);
   }
 
-  public addLessonToGroup(groupId: string, lesson: Lesson): Observable<Lesson> {
-    return of({ ...lesson });
+  public updateGroup(id: string, group: Partial<Group>): Observable<Group> {
+    return this.httpClient.patch<Group>(`groups/${id}`, group);
+  }
+
+  public addStudentToGroup(groupId: string, studentId: string): Observable<{id: string}> {
+    return this.httpClient.post<{id: string}>(`groups/${groupId}/student`, { studentId });
+  }
+
+  public removeStudentFromGroup(groupId: string, studentId: string): Observable<null> {
+    return this.httpClient.delete<null>(`groups/${groupId}/student/${studentId}`);
+  }
+
+  public addLessonToGroup(id: string, lessonId: string): Observable<{id: string}> {
+    return this.httpClient.post<{id: string}>(`groups/${id}/lesson`, { lessonId });
+  }
+
+  public removeLessonFromGroup(id: string, lessonId: string): Observable<null> {
+    return this.httpClient.delete<null>(`groups/${id}/lesson/${lessonId}`);
   }
 
 }

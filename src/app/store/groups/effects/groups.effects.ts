@@ -6,8 +6,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import * as ActionList from '../actions';
 import { GroupsApiService } from '../services/groups-api.service';
 import { Group, GroupInfo } from '../models';
-import {Student} from "../../users/models";
-import {Lesson} from "../../lessons/models";
 
 @Injectable()
 export class GroupsEffects {
@@ -20,6 +18,19 @@ export class GroupsEffects {
           .pipe(
             map((groups: Group[]) => ActionList.requestGroupsSuccess({ groups })),
             catchError((error: HttpErrorResponse) => of(ActionList.requestGroupsFailure({ error })))
+          )
+      )
+    )
+  );
+
+  public requestStudentGroups$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(ActionList.requestStudentGroups),
+      exhaustMap( () =>
+        this.groupsApiService.getStudentGroups()
+          .pipe(
+            map((groups: Group[]) => ActionList.requestStudentGroupsSuccess({ groups })),
+            catchError((error: HttpErrorResponse) => of(ActionList.requestStudentGroupsFailure({ error })))
           )
       )
     )
@@ -41,11 +52,24 @@ export class GroupsEffects {
   public addGroup$ = createEffect(() => this.actions$
     .pipe(
       ofType(ActionList.addGroup),
-      exhaustMap( ({ name }) =>
-        this.groupsApiService.addGroup(name)
+      exhaustMap( ({ group }) =>
+        this.groupsApiService.addGroup({ name: group.name, lessons: group.lessons })
           .pipe(
-            map((group: Group) => ActionList.addGroupSuccess({ group })),
+            map(({ id }) => ActionList.addGroupSuccess({ group: { ...group, id } as Group})),
             catchError((error: HttpErrorResponse) => of(ActionList.addGroupFailure({ error })))
+          )
+      )
+    )
+  );
+
+  public updateGroup$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(ActionList.updateGroup),
+      exhaustMap( ({ id, group }) =>
+        this.groupsApiService.updateGroup(id, group)
+          .pipe(
+            map(() => ActionList.updateGroupSuccess({ group })),
+            catchError((error: HttpErrorResponse) => of(ActionList.updateGroupFailure({ error })))
           )
       )
     )
@@ -55,9 +79,9 @@ export class GroupsEffects {
     .pipe(
       ofType(ActionList.addStudentToGroup),
       exhaustMap( ({ groupId, student }) =>
-        this.groupsApiService.addStudentToGroup(groupId, student)
+        this.groupsApiService.addStudentToGroup(groupId, student.id)
           .pipe(
-            map((student: Student) => ActionList.addStudentToGroupSuccess({ student })),
+            map(() => ActionList.addStudentToGroupSuccess({ student })),
             catchError((error: HttpErrorResponse) => of(ActionList.addStudentToGroupFailure({ error })))
           )
       )
@@ -68,10 +92,36 @@ export class GroupsEffects {
     .pipe(
       ofType(ActionList.addLessonToGroup),
       exhaustMap( ({ groupId, lesson }) =>
-        this.groupsApiService.addLessonToGroup(groupId, lesson)
+        this.groupsApiService.addLessonToGroup(groupId, lesson.id)
           .pipe(
-            map((lesson: Lesson) => ActionList.addLessonToGroupSuccess({ lesson })),
+            map(() => ActionList.addLessonToGroupSuccess({ lesson })),
             catchError((error: HttpErrorResponse) => of(ActionList.addLessonToGroupFailure({ error })))
+          )
+      )
+    )
+  );
+
+  public removeLessonFromGroup$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(ActionList.removeLessonFromGroup),
+      exhaustMap( ({ groupId, lesson }) =>
+        this.groupsApiService.removeLessonFromGroup(groupId, lesson.id)
+          .pipe(
+            map(() => ActionList.removeLessonFromGroupSuccess({ lesson })),
+            catchError((error: HttpErrorResponse) => of(ActionList.removeLessonFromGroupFailure({ error })))
+          )
+      )
+    )
+  );
+
+  public removeStudentFromGroup$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(ActionList.removeStudentFromGroup),
+      exhaustMap( ({ groupId, student }) =>
+        this.groupsApiService.removeStudentFromGroup(groupId, student.id)
+          .pipe(
+            map(() => ActionList.removeStudentFromGroupSuccess({ student })),
+            catchError((error: HttpErrorResponse) => of(ActionList.removeStudentFromGroupFailure({ error })))
           )
       )
     )

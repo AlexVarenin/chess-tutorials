@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GroupUser } from '../../store/groups/models';
+import { User } from '../../store/users/models';
 
 @Component({
   selector: 'chess-chess-avatar',
@@ -8,9 +8,10 @@ import { GroupUser } from '../../store/groups/models';
 })
 export class ChessAvatarComponent {
 
-  @Input() public user: GroupUser;
+  @Input() public user: User;
   @Input() public size = 50;
   @Input() public displayName = false;
+  @Input() public displayTooltip = false;
   public name: string;
 
   constructor() { }

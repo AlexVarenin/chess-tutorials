@@ -32,11 +32,10 @@ import { LessonComponent } from './components/lesson/lesson.component';
 import { ChessModalsWrapperComponent } from './components/chess-modals-wrapper/chess-modals-wrapper.component';
 import { ChessConfirmationDialogComponent } from './components/chess-confirmation-dialog/chess-confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { PieceNamePipe } from './pipes/piece-name/piece-name.pipe';
 import { MatRadioModule } from '@angular/material/radio';
+import { AvatarModule } from 'ngx-avatar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { StudentsComponent } from './components/students/students.component';
-import { AvatarModule } from 'ngx-avatar';
 import { ChessAvatarComponent } from './components/chess-avatar/chess-avatar.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { ChessLabelComponent } from './components/chess-label/chess-label.component';
@@ -44,9 +43,16 @@ import { GroupsComponent } from './components/groups/groups.component';
 import { GroupComponent } from './components/group/group.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { UserNamePipe } from './pipes/user-name/piece-name.pipe';
+import { PieceNamePipe } from './pipes/piece-name/piece-name.pipe';
 import { httpInterceptorProviders } from './interceptors/http-interceptor';
-import {LoginComponent} from "./components/login/login.component";
-
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationTutorComponent } from './components/registration-tutor/registration-tutor.component';
+import { RegistrationStudentComponent } from './components/registration-student/registration-student.component';
+import { SelectedFilterPipe } from './pipes/selected-filter/selected-filter.pipe';
+import { HiddenForDirective } from './directives/hidden-for/hidden-for.directive';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ChessLangSwitcherComponent } from './components/chess-lang-switcher/chess-lang-switcher.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -62,6 +68,7 @@ export function createTranslateLoader(http: HttpClient) {
     ChessTextEditorComponent,
     PieceIconPipe,
     PieceNamePipe,
+    SelectedFilterPipe,
     LessonsComponent,
     LessonComponent,
     ChessModalsWrapperComponent,
@@ -72,7 +79,11 @@ export function createTranslateLoader(http: HttpClient) {
     ChessLabelComponent,
     GroupComponent,
     UserNamePipe,
-    LoginComponent
+    LoginComponent,
+    RegistrationTutorComponent,
+    RegistrationStudentComponent,
+    HiddenForDirective,
+    ChessLangSwitcherComponent
   ],
   imports: [
     BrowserModule,
@@ -96,6 +107,8 @@ export function createTranslateLoader(http: HttpClient) {
     AvatarModule,
     MatChipsModule,
     MatAutocompleteModule,
+    MatMenuModule,
+    MatTooltipModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

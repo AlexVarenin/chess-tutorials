@@ -11,3 +11,14 @@
     margin-left: 30px;
   }
 }
+
+.invite-users-field {
+  width: 700px;
+}
+
+.group-label {
+  cursor: pointer;
+  & + & {
+    margin-left: 5px;
+  }
+}

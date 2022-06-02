@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import {TranslateService} from "@ngx-translate/core";
-import {FormControl} from "@angular/forms";
+import { Component } from '@angular/core';
+import { Subject } from 'rxjs';
+import { UsersStoreService } from '../../store/users/services/users-store.service';
+import { AuthorizationService } from '../../services/authorization.service';
 
 @Component({
   selector: 'chess-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  public lang = new FormControl(this.translate.currentLang);
+  public userMe$ = this.usersStoreService.userMe$;
 
-  constructor(private translate: TranslateService) { }
+  constructor(
+    private usersStoreService: UsersStoreService,
+    private authorizationService: AuthorizationService
+  ) { }
 
-  ngOnInit() {
-    this.lang.valueChanges.subscribe(
-      ((lang: string) => {
-        this.translate.use(lang);
-      })
-    )
+  public logout(): void {
+    this.authorizationService.logout();
   }
 
 }

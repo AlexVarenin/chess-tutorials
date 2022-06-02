@@ -138,9 +138,11 @@ export class BuilderComponent implements OnInit, AfterViewInit {
       orientation: this.board.orientation
     };
 
-    this.lessonsStoreService.addLesson(lesson);
-
-    this.goToList();
+    if (this.lessonId) {
+      this.lessonsStoreService.updateLesson(this.lessonId, lesson)
+    } else {
+      this.lessonsStoreService.addLesson(lesson);
+    }
   }
 
   private goToList(): void {
@@ -194,8 +196,6 @@ export class BuilderComponent implements OnInit, AfterViewInit {
       this.board.fen = moves.length ? moves[moves.length - 1].fen : initialState;
       this.moves = [...moves];
     });
-
-
 
   }
 

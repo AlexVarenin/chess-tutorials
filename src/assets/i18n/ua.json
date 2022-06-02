@@ -1,4 +1,10 @@
 {
+  "HEADER": {
+    "GROUPS": "Групи",
+    "LESSONS": "Уроки",
+    "STUDENTS": "Студенти",
+    "LOGOUT": "Вийти"
+  },
   "BOARD": {
     "TITLE": "Створити новий урок",
     "BUTTON_SUBMIT": "Опублікувати",
@@ -36,7 +42,9 @@
     "MODAL_SUCCESS_DESCRIPTION": "Ви успішно завершили урок! Перейти до переліку уроків?"
   },
   "STUDENTS": {
-    "TITLE": "Перелік студентів"
+    "TITLE": "Перелік студентів",
+    "INVITE_NEW_STUDENT": "Запросити нового студента",
+    "COPY_TO_REGISTER": "Скопіюйте код для реєстрації нового студента"
   },
   "GROUPS": {
     "TITLE": "Перелік груп",
@@ -50,10 +58,45 @@
     "BUTTON_OPEN": "Відкрити",
     "BUTTON_EDIT": "Редагувати групу",
     "SECTION_STUDENTS_PLACEHOLDER": "Почніть вводити ім'я. фамілію чи електронну адресу",
+    "SECTION_LESSONS_TITLE": "Перелік уроків",
     "SECTION_LESSONS_PLACEHOLDER": "Почніть вводити назву уроку"
   },
   "MODAL_CONFIRMATION": {
     "BUTTON_CONFIRM": "Підтвердити",
     "BUTTON_CANCEL": "Відмінити"
+  },
+  "REGISTRATION": {
+    "TITLE": "Форма реєстрації",
+    "SUBTITLE": "Зареєструйтесь, щоб мати можливість користуватись chess-tutorials як вчитель",
+    "INVITATION_CODE": "Код запрошення",
+    "INVITATION_CODE_MANDATORY": "Код запрошення обов'язковий",
+    "EMAIL": "елекронна адреса",
+    "EMAIL_MANDATORY": "Електронна адреса обов'язкова",
+    "EMAIL_NOT_VALID": "Електронна адреса некоректна",
+    "FIRST_NAME": "ім'я",
+    "FIRST_NAME_MANDATORY": "Ім'я обов'язкове",
+    "LAST_NAME": "прізвище",
+    "LAST_NAME_MANDATORY": "Прізвище обов'язкове",
+    "PASSWORD": "пароль",
+    "PASSWORD_MANDATORY": "Пароль обов'язковий",
+    "PASSWORD_SHORT": "Пароль повинен бути не менше 8 символів",
+    "REPEAT_PASSWORD": "підтвердження паролю",
+    "PASSWORD_NOT_MATCH": "Паролі не співпадають",
+    "SUBMIT": "Надіслати",
+    "RESET": "Очистити",
+    "LOADING": "загрузка..."
+  },
+  "LOGIN": {
+    "TITLE": "Форма входу",
+    "SUBTITLE": "Увійдіть, щоб мати можливість користуватись chess-tutorials",
+    "LOGIN": "логін",
+    "LOGIN_MANDATORY": "логін обов'язковий",
+    "INVITATION_CODE_MANDATORY": "логін обов'язковий",
+    "PASSWORD": "пароль",
+    "PASSWORD_MANDATORY": "Пароль обов'язковий",
+    "LOGIN_OR_PASSWORD_WRONG": "Логін або пароль невірний",
+    "SUBMIT": "Відправити",
+    "RESET": "Очистити",
+    "LOADING": "загрузка..."
   }
 }

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import {Lesson, LessonInfo} from '../models';
-import { createRandomString } from '../../../services/helper.helper';
+import { Lesson, LessonInfo, Move, MoveStatusResponse } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,35 +10,31 @@ export class LessonsApiService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getLessons(): Observable<Lesson[]> {
-    return of([{
-      description: '<h1><strong>Хід білих</strong></h1><ol><li><p>Білі ходять першими</p></li><li><p>Пішак а2а3</p></li></ol>',
-      id: 'hy1z6nn441',
-      initialState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
-      orientation: 'white',
-      title: 'Тестовий урок № 1',
-    }])
+  public getLessons(): Observable<Lesson[]> {
+    return this.httpClient.get<Lesson[]>('lessons/my');
   }
 
-  getLessonInfo(id: string): Observable<LessonInfo> {
-    return of({
-      description: '<h1><strong>Хід білих</strong></h1><ol><li><p>Білі ходять першими</p></li><li><p>Пішак а2а3</p></li></ol>',
-      id: 'hy1z6nn441',
-      initialState: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
-      moves: [{from: 'a2', to: 'a3', piece: 'wP', notation: 'a2-a3', fen: 'rnbqkbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR'}],
-      orientation: 'white',
-      notationType: 'cyr',
-      title: 'Тестовий урок № 1',
-      disableDrag: false
-    })
+  public getStudentLessons(): Observable<Lesson[]> {
+    return this.httpClient.get<Lesson[]>('lessons/student');
   }
 
-  addLesson(newLesson: Omit<Lesson, 'id'>): Observable<Lesson> {
-    // return this.httpClient.post<Lesson>('lessons', newLesson)
-    return of({ id: createRandomString(10), ...newLesson });
+  public getLessonInfo(id: string): Observable<LessonInfo> {
+    return this.httpClient.get<LessonInfo>(`lessons/${id}`);
   }
 
-  removeLesson(id: string): Observable<unknown> {
-    return of({});
+  public addLesson(newLesson: Omit<LessonInfo, 'id'>): Observable<{ id: string }> {
+    return this.httpClient.post<{ id: string }>('lessons', newLesson);
+  }
+
+  public removeLesson(id: string): Observable<null> {
+    return this.httpClient.delete<null>(`lessons/${id}`);
+  }
+
+  public updateLesson(id: string, patch: Omit<LessonInfo, 'id'>): Observable<LessonInfo> {
+    return this.httpClient.patch<LessonInfo>(`lessons/${id}`, patch);
+  }
+
+  public checkStudentMove(id: string, moveIndex: number, move: Move): Observable<MoveStatusResponse> {
+    return this.httpClient.post<MoveStatusResponse>(`lessons/${id}/check-move/${moveIndex}`, move);
   }
 }

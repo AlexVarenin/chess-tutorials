@@ -1,0 +1,41 @@
+.login {
+  position: relative;
+  padding-top: 70px;
+  margin: 100px auto;
+  width: 400px;
+  &__main-content {
+    padding-bottom: 30px;
+  }
+
+  &__field {
+    width: 100%;
+
+    &--double {
+      width: 47%;
+    }
+
+  }
+
+  &__button {
+    min-width: 120px;
+    & + & {
+      margin-left: 20px;
+    }
+  }
+}
+
+.field-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  position: absolute;
+  top: -32px;
+}
+
+.lang-switcher {
+  position: absolute;
+  right: 0;
+  top: 5px;
+}

@@ -1,7 +1,7 @@
 <div class="wrapper" *ngIf="lesson$ | async as lesson">
   <div class="title-header">
     <h1 class="mat-display-1">{{ lesson.title }}</h1>
-    <div class="action-buttons">
+    <div class="action-buttons" *hiddenFor="['admin','student']">
       <button mat-raised-button color="primary" (click)="edit()">{{ 'LESSON.BUTTON_EDIT' | translate }}</button>
     </div>
   </div>
@@ -46,7 +46,7 @@
               </div>
               <button
                 mat-mini-fab
-                color="accent"
+                color="warn"
                 (click)="addMove()"
                 [disabled]="!notation.valid"
               >+</button>
@@ -57,7 +57,7 @@
         </mat-accordion>
       </div>
 
-      <h3 *ngIf="historyMoves.length" class="mat-display-1 title-moves">{{ 'LESSON.SUBTITLE_HISTORY' | translate }}</h3>
+      <h3 *ngIf="historyMoves.length" class="mat-display-1 title-smaller">{{ 'LESSON.SUBTITLE_HISTORY' | translate }}</h3>
       <mat-card
         class="double-section small-section"
         *ngFor="let move of historyMoves"

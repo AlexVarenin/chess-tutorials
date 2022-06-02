@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import {Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import {takeUntil, tap} from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BoardComponent } from '../board/board.component';
-import { Move } from '../../store/lessons/models';
+import { Move, MoveStatus } from '../../store/lessons/models';
 import { LessonsStoreService } from '../../store/lessons/services/lessons-store.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ChessConfirmationDialogComponent } from '../chess-confirmation-dialog/chess-confirmation-dialog.component';
@@ -17,7 +17,7 @@ type HistoryMove = Move & { isFalsy?: boolean };
   templateUrl: './lesson.component.html',
   styleUrls: ['./lesson.component.scss'],
 })
-export class LessonComponent implements OnInit {
+export class LessonComponent implements OnInit, OnDestroy {
   public historyMoves: HistoryMove[] = [];
   public controlMoves: Move[] = [];
   public notationType: 'cyr' | 'lat';
@@ -32,6 +32,8 @@ export class LessonComponent implements OnInit {
       this.notationType = lesson.notationType;
     }));
 
+  private destroy$ = new Subject<boolean>();
+
   @ViewChild(BoardComponent) public board: BoardComponent;
 
   constructor(
@@ -43,6 +45,26 @@ export class LessonComponent implements OnInit {
 
   public ngOnInit(): void {
     this.lessonsStoreService.requestLessonInfo(this.lessonId as string);
+
+    this.lessonsStoreService.getCheckMoveSuccessAction().pipe(
+      tap(({ status, move, nextMove }) => {
+        if (status === MoveStatus.FAILED) {
+          this.handleFailureMove(move);
+        }
+        if (status === MoveStatus.SUCCEED) {
+          this.handleSuccessMove(move, nextMove);
+        }
+        if (status === MoveStatus.FINISHED) {
+          this.handleFinishedMove(move);
+        }
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe();
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   public onPieceDrop(move: Move): void {
@@ -62,31 +84,16 @@ export class LessonComponent implements OnInit {
     );
     this.board.movePiece(notation);
     this.resetInput();
-    setTimeout(() => {
-      const move = { piece, notation, fen: this.board.fen };
-      this.checkMove(move as Move, true);
-    })
+    const move = { piece, notation, fen: this.board.fen };
+    this.checkMove(move as Move);
   }
 
   public edit(): void {
     this.router.navigate(['edit'], { relativeTo: this.activatedRoute });
   }
 
-  private checkMove(move: Move, isDirectInput?: boolean) {
-    const controlMove = this.controlMoves[this.moveIndex];
-    if (controlMove.fen === move.fen && (!isDirectInput || move.notation === controlMove.notation)
-    ) {
-      this.historyMoves.push(move);
-      const botMove = this.controlMoves[++this.moveIndex];
-      if (botMove) {
-        this.moveBotPiece(botMove);
-      } else {
-        this.showSuccessDialog();
-      }
-    } else {
-      this.historyMoves.push({ ...move, isFalsy: true});
-      this.board.fen = this.state;
-    }
+  private checkMove(move: Move) {
+    this.lessonsStoreService.checkStudentMove(this.lessonId as string, this.moveIndex, move);
   }
 
   private showSuccessDialog(): void {
@@ -100,20 +107,35 @@ export class LessonComponent implements OnInit {
         hideCancel: true
       }
     });
-    dialogRef.afterClosed().subscribe((isConfirmed: boolean) => {
+    dialogRef.afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((isConfirmed: boolean) => {
       if (isConfirmed) {
-        this.router.navigate(['/lessons']);
+        this.router.navigate(['lessons']);
       }
     });
   }
 
   private moveBotPiece(move: Move): void {
     this.moveIndex++;
-    setTimeout(() => {
-      this.historyMoves.push(move);
-      this.state = this.board.fen = move.fen;
-    }, 500);
+    this.historyMoves.push(move);
+    this.state = this.board.fen = move.fen;
   }
 
+  private handleSuccessMove(move: Move, nextMove: Move): void {
+    this.moveIndex++;
+    this.historyMoves.push(move);
+    this.moveBotPiece(nextMove);
+  }
 
+  private handleFinishedMove(move: Move): void {
+    this.moveIndex++;
+    this.historyMoves.push(move);
+    this.showSuccessDialog();
+  }
+
+  private handleFailureMove(move: Move): void {
+    this.historyMoves.push({ ...move, isFalsy: true });
+    this.board.fen = this.state;
+  }
 }

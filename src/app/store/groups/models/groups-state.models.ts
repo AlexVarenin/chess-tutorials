@@ -1,4 +1,4 @@
-import { User } from '../../users/models';
+import { Student } from '../../users/models';
 import { Lesson } from '../../lessons/models';
 
 export const GroupsStateName = 'groups';
@@ -11,11 +11,8 @@ export interface GroupsState {
 export interface Group {
   id: string;
   name: string;
-  students: GroupUser[];
+  students: Student[];
+  lessons: string[];
 }
 
-export interface GroupInfo extends Group {
-  lessons: Lesson[]
-}
-
-export type GroupUser = Omit<User, 'type'>;
+export type GroupInfo = Omit<Group, 'lessons'> & { lessons: Lesson[] };

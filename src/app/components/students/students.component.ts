@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first, tap } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 import { UsersStoreService } from '../../store/users/services/users-store.service';
+import {Group} from "../../store/groups/models";
 
 @Component({
   selector: 'chess-students',
@@ -10,7 +12,13 @@ import { UsersStoreService } from '../../store/users/services/users-store.servic
 })
 export class StudentsComponent implements OnInit {
 
-  public students$ = this.usersStoreService.students$.pipe(filter(Boolean));
+  public inviteStudent = new FormControl({ value: '', disabled: true });
+
+  public students$ = this.usersStoreService.students$;
+  public userMe$ = this.usersStoreService.userMe$.pipe(
+    first(),
+    tap(( { id }) => this.inviteStudent.setValue(`${location.origin}/student-registration?code=${id}`))
+  );
 
   constructor(
     private router: Router,
@@ -21,4 +29,13 @@ export class StudentsComponent implements OnInit {
     this.usersStoreService.requestStudents();
   }
 
+  public copyContent(): void {
+    navigator.clipboard.writeText(this.inviteStudent.value);
+  }
+
+  public goToGroup(groupId: string): void {
+    this.router.navigate(['groups', groupId]);
+  }
 }
+
+

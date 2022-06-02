@@ -62,6 +62,7 @@
             class="settings-item-buttons"
             aria-labelledby="orientation"
             formControlName="orientation"
+            color="warn"
           >
             <mat-radio-button value="white" class="settings-item-button">
               {{ 'BOARD.SECTION_SETTINGS_PIECES_COLOR_WHITE' | translate }}<img width="25" [src]="'wN' | pieceIcon">
@@ -76,7 +77,7 @@
           <label id="notation-type" class="settings-item-label">
             {{ 'BOARD.SECTION_SETTINGS_NOTATION_TYPE' | translate }}
           </label>
-          <mat-radio-group aria-labelledby="notation-type" formControlName="notationType">
+          <mat-radio-group aria-labelledby="notation-type" formControlName="notationType" color="warn">
             <mat-radio-button value="cyr" class="settings-item-button"
             >{{ 'BOARD.SECTION_SETTINGS_NOTATION_TYPE_CYR' | translate }}</mat-radio-button>
             <mat-radio-button value="lat" class="settings-item-button"
@@ -126,7 +127,7 @@
               </div>
               <button
                 mat-mini-fab
-                color="accent"
+                color="warn"
                 (click)="addMove()"
                 [disabled]="!movesForm.valid"
               >+</button>
@@ -160,7 +161,12 @@
     </div>
   </div>
   <div class="action-buttons action-buttons--bigger">
-    <button mat-raised-button color="primary" (click)="publish()">{{ 'BOARD.BUTTON_SUBMIT' | translate }}</button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="publish()"
+      [disabled]="!moves.length"
+    >{{ 'BOARD.BUTTON_SUBMIT' | translate }}</button>
     <button mat-raised-button (click)="discard()">{{ 'BOARD.BUTTON_CANCEL' | translate }}</button>
   </div>
 </form>

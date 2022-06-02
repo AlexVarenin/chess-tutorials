@@ -5,10 +5,23 @@ import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as ActionList from '../actions';
 import { UsersApiService } from '../services/users-api.service';
-import { Student } from '../models';
+import { Student, User } from '../models';
 
 @Injectable()
 export class UsersEffects {
+
+  public requestUserMe$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(ActionList.requestUserMe),
+      exhaustMap( () =>
+        this.usersApiService.requestUserMe()
+          .pipe(
+            map((userMe: User) => ActionList.requestUserMeSuccess({ userMe })),
+            catchError((error: HttpErrorResponse) => of(ActionList.requestUserMeFailure({ error })))
+          )
+      )
+    )
+  );
 
   public requestStudents$ = createEffect(() => this.actions$
     .pipe(

@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { GroupUser } from "../../store/groups/models";
+import { User } from '../../store/users/models';
 
 @Pipe({
   name: 'userName'
 })
 export class UserNamePipe implements PipeTransform {
 
-  transform(user: GroupUser): string {
+  transform(user: User): string {
     if (!user) {
       return '';
     }

@@ -1,7 +1,12 @@
 .group-label {
   display: inline-block;
-  padding: 5px 15px;
+  padding: 5px 10px;
   border-radius: 15px;
   color: white;
-  background-color: #ff4081;
+  background-color: #f44336;
+  font-size: 12px;
+  max-width: 120px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

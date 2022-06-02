@@ -5,84 +5,147 @@ import { Group, GroupInfo } from '../models';
 import {Student} from "../../users/models";
 import {Lesson} from "../../lessons/models";
 
-export const lessonsActionTypes = {
+export const groupsActionTypes = {
   requestGroups: '[Groups] Request groups',
+  requestStudentGroups: '[Groups] Request student groups',
   requestGroupInfo: '[Groups] Request group info',
   addGroup: '[Groups] Add group',
+  updateGroup: '[Groups] Update group',
   addStudentToGroup: '[Groups] Add student to group',
-  addLessonToGroup: '[Groups] Add lesson to group'
+  removeStudentFromGroup: '[Groups] Remove student from group',
+  addLessonToGroup: '[Groups] Add lesson to group',
+  removeLessonFromGroup: '[Groups] Remove lesson from group'
 };
 
 export const requestGroups = createAction(
-  lessonsActionTypes.requestGroups
+  groupsActionTypes.requestGroups
 );
 
 export const requestGroupsSuccess = createAction(
-  getSuccessType(lessonsActionTypes.requestGroups),
+  getSuccessType(groupsActionTypes.requestGroups),
   props<{ groups: Group[] }>()
 );
 
 export const requestGroupsFailure = createAction(
-  getFailureType(lessonsActionTypes.requestGroups),
+  getFailureType(groupsActionTypes.requestGroups),
+  props<{ error: HttpErrorResponse }>()
+);
+
+export const requestStudentGroups = createAction(
+  groupsActionTypes.requestStudentGroups
+);
+
+export const requestStudentGroupsSuccess = createAction(
+  getSuccessType(groupsActionTypes.requestStudentGroups),
+  props<{ groups: Group[] }>()
+);
+
+export const requestStudentGroupsFailure = createAction(
+  getFailureType(groupsActionTypes.requestStudentGroups),
   props<{ error: HttpErrorResponse }>()
 );
 
 export const requestGroupInfo = createAction(
-  lessonsActionTypes.requestGroupInfo,
+  groupsActionTypes.requestGroupInfo,
   props<{ id: string }>()
 );
 
 export const requestGroupInfoSuccess = createAction(
-  getSuccessType(lessonsActionTypes.requestGroupInfo),
+  getSuccessType(groupsActionTypes.requestGroupInfo),
   props<{ groupInfo: GroupInfo }>()
 );
 
 export const requestGroupInfoFailure = createAction(
-  getFailureType(lessonsActionTypes.requestGroupInfo),
+  getFailureType(groupsActionTypes.requestGroupInfo),
   props<{ error: HttpErrorResponse }>()
 );
 
 export const addGroup = createAction(
-  lessonsActionTypes.addGroup,
-  props<{ name: string }>()
+  groupsActionTypes.addGroup,
+  props<{ group: Partial<Group> }>()
 );
 
 export const addGroupSuccess = createAction(
-  getSuccessType(lessonsActionTypes.addGroup),
+  getSuccessType(groupsActionTypes.addGroup),
   props<{ group: Group }>()
 );
 
 export const addGroupFailure = createAction(
-  getFailureType(lessonsActionTypes.addGroup),
+  getFailureType(groupsActionTypes.addGroup),
+  props<{ error: HttpErrorResponse }>()
+);
+
+export const updateGroup = createAction(
+  groupsActionTypes.updateGroup,
+  props<{ id: string, group: Partial<Group> }>()
+);
+
+export const updateGroupSuccess = createAction(
+  getSuccessType(groupsActionTypes.updateGroup),
+  props<{ group: Partial<Group> }>()
+);
+
+export const updateGroupFailure = createAction(
+  getFailureType(groupsActionTypes.updateGroup),
   props<{ error: HttpErrorResponse }>()
 );
 
 export const addStudentToGroup = createAction(
-  lessonsActionTypes.addStudentToGroup,
+  groupsActionTypes.addStudentToGroup,
   props<{ groupId: string; student: Student }>()
 );
 
 export const addStudentToGroupSuccess = createAction(
-  getSuccessType(lessonsActionTypes.addStudentToGroup),
+  getSuccessType(groupsActionTypes.addStudentToGroup),
   props<{ student: Student }>()
 );
 
 export const addStudentToGroupFailure = createAction(
-  getFailureType(lessonsActionTypes.addStudentToGroup),
+  getFailureType(groupsActionTypes.addStudentToGroup),
   props<{ error: HttpErrorResponse }>()
 );
 
 export const addLessonToGroup = createAction(
-  lessonsActionTypes.addLessonToGroup,
+  groupsActionTypes.addLessonToGroup,
   props<{ groupId: string; lesson: Lesson }>()
 );
 
 export const addLessonToGroupSuccess = createAction(
-  getSuccessType(lessonsActionTypes.addLessonToGroup),
+  getSuccessType(groupsActionTypes.addLessonToGroup),
   props<{ lesson: Lesson }>()
 );
 
 export const addLessonToGroupFailure = createAction(
-  getFailureType(lessonsActionTypes.addLessonToGroup),
+  getFailureType(groupsActionTypes.addLessonToGroup),
+  props<{ error: HttpErrorResponse }>()
+);
+
+export const removeLessonFromGroup = createAction(
+  groupsActionTypes.removeLessonFromGroup,
+  props<{ groupId: string; lesson: Lesson }>()
+);
+
+export const removeLessonFromGroupSuccess = createAction(
+  getSuccessType(groupsActionTypes.removeLessonFromGroup),
+  props<{ lesson: Lesson }>()
+);
+
+export const removeLessonFromGroupFailure = createAction(
+  getFailureType(groupsActionTypes.removeLessonFromGroup),
+  props<{ error: HttpErrorResponse }>()
+);
+
+export const removeStudentFromGroup = createAction(
+  groupsActionTypes.removeStudentFromGroup,
+  props<{ groupId: string; student: Student }>()
+);
+
+export const removeStudentFromGroupSuccess = createAction(
+  getSuccessType(groupsActionTypes.removeStudentFromGroup),
+  props<{ student: Student }>()
+);
+
+export const removeStudentFromGroupFailure = createAction(
+  getFailureType(groupsActionTypes.removeStudentFromGroup),
   props<{ error: HttpErrorResponse }>()
 );

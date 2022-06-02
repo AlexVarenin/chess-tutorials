@@ -1,13 +1,17 @@
 .students-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
 
   .avatar {
+    position: relative;
     margin: 5px;
+    max-width: 100px;
 
-    &:last-child {
-      margin: 5px auto 5px 15px;
+    .remove-user {
+      position: absolute;
+      right: -7px;
+      top: -7px;
     }
   }
 }
@@ -64,5 +68,21 @@
 
 .autocomplete-input {
   width: 350px;
+}
+
+.list-card-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .list-card {
+    flex-grow: 1;
+    margin-bottom: 0;
+  }
+}
+
+.title-smaller {
+  margin-bottom: 0 !important;
 }
 

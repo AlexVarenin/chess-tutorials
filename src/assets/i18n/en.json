@@ -1,4 +1,10 @@
 {
+  "HEADER": {
+    "GROUPS": "Groups",
+    "LESSONS": "Lessons",
+    "STUDENTS": "Students",
+    "LOGOUT": "Logout"
+  },
   "BOARD": {
     "TITLE": "Create new lesson",
     "BUTTON_SUBMIT": "Publish",
@@ -36,7 +42,9 @@
     "MODAL_SUCCESS_DESCRIPTION": "You have successfully finished this lesson! Go to lessons list?"
   },
   "STUDENTS": {
-    "TITLE": "Students list"
+    "TITLE": "Students list",
+    "INVITE_NEW_STUDENT": "Invite new student",
+    "COPY_TO_REGISTER": "Copy code below to register new student"
   },
   "GROUPS": {
     "TITLE": "Groups list",
@@ -50,10 +58,45 @@
     "BUTTON_OPEN": "Open",
     "BUTTON_EDIT": "Edit group",
     "SECTION_STUDENTS_PLACEHOLDER": "Type first name, last name or email",
+    "SECTION_LESSONS_TITLE": "Lessons list",
     "SECTION_LESSONS_PLACEHOLDER": "Type lesson title"
   },
   "MODAL_CONFIRMATION": {
     "BUTTON_CONFIRM": "Confirm",
     "BUTTON_CANCEL": "Cancel"
+  },
+  "REGISTRATION": {
+    "TITLE": "Registration form",
+    "SUBTITLE": "Register to get access to chess-tutorials application as a tutor",
+    "INVITATION_CODE": "Invitation code",
+    "INVITATION_CODE_MANDATORY": "Invitation code is mandatory",
+    "EMAIL": "email",
+    "EMAIL_MANDATORY": "Email is mandatory",
+    "EMAIL_NOT_VALID": "Email is not valid",
+    "FIRST_NAME": "first name",
+    "FIRST_NAME_MANDATORY": "First name is mandatory",
+    "LAST_NAME": "last name",
+    "LAST_NAME_MANDATORY": "Last name is mandatory",
+    "PASSWORD": "password",
+    "PASSWORD_MANDATORY": "Password is mandatory",
+    "PASSWORD_SHORT": "Password should be not less than 8 characters",
+    "REPEAT_PASSWORD": "confirm password",
+    "PASSWORD_NOT_MATCH": "Passwords not match",
+    "SUBMIT": "Submit",
+    "RESET": "Reset",
+    "LOADING": "loading..."
+  },
+  "LOGIN": {
+    "TITLE": "Login form",
+    "SUBTITLE": "Login to get access to chess-tutorials application ",
+    "LOGIN": "login",
+    "LOGIN_MANDATORY": "login is mandatory",
+    "INVITATION_CODE_MANDATORY": "login is mandatory",
+    "PASSWORD": "password",
+    "PASSWORD_MANDATORY": "Password is mandatory",
+    "LOGIN_OR_PASSWORD_WRONG": "Login or password is wrong",
+    "SUBMIT": "Submit",
+    "RESET": "Reset",
+    "LOADING": "loading..."
   }
 }

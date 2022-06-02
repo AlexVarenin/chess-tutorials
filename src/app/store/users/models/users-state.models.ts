@@ -1,6 +1,7 @@
 export const UsersStateName = 'users';
 
 export interface UsersState {
+  userMe: User | undefined;
   usersList: User[] | undefined;
 }
 
@@ -9,12 +10,16 @@ export interface User {
   firstName?: string;
   lastName?: string;
   email: string;
-  type: 'admin' | 'tutor' | 'student'
+  role: 'admin' | 'tutor' | 'student';
+  tutorId?: string;
 }
 
 export interface Student extends User {
-  group: Group;
   role: 'student';
+}
+
+export interface StudentInfo extends Student {
+  groups?: Group[];
 }
 
 export interface Group {
