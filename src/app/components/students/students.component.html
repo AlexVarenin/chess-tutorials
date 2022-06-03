@@ -11,10 +11,14 @@
       <mat-form-field class="invite-users-field" appearance="fill">
         <mat-label>{{ 'STUDENTS.COPY_TO_REGISTER' | translate }}</mat-label>
         <input type="text"
+          class="register-url"
           matInput
           [formControl]="inviteStudent"
           >
-        <button mat-icon-button matSuffix (click)="copyContent(); $event.preventDefault()">
+        <button
+          mat-icon-button
+          matSuffix (click)="copyContent(); $event.preventDefault()"
+          [matTooltip]="'STUDENTS.COPY_TO_CLIPBOARD' | translate">
           <mat-icon>content_copy</mat-icon>
         </button>
       </mat-form-field>

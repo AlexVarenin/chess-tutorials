@@ -46,8 +46,9 @@
   "STUDENTS": {
     "TITLE": "Students list",
     "INVITE_NEW_STUDENT": "Invite new student",
-    "COPY_TO_REGISTER": "Copy code below to register new student",
-    "NO_RESULTS": "There are no students registered"
+    "COPY_TO_REGISTER": "Copy url below to register a new student",
+    "NO_RESULTS": "There are no students registered",
+    "COPY_TO_CLIPBOARD": "Copy to clipboard"
   },
   "GROUPS": {
     "TITLE": "Groups list",
