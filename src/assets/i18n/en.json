@@ -73,7 +73,7 @@
   },
   "REGISTRATION": {
     "TITLE": "Registration form",
-    "SUBTITLE": "Register to get access to chess-tutorials application as a tutor",
+    "SUBTITLE": "Register to get access to Chess Tutorials application as a tutor",
     "INVITATION_CODE": "Invitation code",
     "INVITATION_CODE_MANDATORY": "Invitation code is mandatory",
     "EMAIL": "email",
@@ -95,7 +95,7 @@
   },
   "LOGIN": {
     "TITLE": "Login form",
-    "SUBTITLE": "Login to get access to chess-tutorials application ",
+    "SUBTITLE": "Login to get access to Chess Tutorials application ",
     "LOGIN": "login",
     "LOGIN_MANDATORY": "login is mandatory",
     "INVITATION_CODE_MANDATORY": "login is mandatory",

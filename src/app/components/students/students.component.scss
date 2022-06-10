@@ -18,9 +18,18 @@
 
 .group-label {
   cursor: pointer;
+  margin-top: 1px;
   & + & {
     margin-left: 5px;
   }
+}
+
+.group-label-wrapper {
+  max-width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .register-url {

@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
   langs: ['ua', 'en'],
-  apiBase: 'http://localhost:3000'
+  apiBase: 'https://chess-tutorials-api.herokuapp.com'
 };

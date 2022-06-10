@@ -1,5 +1,6 @@
 .group-label {
-  display: inline-block;
+  display: block;
+  height: 30px;
   padding: 5px 10px;
   border-radius: 15px;
   color: white;
@@ -9,4 +10,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+:host {
+  display: inline-block;
 }

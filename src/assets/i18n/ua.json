@@ -73,7 +73,7 @@
   },
   "REGISTRATION": {
     "TITLE": "Форма реєстрації",
-    "SUBTITLE": "Зареєструйтесь, щоб мати можливість користуватись chess-tutorials як вчитель",
+    "SUBTITLE": "Зареєструйтесь, щоб мати можливість користуватись Chess Tutorials як вчитель",
     "INVITATION_CODE": "Код запрошення",
     "INVITATION_CODE_MANDATORY": "Код запрошення обов'язковий",
     "EMAIL": "елекронна адреса",
@@ -95,7 +95,7 @@
   },
   "LOGIN": {
     "TITLE": "Форма входу",
-    "SUBTITLE": "Увійдіть, щоб мати можливість користуватись chess-tutorials",
+    "SUBTITLE": "Увійдіть, щоб мати можливість користуватись Chess Tutorials",
     "LOGIN": "логін",
     "LOGIN_MANDATORY": "логін обов'язковий",
     "INVITATION_CODE_MANDATORY": "логін обов'язковий",
