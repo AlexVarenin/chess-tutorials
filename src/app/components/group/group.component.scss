@@ -1,0 +1,69 @@
+.students-list {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  .avatar {
+    position: relative;
+    margin: 5px;
+    max-width: 100px;
+
+    .remove-user {
+      position: absolute;
+      right: -7px;
+      top: -7px;
+    }
+  }
+}
+
+.mat-display-1 {
+
+  width: 70%;
+
+  .title-input {
+    height: 60px;
+    width: 100%;
+  }
+
+  ::ng-deep .mat-form-field-infix {
+    border: none;
+    height: 60px;
+  }
+
+  ::ng-deep .mat-form-field-label {
+    display: none !important;
+  }
+}
+
+.title-header {
+  height: 60px;
+  align-items: center;
+}
+
+.title-input-text {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  height: 60px;
+  button {
+    margin-left: 30px;
+  }
+}
+
+.add-button {
+  margin-left: 20px;
+}
+
+.autocomplete-input {
+  width: 350px;
+}
+
+.title-smaller {
+  margin-bottom: 0 !important;
+}
+
+chess-list-group-lesson {
+  display: block;
+  width: 100%;
+}
+

@@ -1,0 +1,79 @@
+<div class="wrapper">
+  <div class="title-header">
+    <h1 class="mat-display-1">{{ 'GROUPS.TITLE' | translate }}</h1>
+    <div class="action-buttons" *hiddenFor="['admin','student']">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="createGroup()"
+        [disabled]="formIdDisplayed"
+      >{{ 'GROUPS.BUTTON_CREATE' | translate }}</button>
+    </div>
+  </div>
+
+  <div class="list-wrapper">
+
+    <mat-card *ngIf="formIdDisplayed" class="list-card group-card">
+      <mat-form-field class="group-input">
+        <input matInput [formControl]="newGroupTitle" [placeholder]="'GROUPS.PLACEHOLDER_GROUP_TITLE' | translate">
+      </mat-form-field>
+
+
+      <div>
+        <button class="form-button" mat-raised-button color="primary" (click)="saveGroup()" [disabled]="!newGroupTitle.valid">
+          {{ 'GROUPS.BUTTON_SAVE_GROUP' | translate }}
+        </button>
+
+        <button class="form-button" mat-raised-button (click)="newGroupTitle.reset(); formIdDisplayed = false">
+          {{ 'GROUPS.BUTTON_RESET' | translate }}
+        </button>
+      </div>
+
+    </mat-card>
+
+    <ng-container *ngIf="groups$ | async as groups; else loading">
+      <div *ngFor="let group of groups" class="list-card-wrapper">
+        <mat-card class="list-card group-card">
+          <div class="group-wrapper">
+            <mat-card-header>
+              <mat-card-title>
+                {{ group.name | titlecase }}
+              </mat-card-title>
+            </mat-card-header>
+
+            <div class="avatars-list">
+              <chess-chess-avatar
+                *ngFor="let student of group.students"
+                class="avatar"
+                [user]="student"
+                [size]="40"
+                [displayTooltip]="true"
+              >
+              </chess-chess-avatar>
+            </div>
+          </div>
+
+          <button mat-raised-button color="primary" (click)="goToGroupInfo(group)">
+            {{ 'GROUPS.BUTTON_OPEN' | translate }}
+          </button>
+        </mat-card>
+        <button *hiddenFor="['admin','student']"
+          mat-icon-button
+          color="primary"
+          (click)="removeGroup(group)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
+
+      <p *ngIf="!groups.length" class="no-results">{{ 'GROUPS.NO_RESULTS' | translate }}</p>
+
+    </ng-container>
+
+  </div>
+</div>
+
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

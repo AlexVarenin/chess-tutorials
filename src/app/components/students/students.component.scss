@@ -1,0 +1,37 @@
+.user-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+
+  .user-name {
+    margin-left: 30px;
+  }
+
+  .user-email {
+    margin-left: 30px;
+  }
+}
+
+.invite-users-field {
+  width: 700px;
+}
+
+.group-label {
+  cursor: pointer;
+  margin-top: 1px;
+  & + & {
+    margin-left: 5px;
+  }
+}
+
+.group-label-wrapper {
+  max-width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.register-url {
+  color: rgba(0, 0, 0, 0.54) !important;
+}

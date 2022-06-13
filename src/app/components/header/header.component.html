@@ -1,12 +1,28 @@
 <mat-toolbar color="primary" class="header">
-  Logo
-  <mat-button-toggle-group
-    class="lang-toggle"
-    appearance="legacy"
-    [formControl]="lang"
-    aria-label="Font Style"
-  >
-    <mat-button-toggle value="ua">ua</mat-button-toggle>
-    <mat-button-toggle value="en">en</mat-button-toggle>
-  </mat-button-toggle-group>
+  <div class="logo"><img height="80" src="/assets/chess-logo.png" alt="Chess Tutorials"></div>
+
+  <div class="inner-header">
+    <div class="menu-items">
+      <span [routerLink]="'/groups'" [routerLinkActive]="['active']">{{ 'HEADER.GROUPS' | translate }}</span>
+      <span [routerLink]="'/lessons'" [routerLinkActive]="['active']">{{ 'HEADER.LESSONS' | translate }}</span>
+      <span *hiddenFor="['admin','student']" [routerLink]="'/students'" [routerLinkActive]="['active']">
+      {{ 'HEADER.STUDENTS' | translate }}
+    </span>
+    </div>
+
+    <ng-container *ngIf="userMe$ | async as user">
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="avatar">
+        <chess-chess-avatar [user]="user"></chess-chess-avatar>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>{{ 'HEADER.LOGOUT' | translate }}</button>
+      </mat-menu>
+    </ng-container>
+  </div>
+
+
+  <div class="lang-section">
+    <chess-chess-lang-switcher></chess-chess-lang-switcher>
+  </div>
+
 </mat-toolbar>

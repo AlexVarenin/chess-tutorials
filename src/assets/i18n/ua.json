@@ -1,4 +1,10 @@
 {
+  "HEADER": {
+    "GROUPS": "Групи",
+    "LESSONS": "Уроки",
+    "STUDENTS": "Студенти",
+    "LOGOUT": "Вийти"
+  },
   "BOARD": {
     "TITLE": "Створити новий урок",
     "BUTTON_SUBMIT": "Опублікувати",
@@ -8,21 +14,116 @@
     "SECTION_DESCRIPTION_TITLE": "Опис уроку",
     "SECTION_DESCRIPTION_PLACEHOLDER": "Додайте завдання*",
     "SECTION_BOARD_TITLE": "Додавання рухів",
-    "SECTION_INITIAL_TITLE": "Початкова позиція",
-    "SECTION_INITIAL_PLACEHOLDER": "Початковий стан у нотації FEN",
+    "SECTION_SETTINGS_TITLE": "Налаштування",
+    "SECTION_SETTINGS_PIECES_COLOR": "Оберіть колір фігур студента",
+    "SECTION_SETTINGS_PIECES_COLOR_WHITE": "Білі",
+    "SECTION_SETTINGS_PIECES_COLOR_BLACK": "Чорні",
+    "SECTION_SETTINGS_NOTATION_TYPE": "Оберіть тип нотації",
+    "SECTION_SETTINGS_NOTATION_TYPE_CYR": "Кирилиця",
+    "SECTION_SETTINGS_NOTATION_TYPE_LAT": "Латиниця",
+    "SECTION_SETTINGS_NOTATION_ONLY": "Заборонити перетягування фігур",
     "SECTION_MOVES_TITLE": "Контрольні ходи",
-    "SECTION_MOVES_TOGGLE_HIDE": "Сховати форму",
+    "SECTION_MOVES_TOGGLE_HIDE": "До початкового положення",
     "SECTION_MOVES_TOGGLE_ADD": "Додати нові ходи",
-    "SECTION_MOVES_PLACEHOLDER_FROM": "Початкова позиція",
-    "SECTION_MOVES_PLACEHOLDER_TO": "Кінцева позиція",
+    "SECTION_MOVES_PLACEHOLDER_EDIT_NOTATION": "Рудагувати нотацію",
     "SECTION_MOVES_BUTTON_ADD": "+ Додати"
   },
   "LESSONS": {
     "TITLE": "Перелік доступних уроків",
-    "BUTTON_EDIT": "Рудагувати",
-    "BUTTON_REMOVE": "Видалити"
+    "BUTTON_EDIT": "Редагувати",
+    "BUTTON_REMOVE": "Видалити",
+    "NO_RESULTS": "У вас поки що немає уроків",
+    "ADD_NEW": "Додати новий урок",
+    "COMPLETED": "Урок завершено",
+    "DELETE_CONFIRMATION": "Ви збираєтесь видалити урок",
+    "ALL_DATA_WILL_BE_REMOVED": "Усі дані по уроку і статистика буде видалено"
   },
   "LESSON": {
-    "SUBTITLE_HISTORY": "Істрія ходів"
+    "SUBTITLE_HISTORY": "Істрія ходів",
+    "BUTTON_EDIT": "Редагувати урок",
+    "SECTION_MOVE_TITLE": "Додавання ходів",
+    "ADD_NOTATION": "Додайте нотацію",
+    "MODAL_SUCCESS_TITLE": "Поздоровляємо!",
+    "MODAL_SUCCESS_DESCRIPTION": "Ви успішно завершили урок! Перейти до переліку уроків?",
+    "START_MESSAGE": "Почати виконувати завдання уроку",
+    "START_BUTTON": "Почати урок"
+  },
+  "STUDENTS": {
+    "TITLE": "Перелік студентів",
+    "INVITE_NEW_STUDENT": "Запросити нового студента",
+    "COPY_TO_REGISTER": "Скопіюйте посилання для реєстрації нового студента",
+    "NO_RESULTS": "Немає заєрестрованих студентів",
+    "COPY_TO_CLIPBOARD": "Скопіювати до буферу обміну",
+    "DELETE_CONFIRMATION": "Ви збираєтесь видалити студента",
+    "ALL_DATA_WILL_BE_REMOVED": "Усі дані по студенту і його статистику буде видалено"
+  },
+  "GROUPS": {
+    "TITLE": "Перелік груп",
+    "BUTTON_OPEN": "Відкрити",
+    "BUTTON_CREATE": "Створити нову групу",
+    "BUTTON_RESET": "Відмінити",
+    "BUTTON_SAVE_GROUP": "Зберегти групу",
+    "PLACEHOLDER_GROUP_TITLE": "Додати заголовок",
+    "NO_RESULTS": "У вас поки що немає груп",
+    "DELETE_CONFIRMATION": "Ви збираєтесь видалити групу",
+    "ALL_DATA_WILL_BE_REMOVED": "Усі дані по групі буде видалено"
+  },
+  "GROUP": {
+    "SECTION_STUDENTS_TITLE": "Перелік студентів",
+    "BUTTON_OPEN": "Відкрити",
+    "BUTTON_EDIT": "Редагувати групу",
+    "SECTION_STUDENTS_PLACEHOLDER": "Почніть вводити ім'я. фамілію чи електронну адресу",
+    "SECTION_LESSONS_TITLE": "Перелік уроків",
+    "SECTION_LESSONS_PLACEHOLDER": "Почніть вводити назву уроку",
+    "TO_STATISTICS": "Статистика по групі",
+    "TO_GROUP": "Повернутись до групи"
+  },
+  "MODAL_CONFIRMATION": {
+    "BUTTON_CONFIRM": "Підтвердити",
+    "BUTTON_CANCEL": "Відмінити"
+  },
+  "REGISTRATION": {
+    "TITLE": "Форма реєстрації",
+    "SUBTITLE": "Зареєструйтесь, щоб мати можливість користуватись Chess Tutorials як вчитель",
+    "INVITATION_CODE": "Код запрошення",
+    "INVITATION_CODE_MANDATORY": "Код запрошення обов'язковий",
+    "EMAIL": "елекронна адреса",
+    "EMAIL_MANDATORY": "Електронна адреса обов'язкова",
+    "EMAIL_NOT_VALID": "Електронна адреса некоректна",
+    "FIRST_NAME": "ім'я",
+    "FIRST_NAME_MANDATORY": "Ім'я обов'язкове",
+    "LAST_NAME": "прізвище",
+    "LAST_NAME_MANDATORY": "Прізвище обов'язкове",
+    "PASSWORD": "пароль",
+    "PASSWORD_MANDATORY": "Пароль обов'язковий",
+    "PASSWORD_SHORT": "Пароль повинен бути не менше 8 символів",
+    "REPEAT_PASSWORD": "підтвердження паролю",
+    "PASSWORD_NOT_MATCH": "Паролі не співпадають",
+    "USER_EXISTS": "Користувач вже існує",
+    "SUBMIT": "Надіслати",
+    "RESET": "Очистити",
+    "LOADING": "загрузка..."
+  },
+  "LOGIN": {
+    "TITLE": "Форма входу",
+    "SUBTITLE": "Увійдіть, щоб мати можливість користуватись Chess Tutorials",
+    "LOGIN": "логін",
+    "LOGIN_MANDATORY": "логін обов'язковий",
+    "INVITATION_CODE_MANDATORY": "логін обов'язковий",
+    "PASSWORD": "пароль",
+    "PASSWORD_MANDATORY": "Пароль обов'язковий",
+    "LOGIN_OR_PASSWORD_WRONG": "Логін або пароль невірний",
+    "SUBMIT": "Відправити",
+    "RESET": "Очистити",
+    "LOADING": "загрузка..."
+  },
+  "STATISTICS": {
+    "TITLE": "Статистика по групі",
+    "STUDENT_COL": "Студент",
+    "LESSON_COL": "Урок",
+    "FAILURES_COL": "Помилки",
+    "DATE_COL": "Дата початку виконання",
+    "PROGRESS_COL": "Прогрес виконання",
+    "FILTER_PLACEHOLDER": "Почніть вводити ім'я студента або назву уроку"
   }
 }

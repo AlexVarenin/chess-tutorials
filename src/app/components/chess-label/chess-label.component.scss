@@ -1,0 +1,17 @@
+.group-label {
+  display: block;
+  height: 30px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  color: white;
+  background-color: #f44336;
+  font-size: 12px;
+  max-width: 120px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+:host {
+  display: inline-block;
+}

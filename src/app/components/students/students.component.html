@@ -1,0 +1,72 @@
+<div class="wrapper">
+  <div class="title-header">
+    <h1 class="mat-display-1">{{ 'STUDENTS.TITLE' | translate }}</h1>
+    <div class="action-buttons">
+    </div>
+  </div>
+
+  <div class="section" *ngIf="userMe$ | async">
+    <mat-card>
+      <mat-card-title class="section-title">{{ 'STUDENTS.INVITE_NEW_STUDENT' | translate }}</mat-card-title>
+      <mat-form-field class="invite-users-field" appearance="fill">
+        <mat-label>{{ 'STUDENTS.COPY_TO_REGISTER' | translate }}</mat-label>
+        <input type="text"
+          class="register-url"
+          matInput
+          [formControl]="inviteStudent"
+          >
+        <button
+          mat-icon-button
+          matSuffix (click)="copyContent(); $event.preventDefault()"
+          [matTooltip]="'STUDENTS.COPY_TO_CLIPBOARD' | translate">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card>
+  </div>
+
+  <div class="list-wrapper">
+    <ng-container *ngIf="students$ | async as students; else loading">
+      <div *ngFor="let student of students" class="list-card-wrapper">
+        <mat-card class="list-card">
+          <mat-card-header>
+            <div class="user-wrapper">
+              <chess-chess-avatar class="avatar" [user]="student"></chess-chess-avatar>
+              <mat-card-title class="user-name" *ngIf="student.firstName || student.lastName">
+                <span>{{ student.firstName | titlecase }} </span>
+                <span>{{ student.lastName | titlecase }}</span>
+              </mat-card-title>
+              <mat-card-subtitle class="user-email">{{ student.email }}</mat-card-subtitle>
+            </div>
+
+          </mat-card-header>
+          <div class="group-label-wrapper">
+            <chess-chess-label
+              class="group-label"
+              *ngFor="let group of student.groups"
+              [text]="group.name"
+              (click)="goToGroup(group.id)"
+            ></chess-chess-label>
+          </div>
+        </mat-card>
+        <button *hiddenFor="['admin','student']"
+          mat-icon-button
+          color="primary"
+          (click)="removeStudent(student)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
+
+      <p class="no-results" *ngIf="!students.length">{{ 'STUDENTS.NO_RESULTS' | translate }}</p>
+
+    </ng-container>
+
+
+  </div>
+</div>
+
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

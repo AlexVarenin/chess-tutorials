@@ -1,0 +1,27 @@
+<chess-modals-wrapper [dialogRef]="dialogRef">
+
+  <ng-container ngProjectAs="modal-title">
+    <h2 *ngIf='data.title' class="modal__title">{{ data.title | translate }}</h2>
+  </ng-container>
+
+  <ng-container ngProjectAs="modal-content">
+    <p class="modal__main-content">{{ data.description | translate }}</p>
+  </ng-container>
+
+  <ng-container ngProjectAs="modal-actions">
+    <button
+      class="modal__button"
+      type="button" mat-raised-button
+      color="primary" (click)="dialogRef.close(true)"
+    >{{ 'MODAL_CONFIRMATION.BUTTON_CONFIRM' | translate}}</button>
+    <button
+      *ngIf="!data.hideCancel"
+      class="modal__button"
+      type="button"
+      mat-raised-button
+      (click)="dialogRef.close()"
+    >{{ 'MODAL_CONFIRMATION.BUTTON_CANCEL' | translate}}</button>
+  </ng-container>
+
+</chess-modals-wrapper>
+

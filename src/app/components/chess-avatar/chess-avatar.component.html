@@ -1,0 +1,6 @@
+<ngx-avatar
+  [name]="user | userName"
+  [size]="size" [matTooltip]="user | userName"
+  [matTooltipDisabled]="!displayTooltip"
+></ngx-avatar>
+<p *ngIf="displayName" class="avatar-name">{{ user | userName }}</p>

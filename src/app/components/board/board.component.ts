@@ -35,10 +35,11 @@ export class BoardComponent implements OnInit, AfterViewInit {
 
   public onPieceDrop = (from: string, to: string, piece: string) => {
     if (from !== to) {
+      const notation = this.handleCastlingAndCreateNotation(from, to, piece);
 
       setTimeout(() => {
-        this.onDrop.emit({ from, to, piece, fen: this.fen });
-      })
+        this.onDrop.emit({ piece, notation, fen: this.fen });
+      }, 100)
     }
   };
 
@@ -88,7 +89,8 @@ export class BoardComponent implements OnInit, AfterViewInit {
   }
 
   public movePiece(move: string): void {
-    this.board.move(move);
+    let moves = this.fixMoveIfCastling(move);
+    this.board.move(...moves);
   }
 
   public getPieceByPosition(position: string): string {
@@ -106,5 +108,46 @@ export class BoardComponent implements OnInit, AfterViewInit {
 
   public toggleSparePieces(isHidden: boolean): void {
     this.isSpareHidden = isHidden;
+  }
+
+  private fixMoveIfCastling(move: string): string[] {
+    let fixedMove = [move.replace('x', '-')];
+
+    if (move === 'O-O') {
+      fixedMove = this.orientation === 'white' ? ['e1-g1', 'h1-f1'] : ['e8-g8', 'h8-f8'];
+    }
+    if (move === 'O-O-O') {
+      fixedMove = this.orientation === 'white' ? ['e1-c1', 'a1-d1'] : ['e8-c8', 'a8-d8'];
+    }
+    return fixedMove;
+  }
+
+  private handleCastlingAndCreateNotation(from: string, to: string, piece: string): string {
+    let notation = `${from}-${to}`;
+    if (piece === 'wK' && from === 'e1' && to === 'c1') {
+      if (this.getPieceByPosition('a1') === 'wR') {
+        notation = 'O-O-O';
+        setTimeout(() => this.board.move(`a1-d1`), 50);
+      }
+    }
+    if (piece === 'wK' && from === 'e1' && to === 'g1') {
+      if (this.getPieceByPosition('h1') === 'wR') {
+        notation = 'O-O';
+        setTimeout(() => this.board.move(`h1-f1`), 50);
+      }
+    }
+    if (piece === 'bK' && from === 'e8' && to === 'c8') {
+      if (this.getPieceByPosition('a8') === 'bR') {
+        notation = 'O-O-O';
+        setTimeout(() => this.board.move(`a8-d8`), 50);
+      }
+    }
+    if (piece === 'bK' && from === 'e8' && to === 'g8') {
+      if (this.getPieceByPosition('h8') === 'bR') {
+        notation = 'O-O';
+        setTimeout(() => this.board.move(`h8-f8`), 50);
+      }
+    }
+    return notation;
   }
 }

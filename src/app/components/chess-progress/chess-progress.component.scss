@@ -1,0 +1,46 @@
+.c0_20 {
+  background-color: red;
+}
+
+.c20_40 {
+  background-color: orange;
+}
+
+.c40_60 {
+  background-color: yellow;
+}
+
+.c60_80 {
+  background-color: greenyellow;
+}
+
+.c100 {
+  background-color: green;
+}
+
+
+.static-block {
+  width: 100px;
+  height: 20px;
+  background-color: #f3f6fa;
+}
+
+.dynamic-block {
+  position: absolute;
+  top: 0;
+  left: 40px;
+  max-width: 100px;
+  height: 20px;
+}
+
+.progress-wrapper {
+  position: relative;
+  display: flex;
+  width: 140px;
+
+  p {
+    width: 40px;
+  }
+}
+
+

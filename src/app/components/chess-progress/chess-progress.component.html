@@ -1,0 +1,14 @@
+<div class="progress-wrapper">
+  <p>{{ progress }}%</p>
+  <div [ngClass]="{'c0_20': progress < 20,
+                  'c20_40': progress >= 20 && progress < 40,
+                  'c40_60': progress >= 40 && progress < 60,
+                  'c60_80': progress >= 60 && progress < 80,
+                 'c80_100': progress >= 80 && progress < 100,
+                    'c100': progress === 100}"
+       [ngStyle]="{ width: progress + 'px' }"
+       class="dynamic-block"
+  ></div>
+  <div class="static-block"></div>
+</div>
+

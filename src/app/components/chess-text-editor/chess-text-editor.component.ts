@@ -3,16 +3,17 @@ import {
   forwardRef,
   OnDestroy,
   OnInit,
-  Injector, Input
+  Injector,
+  Input
 } from '@angular/core';
-import {Editor, Toolbar } from 'ngx-editor';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, Validators} from "@angular/forms";
+import { Editor, Toolbar } from 'ngx-editor';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, Validators } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'chess-chess-text-editor',
   templateUrl: './chess-text-editor.component.html',
-  styleUrls: ['./chess-text-editor.component.scss'],providers: [{
+  styleUrls: ['./chess-text-editor.component.scss'], providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => ChessTextEditorComponent),
     multi: true,
@@ -20,7 +21,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 
 })
 export class ChessTextEditorComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  public editor = new Editor();
+  public editor = new Editor({ features: { linkOnPaste: true } });
   public toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -44,7 +45,7 @@ export class ChessTextEditorComponent implements ControlValueAccessor, OnInit, O
   constructor(private inj: Injector){}
 
   ngAfterViewInit() {
-    const outerControl = this.inj.get(NgControl).control;
+    const outerControl = this.inj.get(NgControl)?.control;
     const prevMarkAsTouched = outerControl?.markAsTouched;
     outerControl!.markAsTouched = (...args: any) => {
       this.formControl.markAsTouched();

@@ -61,11 +61,47 @@ mat-form-field {
   justify-content: flex-end;
 }
 
-.title-moves {
-  font-size: 28px;
-}
-
 .falsy-move {
   background: rgba(255, 0, 0, .1);
+}
+
+.section:last-child {
+  padding-bottom: 20px;
+}
+
+.lesson-section {
+  position: relative;
+}
+
+.lesson-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  background-color: white;
+  opacity: .9;
+}
+
+.lesson-start {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .start-message {
+    margin-top: 100px;
+    min-width: 300px;
+    padding: 50px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  }
 }
 

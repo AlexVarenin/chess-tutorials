@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Lesson } from '../models';
-import { createRandomString } from '../../../services/helper.helper';
+import { Lesson, LessonInfo, Move, MoveStatusResponse } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +10,31 @@ export class LessonsApiService {
 
   constructor(private httpClient: HttpClient) {}
 
-  addLesson(newLesson: Omit<Lesson, 'id'>): Observable<Lesson> {
-    // return this.httpClient.post<Lesson>('lessons', newLesson)
-    return of({ id: createRandomString(10), ...newLesson });
+  public getLessons(): Observable<Lesson[]> {
+    return this.httpClient.get<Lesson[]>('lessons/my');
   }
 
-  removeLesson(id: string): Observable<unknown> {
-    return of({});
+  public getStudentLessons(): Observable<Lesson[]> {
+    return this.httpClient.get<Lesson[]>('lessons/student');
+  }
+
+  public getLessonInfo(id: string): Observable<LessonInfo> {
+    return this.httpClient.get<LessonInfo>(`lessons/${id}`);
+  }
+
+  public addLesson(newLesson: Omit<LessonInfo, 'id'>): Observable<{ id: string }> {
+    return this.httpClient.post<{ id: string }>('lessons', newLesson);
+  }
+
+  public removeLesson(id: string): Observable<null> {
+    return this.httpClient.delete<null>(`lessons/${id}`);
+  }
+
+  public updateLesson(id: string, patch: Omit<LessonInfo, 'id'>): Observable<LessonInfo> {
+    return this.httpClient.patch<LessonInfo>(`lessons/${id}`, patch);
+  }
+
+  public checkStudentMove(id: string, moveIndex: number, move: Move): Observable<MoveStatusResponse> {
+    return this.httpClient.post<MoveStatusResponse>(`lessons/${id}/check-move/${moveIndex}`, move);
   }
 }

@@ -1,22 +1,8 @@
 .lesson-card {
-  width: 332px;
-  min-height: 445px;
+  width: 330px;
   margin-bottom: 15px;
-}
-
-.lesson-card:last-child {
-  margin-left: 15px;
-  margin-right: auto;
-}
-
-.lesson-card:first-child {
-  margin-left: 0;
-}
-
-.lesson-card:hover {
-  cursor: pointer;
-  transition: .1s;
-  transform: scale(1.02);
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .lesson-card.lesson-card--new {
@@ -35,33 +21,14 @@
   }
 
   &:hover {
-    transform: none;
-    transition: none;
+    cursor: pointer;
     background: white;
+    box-shadow: 0px 3px 3px 0px rgb(0 0 0 / 20%),0px 2px 3px 0px rgb(0 0 0 / 14%), 0px 2px 5px 0px rgb(0 0 0 / 12%);
   }
 }
 
 .list-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-
-  mat-card-content {
-    margin-top: 10px;
-  }
-}
-
-.description-wrapper {
-  overflow: hidden;
-  height: 70px;
-  position: relative;
-}
-
-.blur-layout {
-  top: 0;
-  left: 0;
-  position: absolute;
-  height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0), white);
-  width: 100%;
+  justify-content: flex-start;
 }

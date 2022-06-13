@@ -1,4 +1,10 @@
 {
+  "HEADER": {
+    "GROUPS": "Groups",
+    "LESSONS": "Lessons",
+    "STUDENTS": "Students",
+    "LOGOUT": "Logout"
+  },
   "BOARD": {
     "TITLE": "Create new lesson",
     "BUTTON_SUBMIT": "Publish",
@@ -8,21 +14,116 @@
     "SECTION_DESCRIPTION_TITLE": "Lesson description",
     "SECTION_DESCRIPTION_PLACEHOLDER": "Add description*",
     "SECTION_BOARD_TITLE": "Moves adding",
-    "SECTION_INITIAL_TITLE": "Initial position",
-    "SECTION_INITIAL_PLACEHOLDER": "Set initial position FEN",
+    "SECTION_SETTINGS_TITLE": "Settings",
+    "SECTION_SETTINGS_PIECES_COLOR": "Pick student`s piece color",
+    "SECTION_SETTINGS_PIECES_COLOR_WHITE": "White",
+    "SECTION_SETTINGS_PIECES_COLOR_BLACK": "Black",
+    "SECTION_SETTINGS_NOTATION_TYPE": "Pick notation type",
+    "SECTION_SETTINGS_NOTATION_TYPE_CYR": "Cyrillic",
+    "SECTION_SETTINGS_NOTATION_TYPE_LAT": "Latin",
+    "SECTION_SETTINGS_NOTATION_ONLY": "Disable Drag & Drop",
     "SECTION_MOVES_TITLE": "Task moves",
-    "SECTION_MOVES_TOGGLE_HIDE": "Hide form",
+    "SECTION_MOVES_TOGGLE_HIDE": "Edit initial position",
     "SECTION_MOVES_TOGGLE_ADD": "Add new moves",
-    "SECTION_MOVES_PLACEHOLDER_FROM": "Start position",
-    "SECTION_MOVES_PLACEHOLDER_TO": "End position",
+    "SECTION_MOVES_PLACEHOLDER_EDIT_NOTATION": "Edit notation",
     "SECTION_MOVES_BUTTON_ADD": "+ Add"
   },
   "LESSONS": {
     "TITLE": "List of available lessons",
     "BUTTON_EDIT": "Edit",
-    "BUTTON_REMOVE": "Remove"
+    "BUTTON_REMOVE": "Remove",
+    "NO_RESULTS": "There are no lessons yet",
+    "ADD_NEW": "Add new lesson",
+    "COMPLETED": "Lesson completed",
+    "DELETE_CONFIRMATION": "You are going to remove a lesson",
+    "ALL_DATA_WILL_BE_REMOVED": "All lesson data and statistics will be cleared"
   },
   "LESSON": {
-    "SUBTITLE_HISTORY": "Moves history"
+    "SUBTITLE_HISTORY": "Moves history",
+    "BUTTON_EDIT": "Edit lesson",
+    "SECTION_MOVE_TITLE": "Moves adding",
+    "ADD_NOTATION": "Add notation",
+    "MODAL_SUCCESS_TITLE": "Congratulations!",
+    "MODAL_SUCCESS_DESCRIPTION": "You have successfully finished this lesson! Go to lessons list?",
+    "START_MESSAGE": "Start the lesson task",
+    "START_BUTTON": "Start lesson"
+  },
+  "STUDENTS": {
+    "TITLE": "Students list",
+    "INVITE_NEW_STUDENT": "Invite new student",
+    "COPY_TO_REGISTER": "Copy url below to register a new student",
+    "NO_RESULTS": "There are no students registered",
+    "COPY_TO_CLIPBOARD": "Copy to clipboard",
+    "DELETE_CONFIRMATION": "You are going to remove a student",
+    "ALL_DATA_WILL_BE_REMOVED": "All student data and statistics will be cleared"
+  },
+  "GROUPS": {
+    "TITLE": "Groups list",
+    "BUTTON_OPEN": "Open",
+    "BUTTON_CREATE": "Create New Group",
+    "BUTTON_RESET": "Cancel",
+    "BUTTON_SAVE_GROUP": "Save group",
+    "PLACEHOLDER_GROUP_TITLE": "Add title",
+    "NO_RESULTS": "You have no groups yet",
+    "DELETE_CONFIRMATION": "You are going to remove a group",
+    "ALL_DATA_WILL_BE_REMOVED": "All group data will be cleared"
+  },
+  "GROUP": {
+    "SECTION_STUDENTS_TITLE": "Students list",
+    "BUTTON_OPEN": "Open",
+    "BUTTON_EDIT": "Edit group",
+    "SECTION_STUDENTS_PLACEHOLDER": "Type first name, last name or email",
+    "SECTION_LESSONS_TITLE": "Lessons list",
+    "SECTION_LESSONS_PLACEHOLDER": "Type lesson title",
+    "TO_STATISTICS": "Group statistics",
+    "TO_GROUP": "Back to group"
+  },
+  "MODAL_CONFIRMATION": {
+    "BUTTON_CONFIRM": "Confirm",
+    "BUTTON_CANCEL": "Cancel"
+  },
+  "REGISTRATION": {
+    "TITLE": "Registration form",
+    "SUBTITLE": "Register to get access to Chess Tutorials application as a tutor",
+    "INVITATION_CODE": "Invitation code",
+    "INVITATION_CODE_MANDATORY": "Invitation code is mandatory",
+    "EMAIL": "email",
+    "EMAIL_MANDATORY": "Email is mandatory",
+    "EMAIL_NOT_VALID": "Email is not valid",
+    "FIRST_NAME": "first name",
+    "FIRST_NAME_MANDATORY": "First name is mandatory",
+    "LAST_NAME": "last name",
+    "LAST_NAME_MANDATORY": "Last name is mandatory",
+    "PASSWORD": "password",
+    "PASSWORD_MANDATORY": "Password is mandatory",
+    "PASSWORD_SHORT": "Password should be not less than 8 characters",
+    "REPEAT_PASSWORD": "confirm password",
+    "PASSWORD_NOT_MATCH": "Passwords not match",
+    "USER_EXISTS": "User already exists",
+    "SUBMIT": "Submit",
+    "RESET": "Reset",
+    "LOADING": "loading..."
+  },
+  "LOGIN": {
+    "TITLE": "Login form",
+    "SUBTITLE": "Login to get access to Chess Tutorials application ",
+    "LOGIN": "login",
+    "LOGIN_MANDATORY": "login is mandatory",
+    "INVITATION_CODE_MANDATORY": "login is mandatory",
+    "PASSWORD": "password",
+    "PASSWORD_MANDATORY": "Password is mandatory",
+    "LOGIN_OR_PASSWORD_WRONG": "Login or password is wrong",
+    "SUBMIT": "Submit",
+    "RESET": "Reset",
+    "LOADING": "loading..."
+  },
+  "STATISTICS": {
+    "TITLE": "Group statistics",
+    "STUDENT_COL": "Student",
+    "LESSON_COL": "Lesson",
+    "FAILURES_COL": "Failures",
+    "DATE_COL": "Date of beginning",
+    "PROGRESS_COL": "Progress",
+    "FILTER_PLACEHOLDER": "Start to enter student name or lesson title"
   }
 }

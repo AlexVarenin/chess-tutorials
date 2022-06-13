@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 import {
   Lesson,
+  LessonInfo,
   LessonsState,
   LessonsStateName
 } from '../models';
@@ -12,7 +13,7 @@ export const selectLessons: MemoizedSelector<LessonsState, Lesson[] | undefined>
   (lessonsState: LessonsState): Lesson[] | undefined => lessonsState?.lessonsList
 );
 
-
-export const selectLessonInfo: (id: string) => MemoizedSelector<LessonsState, Lesson | undefined> = (id: string) =>
-  createSelector(selectLessons, (lessons: Lesson[] | undefined): Lesson | undefined =>
-    lessons?.find((lesson: Lesson) => lesson.id === id));
+export const selectLessonInfo: MemoizedSelector<LessonsState, LessonInfo | undefined> = createSelector(
+  selectLessonsState,
+  (lessonsState: LessonsState): LessonInfo | undefined => lessonsState?.lessonInfo
+);

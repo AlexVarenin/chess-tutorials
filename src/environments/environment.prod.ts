@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  langs: ['ua', 'en'],
+  // Add real prod url
+  apiBase: 'https://chess-tutorials-api.com'
 };

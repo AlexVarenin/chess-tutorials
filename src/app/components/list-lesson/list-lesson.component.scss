@@ -1,0 +1,39 @@
+.lesson-card {
+  position: relative;
+  width: 330px;
+  margin-bottom: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
+
+  mat-card-content {
+    margin-top: 10px;
+  }
+}
+
+.lesson-card:hover {
+  cursor: pointer;
+  transition: .1s;
+  transform: scale(1.02);
+  box-shadow: 0px 3px 3px 0px rgb(0 0 0 / 20%),0px 2px 3px 0px rgb(0 0 0 / 14%), 0px 2px 5px 0px rgb(0 0 0 / 12%);
+}
+
+.lesson-card-header {
+  min-height: 52px;
+}
+
+.lesson-card.completed {
+  opacity: .5;
+}
+
+.lesson-completed {
+  position: absolute;
+  top: 43%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 330px;
+  height: 100px;
+  background: white;
+  font-size: 14px;
+}

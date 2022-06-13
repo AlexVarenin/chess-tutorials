@@ -28,6 +28,7 @@
     "chessboardjs": "0.0.1",
     "jquery": "^3.6.0",
     "ngrx-store-logger": "^0.2.4",
+    "ngx-avatar": "^4.1.0",
     "ngx-editor": "^12.2.2",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",

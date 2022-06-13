@@ -1,0 +1,46 @@
+<h3 class="mat-display-1 title-smaller">{{ 'STATISTICS.TITLE' | translate }}</h3>
+
+<div class="list-wrapper" *ngIf="dataSource$ | async as source">
+  <mat-form-field appearance="standard">
+    <mat-label>{{ 'STATISTICS.FILTER_PLACEHOLDER' | translate }}</mat-label>
+    <input matInput (keyup)="applyFilter($event, source)">
+  </mat-form-field>
+
+  <table mat-table [dataSource]="source">
+
+    <ng-container matColumnDef="student">
+      <th mat-header-cell *matHeaderCellDef><div class="table-header">{{ 'STATISTICS.STUDENT_COL' | translate }}</div></th>
+      <td mat-cell *matCellDef="let element"><div class="table-cell">{{ element.student }}</div></td>
+    </ng-container>
+
+    <ng-container matColumnDef="lesson">
+      <th mat-header-cell *matHeaderCellDef><div class="table-header">{{ 'STATISTICS.LESSON_COL' | translate }}</div></th>
+      <td mat-cell *matCellDef="let element"><div class="table-cell">{{ element.lesson }}</div></td>
+    </ng-container>
+
+    <ng-container matColumnDef="failures">
+      <th mat-header-cell *matHeaderCellDef><div class="table-header">{{ 'STATISTICS.FAILURES_COL' | translate }}</div></th>
+      <td mat-cell *matCellDef="let element"><div class="table-cell">{{ element.failures | translate }}</div></td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef><div class="table-header">{{ 'STATISTICS.DATE_COL' | translate }}</div></th>
+      <td mat-cell *matCellDef="let element"><div class="table-cell">{{ element.createdAt | date: 'mediumDate': '' : translateService.currentLang }} </div></td>
+    </ng-container>
+
+    <ng-container matColumnDef="progress">
+      <th mat-header-cell *matHeaderCellDef><div class="table-header">{{ 'STATISTICS.PROGRESS_COL' | translate }}</div></th>
+      <td mat-cell *matCellDef="let element">
+        <div class="table-cell">
+          <chess-progress [progress]="element.progress"></chess-progress>
+        </div>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>
+
