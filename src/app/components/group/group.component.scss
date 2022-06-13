@@ -16,18 +16,6 @@
   }
 }
 
-.lessons-wrapper {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
-  .lesson-title {
-    margin-left: 30px;
-    margin-bottom: 0 !important;
-  }
-
-}
-
 .mat-display-1 {
 
   width: 70%;
@@ -70,19 +58,12 @@
   width: 350px;
 }
 
-.list-card-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-
-  .list-card {
-    flex-grow: 1;
-    margin-bottom: 0;
-  }
-}
-
 .title-smaller {
   margin-bottom: 0 !important;
+}
+
+chess-list-group-lesson {
+  display: block;
+  width: 100%;
 }
 

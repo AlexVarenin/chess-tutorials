@@ -9,10 +9,10 @@
 
     <div class="section">
       <mat-card>
-        <p [innerHTML]="lesson.description"></p>
+        <div [innerHTML]="lesson.description | safeHtml"></div>
       </mat-card>
     </div>
-    <div class="section double-section">
+    <div class="section double-section lesson-section">
       <mat-card class="main">
         <chess-board
           [draggable]="!lesson.disableDrag"
@@ -75,6 +75,19 @@
           </div>
         </mat-card>
       </div>
+
+      <ng-container *hiddenFor="['admin','tutor']">
+        <ng-container *ngIf="!isLessonStarted">
+          <div class="lesson-overlay overlay"></div>
+
+          <div class="lesson-overlay lesson-start">
+            <div class="start-message">
+              <p>{{ 'LESSON.START_MESSAGE' | translate }}</p>
+              <button mat-raised-button color="primary" (click)="startLesson()">{{ 'LESSON.START_BUTTON' | translate }}</button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
 
     </div>
   </ng-container>

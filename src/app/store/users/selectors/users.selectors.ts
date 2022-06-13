@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
-import {Student, StudentInfo, User, UsersState, UsersStateName} from '../models';
+import { Student, StudentInfo, User, UsersState, UsersStateName } from '../models';
 
 export const selectUsersState = createFeatureSelector<UsersState>(UsersStateName);
 

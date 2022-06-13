@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { select, Store} from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Group, GroupInfo, GroupsState } from '../models';
 import { filter } from 'rxjs/operators';
+import { Group, GroupInfo, GroupsState } from '../models';
 import { selectGroupInfo, selectGroups } from '../selectors';
 import {
   addGroup,
   addLessonToGroup,
   addStudentToGroup,
+  removeGroup,
   removeLessonFromGroup,
   removeStudentFromGroup,
   requestGroupInfo,
@@ -52,6 +53,10 @@ export class GroupsStoreService {
 
   public updateGroup(id: string, group: Partial<Group>): void {
     this.store.dispatch(updateGroup({ id, group }));
+  }
+
+  public removeGroup(id: string): void {
+    this.store.dispatch(removeGroup({ id }));
   }
 
   public addStudentToGroup(groupId: string, student: Student): void {

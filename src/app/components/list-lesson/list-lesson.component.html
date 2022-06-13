@@ -1,0 +1,29 @@
+<mat-card class="lesson-card" [ngClass]="{'completed': isCompleted$ | async }" (click)="goToLesson()">
+  <mat-card-header class="lesson-card-header">
+    <mat-card-title>{{ lesson.title }}</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <chess-board
+      [initialOrientation]="lesson.orientation"
+      [initialFen]="lesson.initialState"
+      [isMinimised]="true"
+      [draggable]="false"
+      [spare]="false"
+      [showNotation]="false"
+    ></chess-board>
+  </mat-card-content>
+  <mat-card-actions *hiddenFor="['admin','student']">
+    <button mat-raised-button color="primary" (click)="edit(); $event.stopPropagation()">
+      {{ 'LESSONS.BUTTON_EDIT' | translate }}
+    </button>
+    <button mat-raised-button (click)="remove(); $event.stopPropagation()">
+      {{ 'LESSONS.BUTTON_REMOVE' | translate }}
+    </button>
+  </mat-card-actions>
+  <ng-container *hiddenFor="['admin','tutor']">
+    <div class="lesson-completed" *ngIf="isCompleted$ | async">
+      {{ 'LESSONS.COMPLETED' | translate }}
+    </div>
+  </ng-container>
+</mat-card>

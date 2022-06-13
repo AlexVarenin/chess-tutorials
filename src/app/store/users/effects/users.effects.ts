@@ -13,7 +13,7 @@ export class UsersEffects {
   public requestUserMe$ = createEffect(() => this.actions$
     .pipe(
       ofType(ActionList.requestUserMe),
-      exhaustMap( () =>
+      exhaustMap(() =>
         this.usersApiService.requestUserMe()
           .pipe(
             map((userMe: User) => ActionList.requestUserMeSuccess({ userMe })),
@@ -26,11 +26,24 @@ export class UsersEffects {
   public requestStudents$ = createEffect(() => this.actions$
     .pipe(
       ofType(ActionList.requestStudents),
-      exhaustMap( () =>
+      exhaustMap(() =>
         this.usersApiService.getStudents()
           .pipe(
             map((students: Student[]) => ActionList.requestStudentsSuccess({ students })),
             catchError((error: HttpErrorResponse) => of(ActionList.requestStudentsFailure({ error })))
+          )
+      )
+    )
+  );
+
+  public removeStudent$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(ActionList.removeStudent),
+      exhaustMap(({ id }) =>
+        this.usersApiService.removeStudent(id)
+          .pipe(
+            map(() => ActionList.removeStudentSuccess({ id })),
+            catchError((error: HttpErrorResponse) => of(ActionList.removeStudentFailure({ error })))
           )
       )
     )

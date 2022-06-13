@@ -75,6 +75,19 @@ export class GroupsEffects {
     )
   );
 
+  public removeGroup$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(ActionList.removeGroup),
+      exhaustMap(({ id }) =>
+        this.groupsApiService.removeGroup(id)
+          .pipe(
+            map(() => ActionList.removeGroupSuccess({ id })),
+            catchError((error: HttpErrorResponse) => of(ActionList.removeGroupFailure({ error })))
+          )
+      )
+    )
+  );
+
   public addStudentToGroup$ = createEffect(() => this.actions$
     .pipe(
       ofType(ActionList.addStudentToGroup),

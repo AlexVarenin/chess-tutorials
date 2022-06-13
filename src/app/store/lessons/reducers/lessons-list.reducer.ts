@@ -6,7 +6,7 @@ const reducer = createReducer<Lesson[] | undefined>(
   undefined,
   on(requestLessonsSuccess, (state, { lessons }) => lessons),
   on(requestStudentLessonsSuccess, (state, { lessons }) => lessons),
-  on(removeLessonSuccess, (state, { id }) => state?.filter(lesson => lesson.id !== id) )
+  on(removeLessonSuccess, (state, { id }) => state?.filter(lesson => lesson.id !== id))
 );
 
 export function lessonsListReducer(state: Lesson[] | undefined, action: Action) {

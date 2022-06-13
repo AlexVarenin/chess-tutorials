@@ -33,7 +33,10 @@
     "BUTTON_EDIT": "Редагувати",
     "BUTTON_REMOVE": "Видалити",
     "NO_RESULTS": "У вас поки що немає уроків",
-    "ADD_NEW": "Додати новий урок"
+    "ADD_NEW": "Додати новий урок",
+    "COMPLETED": "Урок завершено",
+    "DELETE_CONFIRMATION": "Ви збираєтесь видалити урок",
+    "ALL_DATA_WILL_BE_REMOVED": "Усі дані по уроку і статистика буде видалено"
   },
   "LESSON": {
     "SUBTITLE_HISTORY": "Істрія ходів",
@@ -41,14 +44,18 @@
     "SECTION_MOVE_TITLE": "Додавання ходів",
     "ADD_NOTATION": "Додайте нотацію",
     "MODAL_SUCCESS_TITLE": "Поздоровляємо!",
-    "MODAL_SUCCESS_DESCRIPTION": "Ви успішно завершили урок! Перейти до переліку уроків?"
+    "MODAL_SUCCESS_DESCRIPTION": "Ви успішно завершили урок! Перейти до переліку уроків?",
+    "START_MESSAGE": "Почати виконувати завдання уроку",
+    "START_BUTTON": "Почати урок"
   },
   "STUDENTS": {
     "TITLE": "Перелік студентів",
     "INVITE_NEW_STUDENT": "Запросити нового студента",
     "COPY_TO_REGISTER": "Скопіюйте посилання для реєстрації нового студента",
     "NO_RESULTS": "Немає заєрестрованих студентів",
-    "COPY_TO_CLIPBOARD": "Скопіювати до буферу обміну"
+    "COPY_TO_CLIPBOARD": "Скопіювати до буферу обміну",
+    "DELETE_CONFIRMATION": "Ви збираєтесь видалити студента",
+    "ALL_DATA_WILL_BE_REMOVED": "Усі дані по студенту і його статистику буде видалено"
   },
   "GROUPS": {
     "TITLE": "Перелік груп",
@@ -57,7 +64,9 @@
     "BUTTON_RESET": "Відмінити",
     "BUTTON_SAVE_GROUP": "Зберегти групу",
     "PLACEHOLDER_GROUP_TITLE": "Додати заголовок",
-    "NO_RESULTS": "У вас поки що немає груп"
+    "NO_RESULTS": "У вас поки що немає груп",
+    "DELETE_CONFIRMATION": "Ви збираєтесь видалити групу",
+    "ALL_DATA_WILL_BE_REMOVED": "Усі дані по групі буде видалено"
   },
   "GROUP": {
     "SECTION_STUDENTS_TITLE": "Перелік студентів",
@@ -65,7 +74,9 @@
     "BUTTON_EDIT": "Редагувати групу",
     "SECTION_STUDENTS_PLACEHOLDER": "Почніть вводити ім'я. фамілію чи електронну адресу",
     "SECTION_LESSONS_TITLE": "Перелік уроків",
-    "SECTION_LESSONS_PLACEHOLDER": "Почніть вводити назву уроку"
+    "SECTION_LESSONS_PLACEHOLDER": "Почніть вводити назву уроку",
+    "TO_STATISTICS": "Статистика по групі",
+    "TO_GROUP": "Повернутись до групи"
   },
   "MODAL_CONFIRMATION": {
     "BUTTON_CONFIRM": "Підтвердити",
@@ -105,5 +116,14 @@
     "SUBMIT": "Відправити",
     "RESET": "Очистити",
     "LOADING": "загрузка..."
+  },
+  "STATISTICS": {
+    "TITLE": "Статистика по групі",
+    "STUDENT_COL": "Студент",
+    "LESSON_COL": "Урок",
+    "FAILURES_COL": "Помилки",
+    "DATE_COL": "Дата початку виконання",
+    "PROGRESS_COL": "Прогрес виконання",
+    "FILTER_PLACEHOLDER": "Почніть вводити ім'я студента або назву уроку"
   }
 }

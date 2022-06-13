@@ -6,6 +6,7 @@ import { metaReducers, reducers } from './root-state.reducer';
 import { LessonsModule } from './lessons/lessons.module';
 import { UsersModule } from './users/users.module';
 import { GroupsModule } from './groups/groups.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { GroupsModule } from './groups/groups.module';
     LessonsModule,
     UsersModule,
     GroupsModule,
+    StatisticsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([])
   ]

@@ -18,4 +18,8 @@ export class UsersApiService {
     return this.httpClient.get<Student[]>('users/students');
   }
 
+  public removeStudent(id: string): Observable<null> {
+    return this.httpClient.delete<null>(`users/students/${id}`);
+  }
+
 }

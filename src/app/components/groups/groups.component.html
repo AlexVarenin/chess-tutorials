@@ -32,30 +32,40 @@
     </mat-card>
 
     <ng-container *ngIf="groups$ | async as groups; else loading">
-      <mat-card *ngFor="let group of groups" class="list-card group-card">
-        <div class="group-wrapper">
-          <mat-card-header>
-            <mat-card-title>
-              {{ group.name | titlecase }}
-            </mat-card-title>
-          </mat-card-header>
+      <div *ngFor="let group of groups" class="list-card-wrapper">
+        <mat-card class="list-card group-card">
+          <div class="group-wrapper">
+            <mat-card-header>
+              <mat-card-title>
+                {{ group.name | titlecase }}
+              </mat-card-title>
+            </mat-card-header>
 
-          <div class="avatars-list">
-            <chess-chess-avatar
-              *ngFor="let student of group.students"
-              class="avatar"
-              [user]="student"
-              [size]="40"
-              [displayTooltip]="true"
-            >
-            </chess-chess-avatar>
+            <div class="avatars-list">
+              <chess-chess-avatar
+                *ngFor="let student of group.students"
+                class="avatar"
+                [user]="student"
+                [size]="40"
+                [displayTooltip]="true"
+              >
+              </chess-chess-avatar>
+            </div>
           </div>
-        </div>
 
-        <button mat-raised-button color="primary" (click)="goToGroupInfo(group)">
-          {{ 'GROUPS.BUTTON_OPEN' | translate }}
+          <button mat-raised-button color="primary" (click)="goToGroupInfo(group)">
+            {{ 'GROUPS.BUTTON_OPEN' | translate }}
+          </button>
+        </mat-card>
+        <button *hiddenFor="['admin','student']"
+          mat-icon-button
+          color="primary"
+          (click)="removeGroup(group)"
+        >
+          <mat-icon>delete</mat-icon>
         </button>
-      </mat-card>
+      </div>
+
 
       <p *ngIf="!groups.length" class="no-results">{{ 'GROUPS.NO_RESULTS' | translate }}</p>
 

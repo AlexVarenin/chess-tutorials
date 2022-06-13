@@ -8,13 +8,13 @@ export interface LessonsState {
 export interface Lesson {
   id: string;
   title: string;
-  description: string;
   initialState: string;
   orientation: 'black' | 'white';
 }
 
 export interface LessonInfo extends Lesson {
   moves: Move[];
+  description: string;
   notationType: 'cyr' | 'lat';
   disableDrag: boolean;
 }

@@ -6,6 +6,7 @@ import { Student, User } from '../models';
 export const usersActionTypes = {
   requestUserMe: '[Users] Request user me',
   requestStudents: '[Users] Request students',
+  removeStudent: '[Users] Remove student',
   logout: '[Users] Logout'
 };
 
@@ -39,4 +40,19 @@ export const requestUserMeFailure = createAction(
 
 export const logout = createAction(
   usersActionTypes.logout
+);
+
+export const removeStudent = createAction(
+  usersActionTypes.removeStudent,
+  props<{ id: string }>()
+);
+
+export const removeStudentSuccess = createAction(
+  getSuccessType(usersActionTypes.removeStudent),
+  props<{ id: string }>()
+);
+
+export const removeStudentFailure = createAction(
+  getFailureType(usersActionTypes.removeStudent),
+  props<{ error: HttpErrorResponse }>()
 );

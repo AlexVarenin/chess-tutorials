@@ -1,0 +1,20 @@
+<mat-card class="list-card" [ngClass]="{'completed': isCompleted$ | async }">
+  <mat-card-header>
+    <div class="lessons-wrapper">
+      <img width="40" [src]="(lesson.orientation === 'white' ? 'wN' : 'bN') | pieceIcon">
+      <mat-card-title class="lesson-title">{{ lesson.title }}</mat-card-title>
+    </div>
+
+  </mat-card-header>
+
+  <ng-container *hiddenFor="['admin','tutor']">
+    <div class="list-card-completed" *ngIf="isCompleted$ | async">
+      {{ 'LESSONS.COMPLETED' | translate }}
+    </div>
+  </ng-container>
+
+</mat-card>
+
+<button mat-raised-button color="primary" (click)="goToLesson()" class="lesson-button">
+  {{ 'GROUP.BUTTON_OPEN' | translate }}
+</button>

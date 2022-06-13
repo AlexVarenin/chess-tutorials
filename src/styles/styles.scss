@@ -105,7 +105,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
-.custom-focused {
+.editor-focused {
   margin-top: 0;
   margin-bottom: 0;
   .NgxEditor {
@@ -119,7 +119,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
-.custom-invalid {
+.editor-invalid {
 
   .NgxEditor {
     border-color: #f44336;
@@ -173,6 +173,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex !important;
   justify-content: space-between;
   align-items: center;
+}
+
+.list-card-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .list-card {
+    flex-grow: 1;
+    margin-bottom: 0;
+  }
 }
 
 .list-wrapper {

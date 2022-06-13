@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GroupsStoreService } from '../../store/groups/services/groups-store.service';
 import { Lesson } from '../../store/lessons/models';
 import { FormControl, Validators } from '@angular/forms';
-import { distinctUntilChanged, map, shareReplay, startWith, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, map, shareReplay, startWith, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Student } from '../../store/users/models';
 import { UserNamePipe } from '../../pipes/user-name/piece-name.pipe';
 import { UsersStoreService } from '../../store/users/services/users-store.service';
 import { LessonsStoreService } from '../../store/lessons/services/lessons-store.service';
 import { GroupInfo } from '../../store/groups/models';
+import {StatisticsStoreService} from "../../store/statistics/services/statistics-store.service";
 
 @Component({
   selector: 'chess-group',
@@ -17,7 +18,7 @@ import { GroupInfo } from '../../store/groups/models';
   styleUrls: ['./group.component.scss'],
   providers: [UserNamePipe]
 })
-export class GroupComponent implements OnInit {
+export class GroupComponent implements OnInit, OnDestroy {
 
   public groupId = this.activatedRoute.snapshot.paramMap.get('id');
   public group$: Observable<GroupInfo>;
@@ -30,8 +31,11 @@ export class GroupComponent implements OnInit {
   public isStudentsAddDisabled$: Observable<boolean>;
   public isLessonsAddDisabled$: Observable<boolean>;
   public userMe$ = this.usersStoreService.userMe$;
+  public isStatisticsDisplayed = false;
   public displayFn = (user: Student) => this.userNamePipe.transform(user);
   public displayLessonFn = (lesson: Lesson) => lesson?.title;
+
+  private destroy$ = new Subject<boolean>();
 
   constructor(
     private router: Router,
@@ -39,13 +43,23 @@ export class GroupComponent implements OnInit {
     private groupsStoreService: GroupsStoreService,
     private usersStoreService: UsersStoreService,
     private lessonsStoreService: LessonsStoreService,
-    public userNamePipe: UserNamePipe
+    private statisticsStoreService: StatisticsStoreService,
+    private userNamePipe: UserNamePipe
   ) { }
 
   public ngOnInit(): void {
     this.groupsStoreService.requestGroupInfo(this.groupId as string);
-    this.usersStoreService.requestStudents();
-    this.lessonsStoreService.requestLessons();
+
+    this.usersStoreService.userMe$.pipe(takeUntil(this.destroy$))
+      .subscribe(({ role }) => {
+        if (role === 'tutor') {
+          this.usersStoreService.requestStudents();
+          this.lessonsStoreService.requestLessons();
+        }
+        if (role === 'student') {
+          this.statisticsStoreService.requestCompletedLessons();
+        }
+      });
 
     this.group$ = this.groupsStoreService.group$.pipe(
       tap((group: GroupInfo) => this.title.setValue(group.name, { emitEvent: false }))
@@ -83,6 +97,11 @@ export class GroupComponent implements OnInit {
         map(lessons => this.filterLessons(name, lessons))
       ))
     );
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   public goToLesson(lesson: Lesson): void {

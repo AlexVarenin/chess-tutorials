@@ -1,14 +1,17 @@
-import {Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy, ViewEncapsulation} from '@angular/core';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
-import {takeUntil, tap} from 'rxjs/operators';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+
 import { BoardComponent } from '../board/board.component';
 import { Move, MoveStatus } from '../../store/lessons/models';
 import { LessonsStoreService } from '../../store/lessons/services/lessons-store.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ChessConfirmationDialogComponent } from '../chess-confirmation-dialog/chess-confirmation-dialog.component';
 import { FormControl, Validators } from '@angular/forms';
 import { normaliseNotation } from '../../services/notation-normaliser.helper';
+import { UsersStoreService } from '../../store/users/services/users-store.service';
+import { StatisticsStoreService } from '../../store/statistics/services/statistics-store.service';
 
 type HistoryMove = Move & { isFalsy?: boolean };
 
@@ -16,6 +19,7 @@ type HistoryMove = Move & { isFalsy?: boolean };
   selector: 'chess-lesson',
   templateUrl: './lesson.component.html',
   styleUrls: ['./lesson.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LessonComponent implements OnInit, OnDestroy {
   public historyMoves: HistoryMove[] = [];
@@ -25,6 +29,7 @@ export class LessonComponent implements OnInit, OnDestroy {
   public moveIndex = 0;
   public lessonId = this.activatedRoute.snapshot.paramMap.get('id');
   public notation = new FormControl('', Validators.required);
+  public isLessonStarted = false;
   public lesson$ = this.lessonsStoreService.lessonInfo$.pipe(
     tap(lesson => {
       this.state = lesson.initialState;
@@ -40,7 +45,9 @@ export class LessonComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private lessonsStoreService: LessonsStoreService,
-    private dialog: MatDialog,
+    private usersStoreService: UsersStoreService,
+    private statisticsStoreService: StatisticsStoreService,
+    private dialog: MatDialog
   ) { }
 
   public ngOnInit(): void {
@@ -60,6 +67,7 @@ export class LessonComponent implements OnInit, OnDestroy {
       }),
       takeUntil(this.destroy$)
     ).subscribe();
+
   }
 
   public ngOnDestroy(): void {
@@ -92,13 +100,18 @@ export class LessonComponent implements OnInit, OnDestroy {
     this.router.navigate(['edit'], { relativeTo: this.activatedRoute });
   }
 
+  public startLesson(): void {
+    this.isLessonStarted = true;
+    this.statisticsStoreService.addNewStatisticsRecord(this.lessonId as string);
+  }
+
   private checkMove(move: Move) {
     this.lessonsStoreService.checkStudentMove(this.lessonId as string, this.moveIndex, move);
   }
 
   private showSuccessDialog(): void {
     const dialogRef = this.dialog.open(ChessConfirmationDialogComponent, {
-      width: '300px',
+      width: '450px',
       autoFocus: false,
       disableClose: true,
       data: {

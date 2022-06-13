@@ -1,11 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { GroupsStoreService } from '../../store/groups/services/groups-store.service';
-import { Group } from '../../store/groups/models';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import { UsersStoreService } from '../../store/users/services/users-store.service';
+import { MatDialog } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { GroupsStoreService } from '../../store/groups/services/groups-store.service';
+import { Group } from '../../store/groups/models';
+import { UsersStoreService } from '../../store/users/services/users-store.service';
+
+
+import { ChessConfirmationDialogComponent } from '../chess-confirmation-dialog/chess-confirmation-dialog.component';
 
 @Component({
   selector: 'chess-students',
@@ -25,6 +29,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
     private router: Router,
     private usersStoreService: UsersStoreService,
     private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
@@ -58,4 +63,25 @@ export class GroupsComponent implements OnInit, OnDestroy {
     this.groupsStoreService.addGroup({ name: this.newGroupTitle.value, lessons: [], students: [] });
     this.newGroupTitle.reset();
   }
+
+  public removeGroup(group: Group): void {
+    const dialogRef = this.dialog.open(ChessConfirmationDialogComponent, {
+      width: '400px',
+      autoFocus: false,
+      disableClose: true,
+      data: {
+        title:  'GROUPS.DELETE_CONFIRMATION',
+        description: 'GROUPS.ALL_DATA_WILL_BE_REMOVED'
+      }
+    });
+    dialogRef.afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((isConfirmed: boolean) => {
+        if (isConfirmed) {
+          this.groupsStoreService.removeGroup(group.id);
+        }
+      });
+  }
+
+
 }

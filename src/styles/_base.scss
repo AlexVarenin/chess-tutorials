@@ -4,14 +4,6 @@
   box-sizing: border-box;
 }
 
-a {
-  color: currentColor;
-  text-decoration: none;
-
-  &:active {
-    outline: none;
-  }
-}
 
 input, textarea {
   background: transparent;

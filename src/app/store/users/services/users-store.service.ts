@@ -3,7 +3,7 @@ import { select, Store} from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { StudentInfo, User, UsersState } from '../models';
-import { logout, requestStudents, requestUserMe } from '../actions';
+import {logout, removeStudent, requestStudents, requestUserMe} from '../actions';
 import { selectStudents, selectUserMe } from '../selectors';
 
 @Injectable({
@@ -32,6 +32,10 @@ export class UsersStoreService {
 
   public logout(): void {
     this.store.dispatch(logout());
+  }
+
+  public removeStudent(id: string): void {
+    this.store.dispatch(removeStudent({ id }));
   }
 
 }

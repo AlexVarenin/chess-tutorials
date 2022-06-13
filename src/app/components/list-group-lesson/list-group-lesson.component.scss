@@ -1,0 +1,33 @@
+:host {
+  position: relative;
+}
+
+.lessons-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .lesson-title {
+    margin-left: 30px;
+    margin-bottom: 0 !important;
+  }
+
+}
+
+.list-card {
+  padding-right: 150px !important;
+}
+
+.list-card.completed {
+  opacity: .5;
+}
+
+.list-card-completed {
+  font-size: 14px;
+}
+
+.lesson-button {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+}

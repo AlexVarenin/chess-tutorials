@@ -32,8 +32,11 @@
     "TITLE": "List of available lessons",
     "BUTTON_EDIT": "Edit",
     "BUTTON_REMOVE": "Remove",
-    "NO_RESULTS": "У вас поки що немає уроків",
-    "ADD_NEW": "Додати новий урок"
+    "NO_RESULTS": "There are no lessons yet",
+    "ADD_NEW": "Add new lesson",
+    "COMPLETED": "Lesson completed",
+    "DELETE_CONFIRMATION": "You are going to remove a lesson",
+    "ALL_DATA_WILL_BE_REMOVED": "All lesson data and statistics will be cleared"
   },
   "LESSON": {
     "SUBTITLE_HISTORY": "Moves history",
@@ -41,14 +44,18 @@
     "SECTION_MOVE_TITLE": "Moves adding",
     "ADD_NOTATION": "Add notation",
     "MODAL_SUCCESS_TITLE": "Congratulations!",
-    "MODAL_SUCCESS_DESCRIPTION": "You have successfully finished this lesson! Go to lessons list?"
+    "MODAL_SUCCESS_DESCRIPTION": "You have successfully finished this lesson! Go to lessons list?",
+    "START_MESSAGE": "Start the lesson task",
+    "START_BUTTON": "Start lesson"
   },
   "STUDENTS": {
     "TITLE": "Students list",
     "INVITE_NEW_STUDENT": "Invite new student",
     "COPY_TO_REGISTER": "Copy url below to register a new student",
     "NO_RESULTS": "There are no students registered",
-    "COPY_TO_CLIPBOARD": "Copy to clipboard"
+    "COPY_TO_CLIPBOARD": "Copy to clipboard",
+    "DELETE_CONFIRMATION": "You are going to remove a student",
+    "ALL_DATA_WILL_BE_REMOVED": "All student data and statistics will be cleared"
   },
   "GROUPS": {
     "TITLE": "Groups list",
@@ -57,7 +64,9 @@
     "BUTTON_RESET": "Cancel",
     "BUTTON_SAVE_GROUP": "Save group",
     "PLACEHOLDER_GROUP_TITLE": "Add title",
-    "NO_RESULTS": "You have no groups yet"
+    "NO_RESULTS": "You have no groups yet",
+    "DELETE_CONFIRMATION": "You are going to remove a group",
+    "ALL_DATA_WILL_BE_REMOVED": "All group data will be cleared"
   },
   "GROUP": {
     "SECTION_STUDENTS_TITLE": "Students list",
@@ -65,7 +74,9 @@
     "BUTTON_EDIT": "Edit group",
     "SECTION_STUDENTS_PLACEHOLDER": "Type first name, last name or email",
     "SECTION_LESSONS_TITLE": "Lessons list",
-    "SECTION_LESSONS_PLACEHOLDER": "Type lesson title"
+    "SECTION_LESSONS_PLACEHOLDER": "Type lesson title",
+    "TO_STATISTICS": "Group statistics",
+    "TO_GROUP": "Back to group"
   },
   "MODAL_CONFIRMATION": {
     "BUTTON_CONFIRM": "Confirm",
@@ -105,5 +116,14 @@
     "SUBMIT": "Submit",
     "RESET": "Reset",
     "LOADING": "loading..."
+  },
+  "STATISTICS": {
+    "TITLE": "Group statistics",
+    "STUDENT_COL": "Student",
+    "LESSON_COL": "Lesson",
+    "FAILURES_COL": "Failures",
+    "DATE_COL": "Date of beginning",
+    "PROGRESS_COL": "Progress",
+    "FILTER_PLACEHOLDER": "Start to enter student name or lesson title"
   }
 }

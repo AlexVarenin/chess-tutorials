@@ -12,6 +12,7 @@ import { RegistrationTutorComponent } from './components/registration-tutor/regi
 import { RegistrationStudentComponent } from './components/registration-student/registration-student.component';
 import { AuthGuardGuard } from './guards/auth-guard.guard';
 import { RolesGuardGuard } from './guards/roles-guard.guard';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,11 @@ const routes: Routes = [
       {
         path: 'students',
         component: StudentsComponent,
+        data: { roles: ['tutor'], redirectTo: 'groups' },
+      },
+      {
+        path: 'statistics',
+        component: StatisticsComponent,
         data: { roles: ['tutor'], redirectTo: 'groups' },
       },
       {

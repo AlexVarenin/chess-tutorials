@@ -14,7 +14,8 @@ export const groupsActionTypes = {
   addStudentToGroup: '[Groups] Add student to group',
   removeStudentFromGroup: '[Groups] Remove student from group',
   addLessonToGroup: '[Groups] Add lesson to group',
-  removeLessonFromGroup: '[Groups] Remove lesson from group'
+  removeLessonFromGroup: '[Groups] Remove lesson from group',
+  removeGroup: '[Groups] Remove group'
 };
 
 export const requestGroups = createAction(
@@ -89,6 +90,22 @@ export const updateGroupFailure = createAction(
   getFailureType(groupsActionTypes.updateGroup),
   props<{ error: HttpErrorResponse }>()
 );
+
+export const removeGroup = createAction(
+  groupsActionTypes.removeGroup,
+  props<{ id: string }>()
+);
+
+export const removeGroupSuccess = createAction(
+  getSuccessType(groupsActionTypes.requestGroupInfo),
+  props<{ id: string }>()
+);
+
+export const removeGroupFailure = createAction(
+  getFailureType(groupsActionTypes.requestGroupInfo),
+  props<{ error: HttpErrorResponse }>()
+);
+
 
 export const addStudentToGroup = createAction(
   groupsActionTypes.addStudentToGroup,

@@ -8,6 +8,7 @@ import { BoardComponent } from '../board/board.component';
 import { LessonInfo, Move} from '../../store/lessons/models';
 import { LessonsStoreService } from '../../store/lessons/services/lessons-store.service';
 import { TranslateService } from '@ngx-translate/core';
+import {toDoc} from "ngx-editor";
 
 @Component({
   selector: 'chess-builder',
@@ -181,6 +182,8 @@ export class BuilderComponent implements OnInit, AfterViewInit {
 
   private updateData(lesson: LessonInfo) {
     const { title, description, initialState, moves, orientation, notationType, disableDrag } = lesson;
+
+
 
     setTimeout(() => {
       if (moves.length) {

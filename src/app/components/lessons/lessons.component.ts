@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject} from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LessonsStoreService } from '../../store/lessons/services/lessons-store.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import { Lesson } from '../../store/lessons/models';
 import { UsersStoreService } from '../../store/users/services/users-store.service';
+import { StatisticsStoreService } from '../../store/statistics/services/statistics-store.service';
 
 
 @Component({
@@ -23,6 +23,7 @@ export class LessonsComponent implements OnInit, OnDestroy {
     private lessonsStoreService: LessonsStoreService,
     private usersStoreService: UsersStoreService,
     private activatedRoute: ActivatedRoute,
+    private statisticsStoreService: StatisticsStoreService
   ) { }
 
   public ngOnInit(): void {
@@ -33,6 +34,7 @@ export class LessonsComponent implements OnInit, OnDestroy {
         }
         if (role === 'student') {
           this.lessonsStoreService.requestStudentLessons();
+          this.statisticsStoreService.requestCompletedLessons();
         }
       });
   }
@@ -44,17 +46,5 @@ export class LessonsComponent implements OnInit, OnDestroy {
 
   public addNew(): void {
     this.router.navigate(['create'], { relativeTo: this.activatedRoute });
-  }
-
-  public edit(lesson: Lesson): void {
-    this.router.navigate([lesson.id, 'edit'], { relativeTo: this.activatedRoute })
-  }
-
-  public goToLesson(lesson: Lesson): void {
-    this.router.navigate([lesson.id], { relativeTo: this.activatedRoute })
-  }
-
-  public remove(lesson: Lesson): void {
-    this.lessonsStoreService.removeLesson(lesson.id);
   }
 }

@@ -7,33 +7,8 @@
 
   <div class="list-wrapper">
     <ng-container *ngIf="lessons$ | async as lessons; else loading">
-      <mat-card *ngFor="let lesson of lessons" class="lesson-card" (click)="goToLesson(lesson)">
-        <mat-card-header>
-          <mat-card-title>{{ lesson.title | titlecase }}</mat-card-title>
-        </mat-card-header>
-        <chess-board
-          [initialOrientation]="lesson.orientation"
-          [initialFen]="lesson.initialState"
-          [isMinimised]="true"
-          [draggable]="false"
-          [spare]="false"
-          [showNotation]="false"
-        ></chess-board>
-        <mat-card-content>
-          <div class="description-wrapper">
-            <p [innerHTML]="lesson.description"></p>
-            <div class="blur-layout"></div>
-          </div>
-        </mat-card-content>
-        <mat-card-actions *hiddenFor="['admin','student']">
-          <button mat-raised-button color="primary" (click)="edit(lesson); $event.stopPropagation()">
-            {{ 'LESSONS.BUTTON_EDIT' | translate }}
-          </button>
-          <button mat-raised-button (click)="remove(lesson); $event.stopPropagation()">
-            {{ 'LESSONS.BUTTON_REMOVE' | translate }}
-          </button>
-        </mat-card-actions>
-      </mat-card>
+      <chess-list-lesson *ngFor="let lesson of lessons" [lesson]="lesson">
+      </chess-list-lesson>
 
       <ng-container *ngIf="lessons.length">
         <mat-card *hiddenFor="['admin','student']" class="lesson-card lesson-card--new" (click)="addNew()">

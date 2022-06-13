@@ -30,6 +30,10 @@ export class GroupsApiService {
     return this.httpClient.patch<Group>(`groups/${id}`, group);
   }
 
+  public removeGroup(id: string): Observable<null> {
+    return this.httpClient.delete<null>(`groups/${id}`);
+  }
+
   public addStudentToGroup(groupId: string, studentId: string): Observable<{id: string}> {
     return this.httpClient.post<{id: string}>(`groups/${groupId}/student`, { studentId });
   }
